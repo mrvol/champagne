@@ -6,6 +6,7 @@
     <li><a class="text-blue-600" href="{% url 'address_list' %}">Addresses</a></li>
     <li><a class="text-blue-600" href="{% url 'company_list' %}">Companies</a></li>
     <li><a class="text-blue-600" href="{% url 'good_list' %}">Goods</a></li>
+    <li><a class="text-blue-600" href="{% url 'cart_detail' %}">Cart</a></li>
     <li><a class="text-blue-600" href="{% url 'order_list' %}">Orders</a></li>
     <li><a class="text-blue-600" href="{% url 'payment_list' %}">Payments</a></li>
     <li><a class="text-blue-600" href="{% url 'transaction_list' %}">Transactions</a></li>
@@ -13,4 +14,38 @@
     <li><a class="text-blue-600" href="{% url 'warehouse_list' %}">Warehouses</a></li>
     <li><a class="text-blue-600" href="{% url 'stock_list' %}">Stock</a></li>
 </ul>
+
+{% if user.is_authenticated %}
+<div class="mt-6 bg-white rounded-lg border border-neutral-200 p-4">
+    <p class="text-sm font-medium mb-2">Passkey</p>
+    <button id="add-passkey" class="w-full bg-neutral-900 text-white rounded-md py-2 text-sm">Add a passkey for this device</button>
+    <p id="passkey-status" class="text-sm text-neutral-500 mt-2"></p>
+</div>
+<script>
+document.getElementById('add-passkey').addEventListener('click', async () => {
+    const status = document.getElementById('passkey-status');
+    try {
+        const options = await (await fetch('{% url "passkey_register_options" %}')).json();
+        options.challenge = b64urlToBuffer(options.challenge);
+        options.user.id = b64urlToBuffer(options.user.id);
+        const credential = await navigator.credentials.create({ publicKey: options });
+        const payload = {
+            id: credential.id,
+            response: {
+                clientDataJSON: bufferToB64url(credential.response.clientDataJSON),
+                attestationObject: bufferToB64url(credential.response.attestationObject),
+            },
+        };
+        const res = await fetch('{% url "passkey_register_verify" %}', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
+            body: JSON.stringify(payload),
+        });
+        status.textContent = res.ok ? 'Passkey added.' : 'Could not add passkey.';
+    } catch (err) {
+        status.textContent = 'Passkey setup was cancelled or failed.';
+    }
+});
+</script>
+{% endif %}
 {% endblock %}

@@ -2,6 +2,7 @@ import base64
 import hashlib
 import mimetypes
 import uuid
+from datetime import date
 
 import httpx
 from django.contrib.auth.models import AbstractUser
@@ -11,6 +12,13 @@ from django.db import models
 
 # NOTE: task.models imports BaseModel from this module, so importing task.models here
 # at module level would be circular - Order/current_order are imported lazily in methods.
+
+MIN_AGE = 18
+
+
+def age_from_birthday(birthday):
+    today = date.today()
+    return today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
 
 
 class BaseModel(models.Model):
@@ -47,6 +55,9 @@ class User(AbstractUser, BaseModel):
     terms_accepted_at = models.DateTimeField(blank=True, null=True)
     gdpr_consent = models.BooleanField(default=False)
 
+    def is_of_legal_age(self):
+        return bool(self.birthday) and age_from_birthday(self.birthday) >= MIN_AGE
+
     def set_avatar_from_url(self, url: str) -> None:
         response = httpx.get(url, timeout=10)
         response.raise_for_status()
@@ -61,3 +72,9 @@ class User(AbstractUser, BaseModel):
         self.avatar.save(f'{digest}{extension}', ContentFile(raw), save=True)
 
 
+class WebAuthnCredential(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='webauthn_credentials')
+    credential_id = models.BinaryField(unique=True)
+    public_key_x = models.BinaryField()
+    public_key_y = models.BinaryField()
+    sign_count = models.PositiveIntegerField(default=0)

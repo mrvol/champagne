@@ -4,3 +4,11 @@ tasks:
   run:
     cmds:
       - uv run python manage.py runserver 8989
+
+  reset:
+    cmds:
+      - find address cart company goods mp order payment person review transaction warehouse -type f -path '*/migrations/*.py' ! -name '__init__.py' -print -delete
+      - rm -f db.sqlite3
+      - uv run python manage.py makemigrations
+      - uv run python manage.py migrate
+      - uv run python manage.py loaddata sample_data.json

@@ -1,0 +1,299 @@
+[
+{
+  "model": "person.user",
+  "pk": 1,
+  "fields": {
+    "password": "",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "amelie.dubois",
+    "first_name": "Amelie",
+    "last_name": "Dubois",
+    "email": "amelie.dubois@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-24T23:18:39.985Z",
+    "title": null,
+    "uid": "f576b1b7-e57f-4d18-8a06-51f72c3c30fd",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "address": null,
+    "phone": "+33612345678",
+    "country": "FR",
+    "birthday": null,
+    "email_verified": false,
+    "avatar": "",
+    "bio": "Champagne producer based in Reims.",
+    "gender": null,
+    "language": [],
+    "timezone": null,
+    "primary_address": null,
+    "roles": [
+      "seller"
+    ],
+    "failed_login_attempts": 0,
+    "account_locked": false,
+    "login_history": [],
+    "devices": [],
+    "kyc_status": "verified",
+    "identity_documents": [],
+    "terms_accepted_at": null,
+    "gdpr_consent": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "person.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$OoHU0M6UjEsQidyjaAdRpa$js7w2n2O25H4DerkfjrbLAzAmrO5t0MOH0rfKI5gLv8=",
+    "last_login": "2026-07-24T23:25:30.763Z",
+    "is_superuser": false,
+    "username": "mrvol777@gmail.com",
+    "first_name": "bob",
+    "last_name": "",
+    "email": "mrvol777@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-07-24T23:25:30.580Z",
+    "title": null,
+    "uid": "c63d7d65-157d-4067-95cb-0a64526cebbf",
+    "company_ids": [],
+    "created": "2026-07-24T23:25:30.759Z",
+    "changed": "2026-07-24T23:25:30.759Z",
+    "deleted": null,
+    "address": null,
+    "phone": null,
+    "country": null,
+    "birthday": "1994-07-25",
+    "email_verified": false,
+    "avatar": "",
+    "bio": null,
+    "gender": null,
+    "language": [],
+    "timezone": null,
+    "primary_address": null,
+    "roles": [],
+    "failed_login_attempts": 0,
+    "account_locked": false,
+    "login_history": [],
+    "devices": [],
+    "kyc_status": null,
+    "identity_documents": [],
+    "terms_accepted_at": null,
+    "gdpr_consent": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "person.webauthncredential",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "9f835082-0467-4b37-af51-9d0e5c4bcc5a",
+    "company_ids": [],
+    "created": "2026-07-24T23:25:44.610Z",
+    "changed": "2026-07-24T23:25:44.610Z",
+    "deleted": null,
+    "user": [
+      "mrvol777@gmail.com"
+    ],
+    "credential_id": "LWbDW9lxK4j+g2sJWRx5E2nkRuc=",
+    "public_key_x": "jrrt66gbTnYtpidUCjCtshmtdrYLq4duGAa657va0sI=",
+    "public_key_y": "vT1/M07nZU5DdKmviLrIP035Oz7LKS6M/2ObOCWhwhc=",
+    "sign_count": 0
+  }
+},
+{
+  "model": "company.company",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "ef5b764c-00f2-4606-890d-4f04b58b73a6",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "legal_name": "Maison Lumière",
+    "registration_number": "RCS-REIMS-482910",
+    "country": "FR",
+    "tax_id": "FR12482910337",
+    "vat_number": "FR12482910337",
+    "industry": "Wine & Spirits",
+    "website": "https://maisonlumiere.example",
+    "logo_url": null,
+    "founded_date": "1904-05-12",
+    "employee_count": 38,
+    "rating": "4.60",
+    "review_count": 1,
+    "trust_score": "91.50",
+    "verified_seller": true,
+    "dispute_count": 0
+  }
+},
+{
+  "model": "address.address",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "08c440d2-4a1d-4a00-8891-ad1dcc0cd635",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "type": [
+      "p"
+    ],
+    "user": [
+      "amelie.dubois"
+    ],
+    "line1": "12 Rue des Vignes",
+    "line2": null,
+    "city": "Reims",
+    "region": "Grand Est",
+    "postal_code": "51100",
+    "country": "FR"
+  }
+},
+{
+  "model": "goods.good",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "17e7f0a3-d324-4d67-9fae-849d045669e0",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "company": 1,
+    "name": "Maison Lumière Brut Reserve",
+    "sku": "ML-BRUT-750",
+    "vintage_year": 2016,
+    "region": "Champagne AOC",
+    "grape_variety": "Pinot Noir, Chardonnay",
+    "volume_ml": 750,
+    "abv": "12.50",
+    "price": "45.00",
+    "currency": "EUR"
+  }
+},
+{
+  "model": "warehouse.warehouse",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "60c40836-3560-4bb8-ad56-1793536fb37c",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "name": "Reims Central Cellar",
+    "country": "FR",
+    "city": "Reims",
+    "address": "3 Avenue de Champagne, 51100 Reims"
+  }
+},
+{
+  "model": "warehouse.stock",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "31042ce6-ede5-47a0-9d9a-2db81c47a2d3",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 1,
+    "quantity": 240
+  }
+},
+{
+  "model": "order.order",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "99259247-1f91-4879-935c-45c75b2321a6",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "buyer": [
+      "amelie.dubois"
+    ],
+    "seller": 1,
+    "delivery_address": 1,
+    "status": "paid",
+    "total_amount": "270.00",
+    "currency": "EUR"
+  }
+},
+{
+  "model": "payment.payment",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "340d81fb-0c45-4bc0-ba30-767d0129e1ce",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "order": 1,
+    "payer": [
+      "amelie.dubois"
+    ],
+    "amount": "270.00",
+    "currency": "EUR",
+    "status": "captured",
+    "provider": "stripe",
+    "transaction_id": "pi_3P0examplecharge"
+  }
+},
+{
+  "model": "transaction.transaction",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "5024e8d5-e48c-47ae-97df-52c5a138b189",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "payment": 1,
+    "type": "charge",
+    "method": "card",
+    "amount": "270.00",
+    "currency": "EUR",
+    "status": "succeeded",
+    "provider": "stripe",
+    "provider_reference": "ch_3P0examplecharge",
+    "raw_response": null
+  }
+},
+{
+  "model": "review.review",
+  "pk": 1,
+  "fields": {
+    "title": null,
+    "uid": "e708c1e7-df95-476c-aa18-d5ddb3dc1fee",
+    "company_ids": [],
+    "created": "2026-07-01T09:00:00Z",
+    "changed": "2026-07-01T09:00:00Z",
+    "deleted": null,
+    "author": [
+      "amelie.dubois"
+    ],
+    "rating": 5,
+    "comment": "Excellent vintage, fast shipping from the cellar.",
+    "content_type": [
+      "company",
+      "company"
+    ],
+    "object_id": 1
+  }
+}
+]

@@ -5,12 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Champagne{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        function b64urlToBuffer(b64url) {
+            const pad = '='.repeat((4 - b64url.length % 4) % 4);
+            const b64 = (b64url + pad).replace(/-/g, '+').replace(/_/g, '/');
+            const raw = atob(b64);
+            const buf = new Uint8Array(raw.length);
+            for (let i = 0; i < raw.length; i++) buf[i] = raw.charCodeAt(i);
+            return buf.buffer;
+        }
+        function bufferToB64url(buf) {
+            const bytes = new Uint8Array(buf);
+            let str = '';
+            for (let i = 0; i < bytes.length; i++) str += String.fromCharCode(bytes[i]);
+            return btoa(str).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+        }
+    </script>
 </head>
 <body class="bg-neutral-50 text-neutral-900">
-    <header class="sticky top-0 bg-white border-b border-neutral-200 px-4 py-3">
+    <header class="sticky top-0 bg-white border-b border-neutral-200 px-4 py-3 flex items-center justify-between">
         <a href="/" class="text-lg font-semibold">Champagne</a>
+        <nav class="text-sm space-x-3">
+            {% if user.is_authenticated %}
+            <a href="{% url 'cart_detail' %}" class="text-neutral-600">Cart</a>
+            <a href="{% url 'logout' %}" class="text-neutral-600">Logout</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="text-neutral-600">Sign in</a>
+            <a href="{% url 'register' %}" class="text-neutral-600">Sign up</a>
+            {% endif %}
+        </nav>
     </header>
     <main class="p-4 max-w-md mx-auto">
+        {% if messages %}
+        <div class="mb-4 space-y-2">
+            {% for message in messages %}
+            <p class="text-sm rounded-md px-3 py-2 {% if message.tags == 'error' %}bg-red-50 text-red-700{% else %}bg-amber-50 text-amber-700{% endif %}">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
         {% block content %}{% endblock %}
     </main>
 </body>

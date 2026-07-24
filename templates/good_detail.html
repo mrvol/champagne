@@ -10,6 +10,14 @@
     <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Volume</dt><dd>{{ good.volume_ml|default:"—" }} ml</dd></div>
     <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">ABV</dt><dd>{{ good.abv|default:"—" }}%</dd></div>
     <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Price</dt><dd>{{ good.price|default:"—" }} {{ good.currency }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">In stock</dt><dd>{{ available }}</dd></div>
 </dl>
+{% if available > 0 %}
+<form method="post" action="{% url 'add_to_cart' good.pk %}" class="mt-4 flex gap-2">
+    {% csrf_token %}
+    <input type="number" name="quantity" value="1" min="1" max="{{ available }}" class="w-20 border border-neutral-300 rounded-md p-2 text-sm">
+    <button type="submit" class="flex-1 bg-neutral-900 text-white rounded-md py-2 text-sm">Add to cart</button>
+</form>
+{% endif %}
 <a href="{% url 'good_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
 {% endblock %}
