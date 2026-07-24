@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Review #{{ review.pk }}</h2>
+<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Author</dt><dd>{{ review.author }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Rating</dt><dd>{{ review.rating }}/5</dd></div>
+    <div class="px-4 py-3"><dt class="text-neutral-500 mb-1">Comment</dt><dd>{{ review.comment|default:"—" }}</dd></div>
+</dl>
+<a href="{% url 'review_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+{% endblock %}

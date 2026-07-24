@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Reviews</h2>
+<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+    {% for review in reviews %}
+    <li>
+        <a href="{% url 'review_detail' review.pk %}" class="block px-4 py-3 active:bg-neutral-100">
+            <p class="font-medium">{{ review.author }} · {{ review.rating }}/5</p>
+            <p class="text-sm text-neutral-500 truncate">{{ review.comment|default:"—" }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="px-4 py-3 text-neutral-500">No reviews yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Goods</h2>
+<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+    {% for good in goods %}
+    <li>
+        <a href="{% url 'good_detail' good.pk %}" class="block px-4 py-3 active:bg-neutral-100">
+            <p class="font-medium">{{ good.name|default:"—" }}</p>
+            <p class="text-sm text-neutral-500">{{ good.vintage_year|default:"—" }} · {{ good.price|default:"—" }} {{ good.currency }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="px-4 py-3 text-neutral-500">No goods yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

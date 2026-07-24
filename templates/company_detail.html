@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">{{ company.legal_name|default:"Company" }}</h2>
+<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Registration #</dt><dd>{{ company.registration_number|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Country</dt><dd>{{ company.country|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Tax ID</dt><dd>{{ company.tax_id|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">VAT number</dt><dd>{{ company.vat_number|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Industry</dt><dd>{{ company.industry|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Website</dt><dd>{{ company.website|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Rating</dt><dd>{{ company.rating }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Verified seller</dt><dd>{{ company.verified_seller }}</dd></div>
+</dl>
+<a href="{% url 'company_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+{% endblock %}

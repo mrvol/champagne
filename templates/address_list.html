@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Addresses</h2>
+<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+    {% for address in addresses %}
+    <li>
+        <a href="{% url 'address_detail' address.pk %}" class="block px-4 py-3 active:bg-neutral-100">
+            <p class="font-medium">{{ address.line1|default:"—" }}</p>
+            <p class="text-sm text-neutral-500">{{ address.city|default:"—" }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="px-4 py-3 text-neutral-500">No addresses yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

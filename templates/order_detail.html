@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Order #{{ order.pk }}</h2>
+<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Buyer</dt><dd>{{ order.buyer }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Seller</dt><dd>{{ order.seller }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Status</dt><dd>{{ order.status|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Total</dt><dd>{{ order.total_amount }} {{ order.currency }}</dd></div>
+</dl>
+<a href="{% url 'order_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+{% endblock %}

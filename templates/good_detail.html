@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">{{ good.name|default:"Good" }}</h2>
+<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Company</dt><dd>{{ good.company }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">SKU</dt><dd>{{ good.sku|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Vintage</dt><dd>{{ good.vintage_year|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Region</dt><dd>{{ good.region|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Grape variety</dt><dd>{{ good.grape_variety|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Volume</dt><dd>{{ good.volume_ml|default:"—" }} ml</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">ABV</dt><dd>{{ good.abv|default:"—" }}%</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Price</dt><dd>{{ good.price|default:"—" }} {{ good.currency }}</dd></div>
+</dl>
+<a href="{% url 'good_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+{% endblock %}

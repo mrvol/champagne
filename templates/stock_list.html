@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Stock</h2>
+<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+    {% for item in stock %}
+    <li>
+        <a href="{% url 'stock_detail' item.pk %}" class="block px-4 py-3 active:bg-neutral-100">
+            <p class="font-medium">{{ item.good }}</p>
+            <p class="text-sm text-neutral-500">{{ item.warehouse }} · qty {{ item.quantity }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="px-4 py-3 text-neutral-500">No stock yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Transactions</h2>
+<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+    {% for transaction in transactions %}
+    <li>
+        <a href="{% url 'transaction_detail' transaction.pk %}" class="block px-4 py-3 active:bg-neutral-100">
+            <p class="font-medium">{{ transaction.type }} · {{ transaction.amount }} {{ transaction.currency }}</p>
+            <p class="text-sm text-neutral-500">{{ transaction.method|default:"—" }} · {{ transaction.status|default:"—" }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="px-4 py-3 text-neutral-500">No transactions yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

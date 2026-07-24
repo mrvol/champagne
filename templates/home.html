@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<p class="text-neutral-600">Welcome to Champagne.</p>
+<ul class="mt-4 space-y-2 text-sm">
+    <li><a class="text-blue-600" href="{% url 'user_list' %}">Users</a></li>
+    <li><a class="text-blue-600" href="{% url 'address_list' %}">Addresses</a></li>
+    <li><a class="text-blue-600" href="{% url 'company_list' %}">Companies</a></li>
+    <li><a class="text-blue-600" href="{% url 'good_list' %}">Goods</a></li>
+    <li><a class="text-blue-600" href="{% url 'order_list' %}">Orders</a></li>
+    <li><a class="text-blue-600" href="{% url 'payment_list' %}">Payments</a></li>
+    <li><a class="text-blue-600" href="{% url 'transaction_list' %}">Transactions</a></li>
+    <li><a class="text-blue-600" href="{% url 'review_list' %}">Reviews</a></li>
+    <li><a class="text-blue-600" href="{% url 'warehouse_list' %}">Warehouses</a></li>
+    <li><a class="text-blue-600" href="{% url 'stock_list' %}">Stock</a></li>
+</ul>
+{% endblock %}

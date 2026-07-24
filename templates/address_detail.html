@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">{{ address.line1|default:"Address" }}</h2>
+<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Type</dt><dd>{{ address.type }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Line 2</dt><dd>{{ address.line2|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">City</dt><dd>{{ address.city|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Region</dt><dd>{{ address.region|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Postal code</dt><dd>{{ address.postal_code|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Country</dt><dd>{{ address.country|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">User</dt><dd>{{ address.user }}</dd></div>
+</dl>
+<a href="{% url 'address_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+{% endblock %}

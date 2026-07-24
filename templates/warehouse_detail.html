@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">{{ warehouse.name|default:"Warehouse" }}</h2>
+<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Country</dt><dd>{{ warehouse.country|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">City</dt><dd>{{ warehouse.city|default:"—" }}</dd></div>
+    <div class="px-4 py-3"><dt class="text-neutral-500 mb-1">Address</dt><dd>{{ warehouse.address|default:"—" }}</dd></div>
+</dl>
+<a href="{% url 'warehouse_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Payment #{{ payment.pk }}</h2>
+<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Order</dt><dd>{{ payment.order }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Payer</dt><dd>{{ payment.payer }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Amount</dt><dd>{{ payment.amount }} {{ payment.currency }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Status</dt><dd>{{ payment.status|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Provider</dt><dd>{{ payment.provider|default:"—" }}</dd></div>
+</dl>
+<a href="{% url 'payment_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+{% endblock %}

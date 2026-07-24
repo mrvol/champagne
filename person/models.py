@@ -1,0 +1,63 @@
+import base64
+import hashlib
+import mimetypes
+import uuid
+
+import httpx
+from django.contrib.auth.models import AbstractUser
+from django.core.files.base import ContentFile
+from django.db import models
+
+
+# NOTE: task.models imports BaseModel from this module, so importing task.models here
+# at module level would be circular - Order/current_order are imported lazily in methods.
+
+
+class BaseModel(models.Model):
+    title = models.CharField(max_length=255, blank=True, null=True)
+    uid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    company_ids = models.JSONField(default=list, blank=True)  # ids of Company this record is scoped to
+    created = models.DateTimeField(auto_now_add=True)
+    changed = models.DateTimeField(auto_now=True)
+    deleted = models.DateTimeField(blank=True, null=True)
+
+    class Meta:
+        abstract = True
+
+
+class User(AbstractUser, BaseModel):
+    address = models.JSONField(blank=True, null=True)
+    phone = models.CharField(max_length=32, blank=True, null=True)
+    country = models.CharField(max_length=2, blank=True, null=True)  # ISO 3166-1 alpha-2
+    birthday = models.DateField(blank=True, null=True)
+    email_verified = models.BooleanField(default=False)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    gender = models.CharField(max_length=32, blank=True, null=True)
+    language = models.JSONField(default=list, blank=True)  # list of ISO 639-1 codes
+    timezone = models.CharField(max_length=64, blank=True, null=True)
+    primary_address = models.ForeignKey('address.Address', on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
+    roles = models.JSONField(default=list, blank=True)  # e.g. ['buyer', 'seller']
+    failed_login_attempts = models.PositiveIntegerField(default=0)
+    account_locked = models.BooleanField(default=False)
+    login_history = models.JSONField(default=list, blank=True)
+    devices = models.JSONField(default=list, blank=True)
+    kyc_status = models.CharField(max_length=32, blank=True, null=True)
+    identity_documents = models.JSONField(default=list, blank=True)
+    terms_accepted_at = models.DateTimeField(blank=True, null=True)
+    gdpr_consent = models.BooleanField(default=False)
+
+    def set_avatar_from_url(self, url: str) -> None:
+        response = httpx.get(url, timeout=10)
+        response.raise_for_status()
+        content_type = response.headers.get('content-type', '').split(';')[0].strip()
+        extension = mimetypes.guess_extension(content_type) or ''
+        digest = hashlib.sha256(response.content).hexdigest()[:16]
+        self.avatar.save(f'{digest}{extension}', ContentFile(response.content), save=True)
+
+    def set_avatar_from_base64(self, data: str, extension: str = '.jpg') -> None:
+        raw = base64.b64decode(data)
+        digest = hashlib.sha256(raw).hexdigest()[:16]
+        self.avatar.save(f'{digest}{extension}', ContentFile(raw), save=True)
+
+

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="text-base font-medium mb-3">Companies</h2>
+<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+    {% for company in companies %}
+    <li>
+        <a href="{% url 'company_detail' company.pk %}" class="block px-4 py-3 active:bg-neutral-100">
+            <p class="font-medium">{{ company.legal_name|default:"—" }}</p>
+            <p class="text-sm text-neutral-500">{{ company.country|default:"—" }}</p>
+        </a>
+    </li>
+    {% empty %}
+    <li class="px-4 py-3 text-neutral-500">No companies yet.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
