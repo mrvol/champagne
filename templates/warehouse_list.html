@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 <h2 class="text-base font-medium mb-3">Warehouses</h2>
-<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
     {% for warehouse in warehouses %}
     <li>
-        <a href="{% url 'warehouse_detail' warehouse.pk %}" class="block px-4 py-3 active:bg-neutral-100">
+        <a href="{% url 'warehouse_detail' warehouse.pk %}" class="block px-4 py-3 active:bg-stone-100">
             <p class="font-medium">{{ warehouse.name|default:"—" }}</p>
-            <p class="text-sm text-neutral-500">{{ warehouse.city|default:"—" }}</p>
+            <p class="text-sm text-stone-500">{{ warehouse.city|default:"—" }}</p>
         </a>
     </li>
     {% empty %}
-    <li class="px-4 py-3 text-neutral-500">No warehouses yet.</li>
+    <li class="px-4 py-3 text-stone-500">No warehouses yet.</li>
     {% endfor %}
 </ul>
 {% endblock %}

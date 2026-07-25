@@ -1,25 +1,37 @@
 {% extends "base.html" %}
 {% block content %}
-<p class="text-neutral-600">Welcome to Champagne.</p>
-<ul class="mt-4 space-y-2 text-sm">
-    <li><a class="text-blue-600" href="{% url 'user_list' %}">Users</a></li>
-    <li><a class="text-blue-600" href="{% url 'address_list' %}">Addresses</a></li>
-    <li><a class="text-blue-600" href="{% url 'company_list' %}">Companies</a></li>
-    <li><a class="text-blue-600" href="{% url 'good_list' %}">Goods</a></li>
-    <li><a class="text-blue-600" href="{% url 'cart_detail' %}">Cart</a></li>
-    <li><a class="text-blue-600" href="{% url 'order_list' %}">Orders</a></li>
-    <li><a class="text-blue-600" href="{% url 'payment_list' %}">Payments</a></li>
-    <li><a class="text-blue-600" href="{% url 'transaction_list' %}">Transactions</a></li>
-    <li><a class="text-blue-600" href="{% url 'review_list' %}">Reviews</a></li>
-    <li><a class="text-blue-600" href="{% url 'warehouse_list' %}">Warehouses</a></li>
-    <li><a class="text-blue-600" href="{% url 'stock_list' %}">Stock</a></li>
+<div class="text-center py-6">
+    <h1 class="text-2xl font-semibold text-green-900">Champagne</h1>
+    <p class="text-stone-600 mt-1">Fine champagne, direct from the producers.</p>
+    <a href="{% url 'good_list' %}" class="inline-block mt-4 bg-green-900 text-white rounded-md px-6 py-2 text-sm">Shop all champagnes</a>
+</div>
+
+<h2 class="text-base font-medium mb-3">Featured</h2>
+<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
+    {% for good in featured %}
+    <li>
+        <a href="{% url 'good_detail' good.pk %}" class="flex items-center gap-3 px-4 py-3 active:bg-stone-100">
+            {% if good.photo %}
+            <img src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-12 h-12 rounded-md border border-stone-200 object-cover shrink-0">
+            {% else %}
+            <div class="w-12 h-12 rounded-md bg-stone-100 shrink-0"></div>
+            {% endif %}
+            <div>
+                <p class="font-medium">{{ good.name|default:"—" }}</p>
+                <p class="text-sm text-stone-500">{{ good.vintage_year|default:"—" }} · <span class="text-amber-700 font-medium">{{ good.price|default:"—" }} {{ good.currency }}</span></p>
+            </div>
+        </a>
+    </li>
+    {% empty %}
+    <li class="px-4 py-3 text-stone-500">No goods yet.</li>
+    {% endfor %}
 </ul>
 
 {% if user.is_authenticated %}
-<div class="mt-6 bg-white rounded-lg border border-neutral-200 p-4">
+<div class="mt-6 bg-white rounded-lg border border-stone-200 p-4">
     <p class="text-sm font-medium mb-2">Passkey</p>
-    <button id="add-passkey" class="w-full bg-neutral-900 text-white rounded-md py-2 text-sm">Add a passkey for this device</button>
-    <p id="passkey-status" class="text-sm text-neutral-500 mt-2"></p>
+    <button id="add-passkey" class="w-full bg-green-900 text-white rounded-md py-2 text-sm">Add a passkey for this device</button>
+    <p id="passkey-status" class="text-sm text-stone-500 mt-2"></p>
 </div>
 <script>
 document.getElementById('add-passkey').addEventListener('click', async () => {

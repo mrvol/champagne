@@ -22,20 +22,20 @@
         }
     </script>
 </head>
-<body class="bg-neutral-50 text-neutral-900">
-    <header class="sticky top-0 bg-white border-b border-neutral-200 px-4 py-3 flex items-center justify-between">
-        <a href="/" class="text-lg font-semibold">Champagne</a>
+<body class="bg-stone-50 text-stone-900">
+    <header class="sticky top-0 bg-white border-b-2 border-amber-600 px-4 py-3 flex items-center justify-between">
+        <a href="/" class="text-lg font-semibold text-green-900">Champagne</a>
         <nav class="text-sm space-x-3">
             {% if user.is_authenticated %}
-            <a href="{% url 'cart_detail' %}" class="text-neutral-600">Cart</a>
-            <a href="{% url 'logout' %}" class="text-neutral-600">Logout</a>
+            <a href="{% url 'cart_detail' %}" class="text-stone-600">Cart</a>
+            <a href="{% url 'logout' %}" class="text-stone-600">Logout</a>
             {% else %}
-            <a href="{% url 'login' %}" class="text-neutral-600">Sign in</a>
-            <a href="{% url 'register' %}" class="text-neutral-600">Sign up</a>
+            <a href="{% url 'login' %}" class="text-stone-600">Sign in</a>
+            <a href="{% url 'register' %}" class="text-stone-600">Sign up</a>
             {% endif %}
         </nav>
     </header>
-    <main class="p-4 max-w-md mx-auto">
+    <main class="p-4 pb-20 max-w-md mx-auto">
         {% if messages %}
         <div class="mb-4 space-y-2">
             {% for message in messages %}
@@ -45,5 +45,15 @@
         {% endif %}
         {% block content %}{% endblock %}
     </main>
+    <nav class="fixed bottom-0 inset-x-0 bg-white border-t border-stone-200 flex justify-around max-w-md mx-auto">
+        <a href="{% url 'home' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Home</a>
+        <a href="{% url 'good_list' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Goods</a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'cart_detail' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Cart</a>
+        <a href="{% url 'order_list' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Orders</a>
+        {% else %}
+        <a href="{% url 'login' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Sign in</a>
+        {% endif %}
+    </nav>
 </body>
 </html>

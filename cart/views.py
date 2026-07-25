@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db.models import Sum
 from django.shortcuts import get_object_or_404, redirect, render
 
@@ -9,6 +10,7 @@ from person.models import MIN_AGE
 from warehouse.models import Stock
 
 
+@login_required
 def add_to_cart(request, pk):
     good = get_object_or_404(Good, pk=pk)
     requested = int(request.POST.get('quantity') or 1)
@@ -31,6 +33,7 @@ def add_to_cart(request, pk):
     return redirect('cart_detail')
 
 
+@login_required
 def cart_detail(request):
     cart, _ = Cart.objects.get_or_create(user=request.user, status=Cart.STATUS_OPEN)
     if request.method == 'POST':

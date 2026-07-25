@@ -1,23 +1,33 @@
 {% extends "base.html" %}
 {% block content %}
 <h2 class="text-base font-medium mb-3">{{ good.name|default:"Good" }}</h2>
-<dl class="bg-white rounded-lg border border-neutral-200 divide-y divide-neutral-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Company</dt><dd>{{ good.company }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">SKU</dt><dd>{{ good.sku|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Vintage</dt><dd>{{ good.vintage_year|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Region</dt><dd>{{ good.region|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Grape variety</dt><dd>{{ good.grape_variety|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Volume</dt><dd>{{ good.volume_ml|default:"—" }} ml</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">ABV</dt><dd>{{ good.abv|default:"—" }}%</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">Price</dt><dd>{{ good.price|default:"—" }} {{ good.currency }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-neutral-500">In stock</dt><dd>{{ available }}</dd></div>
+{% if good.photo %}
+<img id="main-photo" src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-full rounded-lg border border-stone-200 mb-3 aspect-square object-cover">
+{% endif %}
+{% if good.photos.all %}
+<div class="flex gap-2 overflow-x-auto mb-3">
+    {% for photo in good.photos.all %}
+    <img src="{{ photo.image.url }}" alt="{{ photo.description|default:good.name }}" class="w-16 h-16 rounded-md border border-stone-200 object-cover shrink-0 cursor-pointer" onclick="document.getElementById('main-photo').src = this.src">
+    {% endfor %}
+</div>
+{% endif %}
+<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Company</dt><dd>{{ good.company }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">SKU</dt><dd>{{ good.sku|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Vintage</dt><dd>{{ good.vintage_year|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Region</dt><dd>{{ good.region|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Grape variety</dt><dd>{{ good.grape_variety|default:"—" }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Volume</dt><dd>{{ good.volume_ml|default:"—" }} ml</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">ABV</dt><dd>{{ good.abv|default:"—" }}%</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Price</dt><dd class="text-amber-700 font-medium">{{ good.price|default:"—" }} {{ good.currency }}</dd></div>
+    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">In stock</dt><dd>{{ available }}</dd></div>
 </dl>
 {% if available > 0 %}
 <form method="post" action="{% url 'add_to_cart' good.pk %}" class="mt-4 flex gap-2">
     {% csrf_token %}
-    <input type="number" name="quantity" value="1" min="1" max="{{ available }}" class="w-20 border border-neutral-300 rounded-md p-2 text-sm">
-    <button type="submit" class="flex-1 bg-neutral-900 text-white rounded-md py-2 text-sm">Add to cart</button>
+    <input type="number" name="quantity" value="1" min="1" max="{{ available }}" class="w-20 border border-stone-300 rounded-md p-2 text-sm">
+    <button type="submit" class="flex-1 bg-green-900 text-white rounded-md py-2 text-sm">Add to cart</button>
 </form>
 {% endif %}
-<a href="{% url 'good_list' %}" class="inline-block mt-4 text-sm text-neutral-500">&larr; Back</a>
+<a href="{% url 'good_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
 {% endblock %}

@@ -1,16 +1,26 @@
 {% extends "base.html" %}
 {% block content %}
 <h2 class="text-base font-medium mb-3">Goods</h2>
-<ul class="divide-y divide-neutral-200 bg-white rounded-lg border border-neutral-200">
+<form method="get" class="mb-3">
+    <input type="search" name="q" value="{{ q }}" placeholder="Search by name, region, grape…" class="w-full border border-stone-300 rounded-md p-2 text-sm">
+</form>
+<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
     {% for good in goods %}
     <li>
-        <a href="{% url 'good_detail' good.pk %}" class="block px-4 py-3 active:bg-neutral-100">
-            <p class="font-medium">{{ good.name|default:"—" }}</p>
-            <p class="text-sm text-neutral-500">{{ good.vintage_year|default:"—" }} · {{ good.price|default:"—" }} {{ good.currency }}</p>
+        <a href="{% url 'good_detail' good.pk %}" class="flex items-center gap-3 px-4 py-3 active:bg-stone-100">
+            {% if good.photo %}
+            <img src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-12 h-12 rounded-md border border-stone-200 object-cover shrink-0">
+            {% else %}
+            <div class="w-12 h-12 rounded-md bg-stone-100 shrink-0"></div>
+            {% endif %}
+            <div>
+                <p class="font-medium">{{ good.name|default:"—" }}</p>
+                <p class="text-sm text-stone-500">{{ good.vintage_year|default:"—" }} · <span class="text-amber-700 font-medium">{{ good.price|default:"—" }} {{ good.currency }}</span></p>
+            </div>
         </a>
     </li>
     {% empty %}
-    <li class="px-4 py-3 text-neutral-500">No goods yet.</li>
+    <li class="px-4 py-3 text-stone-500">{% if q %}No goods match "{{ q }}".{% else %}No goods yet.{% endif %}</li>
     {% endfor %}
 </ul>
 {% endblock %}
