@@ -1,10 +1,91 @@
+{% load i18n %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ LANGUAGE_CODE }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Champagne{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        stone: {
+                            50: '#f7f3ea',
+                            100: '#f1e9da',
+                            200: '#e8ddc7',
+                            300: '#d7c7a5',
+                            500: '#82786a',
+                            600: '#645b4c',
+                            900: '#1a1510',
+                        },
+                        green: {
+                            800: '#17493a',
+                            900: '#0f3d2e',
+                        },
+                        gold: { DEFAULT: '#9c7a20' },
+                    },
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        .gold-foil-rule {
+            border-bottom: 2px solid;
+            border-image: linear-gradient(90deg, #6b5219 0%, #c9a227 30%, #f0dfa8 50%, #c9a227 70%, #6b5219 100%) 1;
+        }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-up { animation: fadeUp .8s ease-out both; }
+
+        /* Primary nav links: quiet by default, a foil-gold underline draws in on hover/active */
+        .nav-link {
+            position: relative;
+            padding-bottom: 6px;
+            color: #645b4c;
+            transition: color .35s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            background: linear-gradient(90deg, #6b5219, #c9a227, #f0dfa8, #c9a227, #6b5219);
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform .4s cubic-bezier(.4,0,.2,1);
+        }
+        .nav-link:hover { color: #0f3d2e; }
+        .nav-link:hover::after, .nav-link.is-active::after { transform: scaleX(1); }
+        .nav-link.is-active { color: #0f3d2e; }
+
+        /* Mobile bottom bar: icon + tracked micro-label, soft shadow instead of a flat line */
+        .tab-link {
+            flex: 1 1 0%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            padding: 10px 2px 8px;
+            font-size: 10px;
+            letter-spacing: .07em;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: #82786a;
+            transition: color .3s ease;
+        }
+        .tab-link svg { transition: transform .25s ease; }
+        .tab-link:active svg { transform: scale(.88); }
+        .tab-link.is-active { color: #0f3d2e; }
+    </style>
     <script>
         function b64urlToBuffer(b64url) {
             const pad = '='.repeat((4 - b64url.length % 4) % 4);
@@ -23,19 +104,60 @@
     </script>
 </head>
 <body class="bg-stone-50 text-stone-900">
-    <header class="sticky top-0 bg-white border-b-2 border-amber-600 px-4 py-3 flex items-center justify-between">
-        <a href="/" class="text-lg font-semibold text-green-900">Champagne</a>
-        <nav class="text-sm space-x-3">
+    {% with url_name=request.resolver_match.url_name %}
+    <header class="sticky top-0 z-10 bg-white gold-foil-rule px-4 py-3 md:py-5 flex items-center justify-between gap-6">
+        <a href="/" class="font-serif italic text-2xl md:text-3xl font-semibold text-green-900 tracking-wide shrink-0">Champagne</a>
+        <nav class="hidden md:flex items-center gap-10 text-xs uppercase tracking-[0.18em] font-medium">
+            <a href="{% url 'home' %}" class="nav-link {% if url_name == 'home' %}is-active{% endif %}">{% trans "Home" %}</a>
+            <a href="{% url 'good_list' %}" class="nav-link {% if url_name == 'good_list' or url_name == 'good_detail' %}is-active{% endif %}">{% trans "Goods" %}</a>
+            <a href="{% url 'company_list' %}" class="nav-link {% if url_name == 'company_list' or url_name == 'company_detail' or url_name == 'company_goods' %}is-active{% endif %}">{% trans "Producers" %}</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'cart_detail' %}" class="text-stone-600">Cart</a>
-            <a href="{% url 'logout' %}" class="text-stone-600">Logout</a>
-            {% else %}
-            <a href="{% url 'login' %}" class="text-stone-600">Sign in</a>
-            <a href="{% url 'register' %}" class="text-stone-600">Sign up</a>
+            <a href="{% url 'cart_detail' %}" class="nav-link {% if url_name == 'cart_detail' %}is-active{% endif %}">{% trans "Cart" %}</a>
+            <a href="{% url 'order_list' %}" class="nav-link {% if url_name == 'order_list' or url_name == 'order_detail' %}is-active{% endif %}">{% trans "Orders" %}</a>
             {% endif %}
         </nav>
+        <div class="hidden md:flex items-center gap-5 text-xs uppercase tracking-[0.15em] shrink-0">
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="nav-link">{% trans "Logout" %}</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="nav-link">{% trans "Sign in" %}</a>
+            <a href="{% url 'register' %}" class="border border-green-900 text-green-900 rounded-full px-4 py-1.5 tracking-[0.1em] transition duration-300 hover:bg-green-900 hover:text-white">{% trans "Sign up" %}</a>
+            {% endif %}
+            <div class="w-px h-4 bg-stone-300"></div>
+            <form action="{% url 'set_language' %}" method="post" class="inline">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <select name="language" onchange="this.form.submit()" class="bg-transparent border-0 border-b border-stone-300 text-stone-600 text-xs uppercase tracking-[0.15em] py-0.5 pr-1 cursor-pointer transition focus:outline-none focus:border-green-900">
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                    {% for code, name in AVAILABLE_LANGUAGES %}
+                    <option value="{{ code }}" {% if code == CURRENT_LANGUAGE %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+        <div class="md:hidden flex items-center gap-3 shrink-0">
+            {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="text-sm text-stone-600">{% trans "Logout" %}</a>
+            {% else %}
+            <a href="{% url 'login' %}" class="text-sm text-stone-600">{% trans "Sign in" %}</a>
+            <a href="{% url 'register' %}" class="text-sm text-stone-600">{% trans "Sign up" %}</a>
+            {% endif %}
+            <form action="{% url 'set_language' %}" method="post" class="inline">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <select name="language" onchange="this.form.submit()" class="text-stone-600 bg-transparent border border-stone-300 rounded-md text-sm py-1">
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                    {% for code, name in AVAILABLE_LANGUAGES %}
+                    <option value="{{ code }}" {% if code == CURRENT_LANGUAGE %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
     </header>
-    <main class="p-4 pb-20 max-w-md mx-auto">
+    {% endwith %}
+    <main class="p-4 pb-20 md:pb-10 mx-auto {% block page_width %}max-w-md{% endblock %}">
         {% if messages %}
         <div class="mb-4 space-y-2">
             {% for message in messages %}
@@ -45,15 +167,36 @@
         {% endif %}
         {% block content %}{% endblock %}
     </main>
-    <nav class="fixed bottom-0 inset-x-0 bg-white border-t border-stone-200 flex justify-around max-w-md mx-auto">
-        <a href="{% url 'home' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Home</a>
-        <a href="{% url 'good_list' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Goods</a>
+    {% with url_name=request.resolver_match.url_name %}
+    <nav class="md:hidden fixed bottom-0 inset-x-0 bg-white shadow-[0_-6px_20px_-8px_rgba(26,21,16,0.12)] flex justify-around mx-auto {% block nav_width %}max-w-md{% endblock %}">
+        <a href="{% url 'home' %}" class="tab-link {% if url_name == 'home' %}is-active{% endif %}">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5"/><path d="M5.5 9.5V19a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4h4v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1V9.5"/></svg>
+            <span>{% trans "Home" %}</span>
+        </a>
+        <a href="{% url 'good_list' %}" class="tab-link {% if url_name == 'good_list' or url_name == 'good_detail' %}is-active{% endif %}">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h10c0 4-1.5 8-5 8s-5-4-5-8Z"/><path d="M12 11v7"/><path d="M8.5 20.5h7"/></svg>
+            <span>{% trans "Goods" %}</span>
+        </a>
+        <a href="{% url 'company_list' %}" class="tab-link {% if url_name == 'company_list' or url_name == 'company_detail' or url_name == 'company_goods' %}is-active{% endif %}">
+            <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.933a.75.75 0 00.62 0c.058-.026.122-.058.19-.096a17.4 17.4 0 002.207-1.508c1.375-1.09 2.756-2.512 3.822-4.14C17.586 11.552 18.25 9.822 18.25 8A8.25 8.25 0 001.75 8c0 1.822.664 3.552 1.72 5.19 1.066 1.627 2.448 3.049 3.822 4.139a17.4 17.4 0 002.397 1.604ZM10 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5Z" clip-rule="evenodd"/></svg>
+            <span>{% trans "Producers" %}</span>
+        </a>
         {% if user.is_authenticated %}
-        <a href="{% url 'cart_detail' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Cart</a>
-        <a href="{% url 'order_list' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Orders</a>
+        <a href="{% url 'cart_detail' %}" class="tab-link {% if url_name == 'cart_detail' %}is-active{% endif %}">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+            <span>{% trans "Cart" %}</span>
+        </a>
+        <a href="{% url 'order_list' %}" class="tab-link {% if url_name == 'order_list' or url_name == 'order_detail' %}is-active{% endif %}">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l3 3v14H7z"/><path d="M9.5 11h5M9.5 14h5M9.5 17h3"/></svg>
+            <span>{% trans "Orders" %}</span>
+        </a>
         {% else %}
-        <a href="{% url 'login' %}" class="flex-1 text-center text-xs text-stone-600 py-3">Sign in</a>
+        <a href="{% url 'login' %}" class="tab-link {% if url_name == 'login' %}is-active{% endif %}">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.25"/><path d="M5 19.5c1-3.5 4-5 7-5s6 1.5 7 5"/></svg>
+            <span>{% trans "Sign in" %}</span>
+        </a>
         {% endif %}
     </nav>
+    {% endwith %}
 </body>
 </html>

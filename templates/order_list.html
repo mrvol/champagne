@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Orders</h2>
-<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-5">{% trans "Orders" %}</h2>
+<ul class="space-y-3">
     {% for order in orders %}
     <li>
-        <a href="{% url 'order_detail' order.pk %}" class="block px-4 py-3 active:bg-stone-100">
-            <p class="font-medium">Order #{{ order.pk }}</p>
+        <a href="{% url 'order_detail' order.pk %}" class="block bg-white rounded-xl border border-stone-200 px-4 py-3.5 transition duration-200 ease-out hover:border-stone-300 hover:shadow-md">
+            <p class="font-medium">{% blocktrans with pk=order.pk %}Order #{{ pk }}{% endblocktrans %}</p>
             <p class="text-sm text-stone-500">{{ order.status|default:"—" }} · {{ order.total_amount }} {{ order.currency }}</p>
         </a>
     </li>
     {% empty %}
-    <li class="px-4 py-3 text-stone-500">No orders yet.</li>
+    <li class="text-center py-16 text-stone-500">{% trans "No orders yet." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

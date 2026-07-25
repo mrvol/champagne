@@ -38,6 +38,18 @@ class Good(BaseModel):
     # row_vineyard
     # positionInRow
 
+    def __str__(self):
+        return self.name or f'Good #{self.pk}'
+
+    @classmethod
+    def as_json(cls, qs):
+        return [{'name': g.name, 'main_photo': g.photo.image.url if g.photo else None} for g in qs]
+
+    def grape_variety_list(self):
+        if not self.grape_variety:
+            return []
+        return [v.strip() for v in self.grape_variety.split(',') if v.strip()]
+
     def make_main(self, photo_id):
         if self.photos.filter(pk=photo_id).exists():
             self.photo_id = photo_id

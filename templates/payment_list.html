@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Payments</h2>
-<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-5">{% trans "Payments" %}</h2>
+<ul class="space-y-3">
     {% for payment in payments %}
     <li>
-        <a href="{% url 'payment_detail' payment.pk %}" class="block px-4 py-3 active:bg-stone-100">
+        <a href="{% url 'payment_detail' payment.pk %}" class="block bg-white rounded-xl border border-stone-200 px-4 py-3.5 transition duration-200 ease-out hover:border-stone-300 hover:shadow-md">
             <p class="font-medium">{{ payment.amount }} {{ payment.currency }}</p>
             <p class="text-sm text-stone-500">{{ payment.status|default:"—" }}</p>
         </a>
     </li>
     {% empty %}
-    <li class="px-4 py-3 text-stone-500">No payments yet.</li>
+    <li class="text-center py-16 text-stone-500">{% trans "No payments yet." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

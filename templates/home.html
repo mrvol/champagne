@@ -1,36 +1,55 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block content %}
-<div class="text-center py-6">
-    <h1 class="text-2xl font-semibold text-green-900">Champagne</h1>
-    <p class="text-stone-600 mt-1">Fine champagne, direct from the producers.</p>
-    <a href="{% url 'good_list' %}" class="inline-block mt-4 bg-green-900 text-white rounded-md px-6 py-2 text-sm">Shop all champagnes</a>
-</div>
+<section class="relative -mx-4 rounded-b-2xl md:rounded-2xl overflow-hidden mb-12 md:mb-20">
+    <div class="aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9]">
+        <img src="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=1800&h=1000&fit=crop&q=80" alt="" class="w-full h-full object-cover">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10"></div>
+    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
+        <h1 class="fade-up font-serif italic text-4xl md:text-6xl text-white">Champagne</h1>
+        <p class="fade-up text-white/90 mt-3 max-w-md md:text-lg" style="animation-delay:.15s">{% trans "Exceptional champagne, direct from the estates that craft it." %}</p>
+        <a href="{% url 'good_list' %}" class="fade-up inline-block mt-6 bg-white text-green-900 rounded-md px-7 py-2.5 text-sm font-medium transition hover:bg-white/90" style="animation-delay:.3s">{% trans "Shop all champagnes" %}</a>
+    </div>
+</section>
 
-<h2 class="text-base font-medium mb-3">Featured</h2>
-<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
-    {% for good in featured %}
-    <li>
-        <a href="{% url 'good_detail' good.pk %}" class="flex items-center gap-3 px-4 py-3 active:bg-stone-100">
-            {% if good.photo %}
-            <img src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-12 h-12 rounded-md border border-stone-200 object-cover shrink-0">
-            {% else %}
-            <div class="w-12 h-12 rounded-md bg-stone-100 shrink-0"></div>
-            {% endif %}
-            <div>
-                <p class="font-medium">{{ good.name|default:"—" }}</p>
-                <p class="text-sm text-stone-500">{{ good.vintage_year|default:"—" }} · <span class="text-amber-700 font-medium">{{ good.price|default:"—" }} {{ good.currency }}</span></p>
-            </div>
-        </a>
-    </li>
-    {% empty %}
-    <li class="px-4 py-3 text-stone-500">No goods yet.</li>
-    {% endfor %}
-</ul>
+<section class="mb-12 md:mb-20">
+    <div class="flex items-baseline justify-between mb-5 gap-3">
+        <h2 class="font-serif text-2xl md:text-3xl font-semibold text-green-900">{% trans "Featured Wines" %}</h2>
+        <a href="{% url 'good_list' %}" class="text-sm text-green-800 shrink-0">{% trans "Shop all champagnes" %}</a>
+    </div>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
+        {% for good in featured %}
+        {% include 'good_md.html' %}
+        {% empty %}
+        <li class="px-4 py-3 text-stone-500 col-span-full">{% trans "No goods yet." %}</li>
+        {% endfor %}
+    </ul>
+</section>
+
+{% if producers %}
+<section class="mb-12 md:mb-20">
+    <div class="max-w-xl mx-auto text-center mb-8">
+        <h2 class="font-serif italic text-2xl md:text-3xl text-green-900">{% trans "A Collection of Prestigious Estates" %}</h2>
+        <p class="text-stone-600 mt-2">{% trans "Every wine on Champagne comes from a producer we've verified in person — their heritage, craft, and story are part of what you're buying." %}</p>
+    </div>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
+        {% for company in producers %}
+        {% include 'company_md.html' %}
+        {% endfor %}
+    </ul>
+    <div class="text-center mt-8">
+        <a href="{% url 'company_list' %}" class="inline-block text-sm text-green-800 border border-stone-300 rounded-md px-5 py-2 transition hover:border-stone-400">{% trans "Meet all our producers" %}</a>
+    </div>
+</section>
+{% endif %}
 
 {% if user.is_authenticated %}
 <div class="mt-6 bg-white rounded-lg border border-stone-200 p-4">
-    <p class="text-sm font-medium mb-2">Passkey</p>
-    <button id="add-passkey" class="w-full bg-green-900 text-white rounded-md py-2 text-sm">Add a passkey for this device</button>
+    <p class="text-sm font-medium mb-2">{% trans "Passkey" %}</p>
+    <button id="add-passkey" class="w-full bg-green-900 text-white rounded-md py-2 text-sm">{% trans "Add a passkey for this device" %}</button>
     <p id="passkey-status" class="text-sm text-stone-500 mt-2"></p>
 </div>
 <script>
@@ -53,9 +72,9 @@ document.getElementById('add-passkey').addEventListener('click', async () => {
             headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
             body: JSON.stringify(payload),
         });
-        status.textContent = res.ok ? 'Passkey added.' : 'Could not add passkey.';
+        status.textContent = res.ok ? '{% trans "Passkey added." %}' : '{% trans "Could not add passkey." %}';
     } catch (err) {
-        status.textContent = 'Passkey setup was cancelled or failed.';
+        status.textContent = '{% trans "Passkey setup was cancelled or failed." %}';
     }
 });
 </script>

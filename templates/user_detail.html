@@ -1,12 +1,28 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">{{ user.username }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Email</dt><dd>{{ user.email }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Phone</dt><dd>{{ user.phone|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Country</dt><dd>{{ user.country|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Roles</dt><dd>{{ user.roles }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">KYC status</dt><dd>{{ user.kyc_status|default:"—" }}</dd></div>
-</dl>
-<a href="{% url 'user_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{{ user.username }}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Email" %}</p>
+        <p class="font-medium">{{ user.email }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Phone" %}</p>
+        <p class="font-medium">{{ user.phone|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Country" %}</p>
+        <p class="font-medium">{{ user.country|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Roles" %}</p>
+        <p class="font-medium">{{ user.roles }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "KYC status" %}</p>
+        <p class="font-medium">{{ user.kyc_status|default:"—" }}</p>
+    </div>
+</div>
+<a href="{% url 'user_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

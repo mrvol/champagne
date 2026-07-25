@@ -16,4 +16,8 @@ def good_list(request):
 def good_detail(request, pk):
     good = get_object_or_404(Good, pk=pk)
     available = Stock.objects.filter(good=good).aggregate(total=Sum('quantity'))['total'] or 0
-    return render(request, 'good_detail.html', {'good': good, 'available': available})
+    return render(request, 'good_detail.html', {
+        'good': good,
+        'available': available,
+        'grape_varieties': good.grape_variety_list(),
+    })

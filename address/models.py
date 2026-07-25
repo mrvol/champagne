@@ -17,3 +17,6 @@ class Address(BaseModel):
     region = models.CharField(max_length=128, blank=True, null=True)
     postal_code = models.CharField(max_length=32, blank=True, null=True)
     country = models.CharField(max_length=2, blank=True, null=True)  # ISO 3166-1 alpha-2
+
+    def __str__(self):
+        return f'{self.line1 or "—"}, {self.city or "—"}'

@@ -1,10 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Stock #{{ item.pk }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Warehouse</dt><dd>{{ item.warehouse }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Good</dt><dd>{{ item.good }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Quantity</dt><dd>{{ item.quantity }}</dd></div>
-</dl>
-<a href="{% url 'stock_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{% blocktrans with pk=item.pk %}Stock #{{ pk }}{% endblocktrans %}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Warehouse" %}</p>
+        <p class="font-medium">{{ item.warehouse }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Good" %}</p>
+        <p class="font-medium">{{ item.good }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Quantity" %}</p>
+        <p class="font-medium">{{ item.quantity }}</p>
+    </div>
+</div>
+<a href="{% url 'stock_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

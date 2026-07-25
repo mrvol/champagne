@@ -1,0 +1,47 @@
+{% load i18n %}
+<li>
+    <a href="{% url 'company_detail' company.pk %}"
+       class="group flex flex-col h-full bg-white rounded-xl border border-stone-200 overflow-hidden transition duration-200 ease-out hover:border-stone-300 hover:shadow-lg hover:-translate-y-0.5">
+        <div class="aspect-[4/3] bg-stone-100 overflow-hidden">
+            {% if company.hero_photo %}
+            <img src="{{ company.hero_photo.image.url }}" alt="" class="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-105">
+            {% else %}
+            <div class="w-full h-full bg-gradient-to-br from-green-900 to-stone-800"></div>
+            {% endif %}
+        </div>
+        <div class="p-5 flex flex-col flex-1 gap-4">
+            <div class="flex items-center gap-4">
+                {% if company.logo_url %}
+                <img src="{{ company.logo_url }}" alt="{{ company.legal_name }}" class="w-14 h-14 rounded-full object-cover border border-stone-200 shrink-0 bg-white -mt-10 shadow-md">
+                {% else %}
+                <div class="w-14 h-14 rounded-full bg-stone-100 border border-stone-200 shrink-0 flex items-center justify-center text-lg font-medium text-green-900 -mt-10 shadow-md">
+                    {{ company.legal_name|default:"—"|slice:":1" }}
+                </div>
+                {% endif %}
+                <div class="min-w-0">
+                    <p class="font-serif text-lg font-medium truncate flex items-center gap-1.5">
+                        <span class="truncate">{{ company.legal_name|default:"—" }}</span>
+                        {% if company.verified_seller %}
+                        <svg class="w-4 h-4 text-green-900 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16Zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5Z" clip-rule="evenodd" />
+                        </svg>
+                        <span class="sr-only">{% trans "Verified producer" %}</span>
+                        {% endif %}
+                    </p>
+                    <p class="text-sm text-stone-500 truncate">
+                        {% if company.industry %}{{ company.industry }}{% endif %}
+                        {% if company.founded_date %} · {% blocktrans with year=company.founded_date.year %}Est. {{ year }}{% endblocktrans %}{% endif %}
+                    </p>
+                </div>
+            </div>
+            {% if company.country %}
+            <div class="flex items-center gap-1.5 text-xs text-stone-500 mt-auto">
+                <svg class="w-3.5 h-3.5 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M9.69 18.933a.75.75 0 00.62 0c.058-.026.122-.058.19-.096a17.4 17.4 0 002.207-1.508c1.375-1.09 2.756-2.512 3.822-4.14C17.586 11.552 18.25 9.822 18.25 8A8.25 8.25 0 001.75 8c0 1.822.664 3.552 1.72 5.19 1.066 1.627 2.448 3.049 3.822 4.139a17.4 17.4 0 002.397 1.604ZM10 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5Z" clip-rule="evenodd" />
+                </svg>
+                <span class="uppercase tracking-wide">{{ company.country }}</span>
+            </div>
+            {% endif %}
+        </div>
+    </a>
+</li>

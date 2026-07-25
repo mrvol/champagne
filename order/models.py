@@ -10,3 +10,6 @@ class Order(BaseModel):
     status = models.CharField(max_length=32, blank=True, null=True)
     total_amount = models.DecimalField(max_digits=12, decimal_places=2, default=0)
     currency = models.CharField(max_length=3, blank=True, null=True)  # ISO 4217
+
+    def __str__(self):
+        return f'Order #{self.pk}'

@@ -12,3 +12,6 @@ class Payment(BaseModel):
     status = models.CharField(max_length=32, blank=True, null=True)
     provider = models.CharField(max_length=64, blank=True, null=True)
     transaction_id = models.CharField(max_length=128, blank=True, null=True)
+
+    def __str__(self):
+        return f'Payment #{self.pk}'

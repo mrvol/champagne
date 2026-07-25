@@ -36,3 +36,6 @@ class Transaction(BaseModel):
     provider = models.CharField(max_length=64, blank=True, null=True)  # e.g. stripe, paypal, gift card issuer
     provider_reference = models.CharField(max_length=128, blank=True, null=True)  # gateway/processor transaction id
     raw_response = models.JSONField(blank=True, null=True)  # technical/provider payload
+
+    def __str__(self):
+        return f'Transaction #{self.pk}'

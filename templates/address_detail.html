@@ -1,14 +1,37 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">{{ address.line1|default:"Address" }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Type</dt><dd>{{ address.type }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Line 2</dt><dd>{{ address.line2|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">City</dt><dd>{{ address.city|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Region</dt><dd>{{ address.region|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Postal code</dt><dd>{{ address.postal_code|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Country</dt><dd>{{ address.country|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">User</dt><dd>{{ address.user }}</dd></div>
-</dl>
-<a href="{% url 'address_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+{% trans "Address" as default_address_name %}
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{{ address.line1|default:default_address_name }}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Type" %}</p>
+        <p class="font-medium">{{ address.type }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Line 2" %}</p>
+        <p class="font-medium">{{ address.line2|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "City" %}</p>
+        <p class="font-medium">{{ address.city|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Region" %}</p>
+        <p class="font-medium">{{ address.region|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Postal code" %}</p>
+        <p class="font-medium">{{ address.postal_code|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Country" %}</p>
+        <p class="font-medium">{{ address.country|default:"—" }}</p>
+    </div>
+    <div class="col-span-2">
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "User" %}</p>
+        <p class="font-medium">{{ address.user }}</p>
+    </div>
+</div>
+<a href="{% url 'address_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

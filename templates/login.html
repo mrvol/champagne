@@ -1,36 +1,37 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-4">Sign in</h2>
+<h2 class="font-serif italic text-3xl text-green-900 text-center mb-6">{% trans "Sign in" %}</h2>
 {% if error %}<p class="text-sm text-red-600 mb-3">{{ error }}</p>{% endif %}
-<form method="post" class="bg-white rounded-lg border border-stone-200 p-4 space-y-3">
+<form method="post" class="bg-white rounded-xl border border-stone-200 p-6 space-y-4">
     {% csrf_token %}
     <div>
-        <label class="block text-sm text-stone-500 mb-1">Email</label>
+        <label class="block text-sm text-stone-500 mb-1">{% trans "Email" %}</label>
         <input type="email" name="email" required class="w-full border border-stone-300 rounded-md p-2 text-sm">
     </div>
     <div>
-        <label class="block text-sm text-stone-500 mb-1">Password</label>
+        <label class="block text-sm text-stone-500 mb-1">{% trans "Password" %}</label>
         <input type="password" name="password" required class="w-full border border-stone-300 rounded-md p-2 text-sm">
     </div>
-    <button type="submit" class="w-full bg-green-900 text-white rounded-md py-2 text-sm">Sign in</button>
+    <button type="submit" class="w-full bg-green-900 text-white rounded-md py-2.5 text-sm transition hover:bg-green-800">{% trans "Sign in" %}</button>
 </form>
 
 <div class="mt-4">
-    <button id="passkey-login" class="w-full border border-stone-300 rounded-md py-2 text-sm">Sign in with a passkey</button>
+    <button id="passkey-login" class="w-full border border-stone-300 rounded-md py-2.5 text-sm transition hover:border-stone-400">{% trans "Sign in with a passkey" %}</button>
     <p id="passkey-login-status" class="text-sm text-stone-500 mt-2"></p>
 </div>
 <script>
 document.getElementById('passkey-login').addEventListener('click', async () => {
     const status = document.getElementById('passkey-login-status');
     const email = document.querySelector('input[name="email"]').value.trim().toLowerCase();
-    if (!email) { status.textContent = 'Enter your email above first.'; return; }
+    if (!email) { status.textContent = '{% trans "Enter your email above first." %}'; return; }
     try {
         const optionsRes = await fetch('{% url "passkey_login_options" %}', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': '{{ csrf_token }}'},
             body: 'email=' + encodeURIComponent(email),
         });
-        if (!optionsRes.ok) { status.textContent = 'No passkey registered for that email.'; return; }
+        if (!optionsRes.ok) { status.textContent = '{% trans "No passkey registered for that email." %}'; return; }
         const options = await optionsRes.json();
         options.challenge = b64urlToBuffer(options.challenge);
         options.allowCredentials = options.allowCredentials.map(c => ({...c, id: b64urlToBuffer(c.id)}));
@@ -51,12 +52,12 @@ document.getElementById('passkey-login').addEventListener('click', async () => {
         if (verifyRes.ok) {
             window.location.href = '/';
         } else {
-            status.textContent = 'Passkey sign-in failed.';
+            status.textContent = '{% trans "Passkey sign-in failed." %}';
         }
     } catch (err) {
-        status.textContent = 'Passkey sign-in was cancelled or failed.';
+        status.textContent = '{% trans "Passkey sign-in was cancelled or failed." %}';
     }
 });
 </script>
-<p class="text-sm text-stone-500 mt-4">No account? <a href="{% url 'register' %}" class="text-green-800">Sign up</a></p>
+<p class="text-sm text-stone-500 mt-4">{% trans "No account?" %} <a href="{% url 'register' %}" class="text-green-800">{% trans "Sign up" %}</a></p>
 {% endblock %}

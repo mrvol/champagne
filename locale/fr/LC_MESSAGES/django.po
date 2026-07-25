@@ -1,0 +1,569 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-25 20:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: cart/views.py:29
+#, python-format
+msgid "%(name)s is out of stock."
+msgstr "%(name)s est en rupture de stock."
+
+#: cart/views.py:32
+#, python-format
+msgid "Only %(available)s of %(name)s in stock."
+msgstr "Il ne reste que %(available)s de %(name)s en stock."
+
+#: cart/views.py:50
+#, python-format
+msgid "You must be at least %(age)s to place an order."
+msgstr "Vous devez avoir au moins %(age)s ans pour passer une commande."
+
+#: person/views.py:40
+msgid "That email and password don't match."
+msgstr "Cet e-mail et ce mot de passe ne correspondent pas."
+
+#: person/views.py:52
+msgid "Enter a valid work email."
+msgstr "Saisissez une adresse e-mail professionnelle valide."
+
+#: person/views.py:54
+msgid "The password needs at least 8 characters."
+msgstr "Le mot de passe doit contenir au moins 8 caractères."
+
+#: person/views.py:56
+msgid "This email already has an account. Sign in instead."
+msgstr "Cet e-mail possède déjà un compte. Connectez-vous à la place."
+
+#: person/views.py:58
+msgid "Enter your date of birth."
+msgstr "Saisissez votre date de naissance."
+
+#: person/views.py:60
+#, python-format
+msgid "You must be at least %(age)s to sign up."
+msgstr "Vous devez avoir au moins %(age)s ans pour vous inscrire."
+
+#: templates/address_detail.html:4 templates/warehouse_detail.html:16
+msgid "Address"
+msgstr "Adresse"
+
+#: templates/address_detail.html:8 templates/transaction_detail.html:11
+msgid "Type"
+msgstr "Type"
+
+#: templates/address_detail.html:12
+msgid "Line 2"
+msgstr "Ligne 2"
+
+#: templates/address_detail.html:16 templates/warehouse_detail.html:12
+msgid "City"
+msgstr "Ville"
+
+#: templates/address_detail.html:20 templates/company_detail.html:60
+msgid "Region"
+msgstr "Région"
+
+#: templates/address_detail.html:24
+msgid "Postal code"
+msgstr "Code postal"
+
+#: templates/address_detail.html:28 templates/user_detail.html:15
+#: templates/warehouse_detail.html:8
+msgid "Country"
+msgstr "Pays"
+
+#: templates/address_detail.html:32
+msgid "User"
+msgstr "Utilisateur"
+
+#: templates/address_detail.html:36 templates/company_goods.html:17
+#: templates/good_detail.html:91 templates/order_detail.html:27
+#: templates/payment_detail.html:27 templates/review_detail.html:19
+#: templates/stock_detail.html:19 templates/transaction_detail.html:31
+#: templates/user_detail.html:27 templates/warehouse_detail.html:20
+msgid "Back"
+msgstr "Retour"
+
+#: templates/address_list.html:4
+msgid "Addresses"
+msgstr "Adresses"
+
+#: templates/address_list.html:14
+msgid "No addresses yet."
+msgstr "Aucune adresse pour le moment."
+
+#: templates/base.html:69 templates/base.html:102 templates/cart_detail.html:4
+msgid "Cart"
+msgstr "Panier"
+
+#: templates/base.html:70
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: templates/base.html:72 templates/base.html:105 templates/login.html:4
+#: templates/login.html:16 templates/register.html:26
+msgid "Sign in"
+msgstr "Se connecter"
+
+#: templates/base.html:73 templates/login.html:62 templates/register.html:4
+msgid "Sign up"
+msgstr "S'inscrire"
+
+#: templates/base.html:99
+msgid "Home"
+msgstr "Accueil"
+
+#: templates/base.html:100 templates/good_list.html:7
+msgid "Goods"
+msgstr "Produits"
+
+#: templates/base.html:103 templates/order_list.html:4
+msgid "Orders"
+msgstr "Commandes"
+
+#: templates/cart_detail.html:13
+msgid "Remove"
+msgstr "Supprimer"
+
+#: templates/cart_detail.html:18
+msgid "Your cart is empty."
+msgstr "Votre panier est vide."
+
+#: templates/cart_detail.html:25 templates/order_detail.html:15
+msgid "Delivery address"
+msgstr "Adresse de livraison"
+
+#: templates/cart_detail.html:31
+msgid "Place order"
+msgstr "Passer la commande"
+
+#: templates/company_detail.html:6 templates/company_goods.html:6
+msgid "Company"
+msgstr "Maison"
+
+#: templates/company_detail.html:28 templates/company_detail.html:33
+#: templates/company_md.html:28
+msgid "Verified producer"
+msgstr "Producteur vérifié"
+
+#: templates/company_detail.html:41 templates/company_md.html:33
+#, python-format
+msgid "Est. %(year)s"
+msgstr "Depuis %(year)s"
+
+#: templates/company_detail.html:50
+msgid "Our Story"
+msgstr "Notre histoire"
+
+#: templates/company_detail.html:66
+msgid "Founded"
+msgstr "Fondée en"
+
+#: templates/company_detail.html:72
+msgid "Speciality"
+msgstr "Spécialité"
+
+#: templates/company_detail.html:78
+msgid "Annual Production"
+msgstr "Production annuelle"
+
+#: templates/company_detail.html:79
+#, python-format
+msgid "%(count)s bottles"
+msgstr "%(count)s bouteilles"
+
+#: templates/company_detail.html:86 templates/good_detail.html:62
+msgid "Grape Varieties"
+msgstr "Cépages"
+
+#: templates/company_detail.html:97
+msgid "Certifications"
+msgstr "Certifications"
+
+#: templates/company_detail.html:110
+msgid "Gallery"
+msgstr "Galerie"
+
+#: templates/company_detail.html:124 templates/home.html:20
+msgid "Featured Wines"
+msgstr "Vins en vedette"
+
+#: templates/company_detail.html:125
+#, python-format
+msgid "View all (%(count)s)"
+msgstr "Voir tout (%(count)s)"
+
+#: templates/company_detail.html:137
+msgid "Contact"
+msgstr "Contact"
+
+#: templates/company_detail.html:141
+msgid "Visit website"
+msgstr "Visiter le site"
+
+#: templates/company_detail.html:146
+msgid "Back to producers"
+msgstr "Retour aux producteurs"
+
+#: templates/company_goods.html:8
+#, python-format
+msgid "%(name)s — Goods"
+msgstr "%(name)s — Produits"
+
+#: templates/company_goods.html:14
+msgid "This company has no goods yet."
+msgstr "Cette maison n'a pas encore de produits."
+
+#: templates/company_list.html:7
+msgid "Producers"
+msgstr "Producteurs"
+
+#: templates/company_list.html:8
+msgid "The wine producers behind our champagnes."
+msgstr "Les producteurs de nos champagnes."
+
+#: templates/company_list.html:15
+msgid "No producers yet."
+msgstr "Aucun producteur pour le moment."
+
+#: templates/good_detail.html:6 templates/stock_detail.html:11
+msgid "Good"
+msgstr "Produit"
+
+#: templates/good_detail.html:53 templates/good_md.html:21
+msgid "Add to cart"
+msgstr "Ajouter au panier"
+
+#: templates/good_detail.html:56 templates/good_md.html:24
+msgid "Out of stock"
+msgstr "Rupture de stock"
+
+#: templates/good_detail.html:72
+msgid "Volume"
+msgstr "Volume"
+
+#: templates/good_detail.html:78
+msgid "ABV"
+msgstr "Degré d'alcool"
+
+#: templates/good_detail.html:84
+msgid "SKU"
+msgstr "Référence"
+
+#: templates/good_list.html:10
+msgid "Search by name, region, grape…"
+msgstr "Rechercher par nom, région, cépage…"
+
+#: templates/good_list.html:16
+#, python-format
+msgid "No goods match \"%(q)s\"."
+msgstr "Aucun produit ne correspond à « %(q)s »."
+
+#: templates/good_list.html:16 templates/home.html:27
+msgid "No goods yet."
+msgstr "Aucun produit pour le moment."
+
+#: templates/good_md.html:14
+#, python-format
+msgid "%(count)s in stock"
+msgstr "%(count)s en stock"
+
+#: templates/home.html:13
+msgid "Exceptional champagne, direct from the estates that craft it."
+msgstr "Un champagne d'exception, directement des domaines qui le façonnent."
+
+#: templates/home.html:14 templates/home.html:21
+msgid "Shop all champagnes"
+msgstr "Voir tous les champagnes"
+
+#: templates/home.html:35
+msgid "A Collection of Prestigious Estates"
+msgstr "Une sélection de domaines prestigieux"
+
+#: templates/home.html:36
+msgid ""
+"Every wine on Champagne comes from a producer we've verified in person — "
+"their heritage, craft, and story are part of what you're buying."
+msgstr "Chaque vin de Champagne provient d'un producteur que nous avons vérifié en personne — son héritage, son savoir-faire et son histoire font partie de ce que vous achetez."
+
+#: templates/home.html:44
+msgid "Meet all our producers"
+msgstr "Découvrir tous nos producteurs"
+
+#: templates/home.html:51
+msgid "Passkey"
+msgstr "Clé d'accès"
+
+#: templates/home.html:52
+msgid "Add a passkey for this device"
+msgstr "Ajouter une clé d'accès pour cet appareil"
+
+#: templates/home.html:75
+msgid "Passkey added."
+msgstr "Clé d'accès ajoutée."
+
+#: templates/home.html:75
+msgid "Could not add passkey."
+msgstr "Impossible d'ajouter la clé d'accès."
+
+#: templates/home.html:77
+msgid "Passkey setup was cancelled or failed."
+msgstr "La configuration de la clé d'accès a été annulée ou a échoué."
+
+#: templates/login.html:9 templates/register.html:13
+#: templates/user_detail.html:7
+msgid "Email"
+msgstr "E-mail"
+
+#: templates/login.html:13 templates/register.html:17
+msgid "Password"
+msgstr "Mot de passe"
+
+#: templates/login.html:20
+msgid "Sign in with a passkey"
+msgstr "Se connecter avec une clé d'accès"
+
+#: templates/login.html:27
+msgid "Enter your email above first."
+msgstr "Saisissez d'abord votre e-mail ci-dessus."
+
+#: templates/login.html:34
+msgid "No passkey registered for that email."
+msgstr "Aucune clé d'accès enregistrée pour cet e-mail."
+
+#: templates/login.html:55
+msgid "Passkey sign-in failed."
+msgstr "Échec de la connexion par clé d'accès."
+
+#: templates/login.html:58
+msgid "Passkey sign-in was cancelled or failed."
+msgstr "La connexion par clé d'accès a été annulée ou a échoué."
+
+#: templates/login.html:62
+msgid "No account?"
+msgstr "Pas de compte ?"
+
+#: templates/order_detail.html:4 templates/order_list.html:9
+#, python-format
+msgid "Order #%(pk)s"
+msgstr "Commande n° %(pk)s"
+
+#: templates/order_detail.html:7
+msgid "Buyer"
+msgstr "Acheteur"
+
+#: templates/order_detail.html:11
+msgid "Seller"
+msgstr "Vendeur"
+
+#: templates/order_detail.html:19 templates/payment_detail.html:19
+#: templates/transaction_detail.html:23
+msgid "Status"
+msgstr "Statut"
+
+#: templates/order_detail.html:23
+msgid "Total"
+msgstr "Total"
+
+#: templates/order_list.html:14
+msgid "No orders yet."
+msgstr "Aucune commande pour le moment."
+
+#: templates/payment_detail.html:4
+#, python-format
+msgid "Payment #%(pk)s"
+msgstr "Paiement n° %(pk)s"
+
+#: templates/payment_detail.html:7
+msgid "Order"
+msgstr "Commande"
+
+#: templates/payment_detail.html:11
+msgid "Payer"
+msgstr "Payeur"
+
+#: templates/payment_detail.html:15 templates/transaction_detail.html:19
+msgid "Amount"
+msgstr "Montant"
+
+#: templates/payment_detail.html:23
+msgid "Provider"
+msgstr "Prestataire"
+
+#: templates/payment_list.html:4
+msgid "Payments"
+msgstr "Paiements"
+
+#: templates/payment_list.html:14
+msgid "No payments yet."
+msgstr "Aucun paiement pour le moment."
+
+#: templates/register.html:9
+msgid "Name"
+msgstr "Nom"
+
+#: templates/register.html:21
+msgid "Date of birth"
+msgstr "Date de naissance"
+
+#: templates/register.html:24
+msgid "Create account"
+msgstr "Créer un compte"
+
+#: templates/register.html:26
+msgid "Already have an account?"
+msgstr "Vous avez déjà un compte ?"
+
+#: templates/review_detail.html:4
+#, python-format
+msgid "Review #%(pk)s"
+msgstr "Avis n° %(pk)s"
+
+#: templates/review_detail.html:7
+msgid "Author"
+msgstr "Auteur"
+
+#: templates/review_detail.html:11
+msgid "Rating"
+msgstr "Note"
+
+#: templates/review_detail.html:15
+msgid "Comment"
+msgstr "Commentaire"
+
+#: templates/review_list.html:4
+msgid "Reviews"
+msgstr "Avis"
+
+#: templates/review_list.html:14
+msgid "No reviews yet."
+msgstr "Aucun avis pour le moment."
+
+#: templates/stock_detail.html:4
+#, python-format
+msgid "Stock #%(pk)s"
+msgstr "Stock n° %(pk)s"
+
+#: templates/stock_detail.html:7 templates/warehouse_detail.html:4
+msgid "Warehouse"
+msgstr "Entrepôt"
+
+#: templates/stock_detail.html:15
+msgid "Quantity"
+msgstr "Quantité"
+
+#: templates/stock_list.html:4
+msgid "Stock"
+msgstr "Stock"
+
+#: templates/stock_list.html:10
+#, python-format
+msgid "%(warehouse)s · qty %(qty)s"
+msgstr "%(warehouse)s · qté %(qty)s"
+
+#: templates/stock_list.html:14
+msgid "No stock yet."
+msgstr "Aucun stock pour le moment."
+
+#: templates/transaction_detail.html:4
+#, python-format
+msgid "Transaction #%(pk)s"
+msgstr "Transaction n° %(pk)s"
+
+#: templates/transaction_detail.html:7
+msgid "Payment"
+msgstr "Paiement"
+
+#: templates/transaction_detail.html:15
+msgid "Method"
+msgstr "Méthode"
+
+#: templates/transaction_detail.html:27
+msgid "Provider ref"
+msgstr "Réf. prestataire"
+
+#: templates/transaction_list.html:4
+msgid "Transactions"
+msgstr "Transactions"
+
+#: templates/transaction_list.html:14
+msgid "No transactions yet."
+msgstr "Aucune transaction pour le moment."
+
+#: templates/user_detail.html:11
+msgid "Phone"
+msgstr "Téléphone"
+
+#: templates/user_detail.html:19
+msgid "Roles"
+msgstr "Rôles"
+
+#: templates/user_detail.html:23
+msgid "KYC status"
+msgstr "Statut KYC"
+
+#: templates/user_list.html:4
+msgid "Users"
+msgstr "Utilisateurs"
+
+#: templates/user_list.html:14
+msgid "No users yet."
+msgstr "Aucun utilisateur pour le moment."
+
+#: templates/warehouse_list.html:4
+msgid "Warehouses"
+msgstr "Entrepôts"
+
+#: templates/warehouse_list.html:14
+msgid "No warehouses yet."
+msgstr "Aucun entrepôt pour le moment."
+
+#~ msgid "Vintage"
+#~ msgstr "Millésime"
+
+#~ msgid "Grape variety"
+#~ msgstr "Cépage"
+
+#~ msgid "Price"
+#~ msgstr "Prix"
+
+#~ msgid "In stock"
+#~ msgstr "En stock"
+
+#~ msgid "Featured"
+#~ msgstr "Sélection"
+
+#~ msgid "Registration #"
+#~ msgstr "N° d'immatriculation"
+
+#~ msgid "Tax ID"
+#~ msgstr "Numéro fiscal"
+
+#~ msgid "VAT number"
+#~ msgstr "Numéro de TVA"
+
+#~ msgid "Industry"
+#~ msgstr "Secteur"
+
+#~ msgid "Verified seller"
+#~ msgstr "Vendeur vérifié"
+
+#~ msgid "Companies"
+#~ msgstr "Maisons"
+
+#~ msgid "No companies yet."
+#~ msgstr "Aucune maison pour le moment."

@@ -1,10 +1,21 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">{{ warehouse.name|default:"Warehouse" }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Country</dt><dd>{{ warehouse.country|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">City</dt><dd>{{ warehouse.city|default:"—" }}</dd></div>
-    <div class="px-4 py-3"><dt class="text-stone-500 mb-1">Address</dt><dd>{{ warehouse.address|default:"—" }}</dd></div>
-</dl>
-<a href="{% url 'warehouse_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+{% trans "Warehouse" as default_warehouse_name %}
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{{ warehouse.name|default:default_warehouse_name }}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Country" %}</p>
+        <p class="font-medium">{{ warehouse.country|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "City" %}</p>
+        <p class="font-medium">{{ warehouse.city|default:"—" }}</p>
+    </div>
+    <div class="col-span-2">
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Address" %}</p>
+        <p class="font-medium">{{ warehouse.address|default:"—" }}</p>
+    </div>
+</div>
+<a href="{% url 'warehouse_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

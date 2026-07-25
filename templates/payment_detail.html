@@ -1,12 +1,28 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Payment #{{ payment.pk }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Order</dt><dd>{{ payment.order }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Payer</dt><dd>{{ payment.payer }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Amount</dt><dd>{{ payment.amount }} {{ payment.currency }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Status</dt><dd>{{ payment.status|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Provider</dt><dd>{{ payment.provider|default:"—" }}</dd></div>
-</dl>
-<a href="{% url 'payment_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{% blocktrans with pk=payment.pk %}Payment #{{ pk }}{% endblocktrans %}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Order" %}</p>
+        <p class="font-medium">{{ payment.order }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Payer" %}</p>
+        <p class="font-medium">{{ payment.payer }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Amount" %}</p>
+        <p class="font-medium text-gold">{{ payment.amount }} {{ payment.currency }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Status" %}</p>
+        <p class="font-medium">{{ payment.status|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Provider" %}</p>
+        <p class="font-medium">{{ payment.provider|default:"—" }}</p>
+    </div>
+</div>
+<a href="{% url 'payment_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

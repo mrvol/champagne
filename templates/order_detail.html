@@ -1,12 +1,28 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Order #{{ order.pk }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Buyer</dt><dd>{{ order.buyer }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Seller</dt><dd>{{ order.seller }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Delivery address</dt><dd>{{ order.delivery_address }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Status</dt><dd>{{ order.status|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Total</dt><dd>{{ order.total_amount }} {{ order.currency }}</dd></div>
-</dl>
-<a href="{% url 'order_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{% blocktrans with pk=order.pk %}Order #{{ pk }}{% endblocktrans %}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Buyer" %}</p>
+        <p class="font-medium">{{ order.buyer }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Seller" %}</p>
+        <p class="font-medium">{{ order.seller }}</p>
+    </div>
+    <div class="col-span-2">
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Delivery address" %}</p>
+        <p class="font-medium">{{ order.delivery_address }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Status" %}</p>
+        <p class="font-medium">{{ order.status|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Total" %}</p>
+        <p class="font-medium text-gold">{{ order.total_amount }} {{ order.currency }}</p>
+    </div>
+</div>
+<a href="{% url 'order_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

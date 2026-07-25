@@ -10,4 +10,17 @@ def company_list(request):
 
 def company_detail(request, pk):
     company = get_object_or_404(Company, pk=pk)
-    return render(request, 'company_detail.html', {'company': company})
+    featured_goods = company.goods.all()[:4]
+    gallery_photos = company.photos.exclude(pk=company.hero_photo_id)[:6]
+    return render(request, 'company_detail.html', {
+        'company': company,
+        'featured_goods': featured_goods,
+        'gallery_photos': gallery_photos,
+        'grape_varieties': company.grape_varieties(),
+    })
+
+
+def company_goods(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+    goods = company.goods.all()
+    return render(request, 'company_goods.html', {'company': company, 'goods': goods})

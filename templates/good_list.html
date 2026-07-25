@@ -1,26 +1,19 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Goods</h2>
-<form method="get" class="mb-3">
-    <input type="search" name="q" value="{{ q }}" placeholder="Search by name, region, grape…" class="w-full border border-stone-300 rounded-md p-2 text-sm">
+<div class="mb-6 md:mb-8 text-center">
+    <h2 class="font-serif italic text-3xl md:text-4xl text-green-900">{% trans "Goods" %}</h2>
+</div>
+<form method="get" class="mb-6 max-w-md mx-auto">
+    <input type="search" name="q" value="{{ q }}" placeholder="{% trans 'Search by name, region, grape…' %}" class="w-full border border-stone-300 rounded-md p-2.5 text-sm">
 </form>
-<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
+<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
     {% for good in goods %}
-    <li>
-        <a href="{% url 'good_detail' good.pk %}" class="flex items-center gap-3 px-4 py-3 active:bg-stone-100">
-            {% if good.photo %}
-            <img src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-12 h-12 rounded-md border border-stone-200 object-cover shrink-0">
-            {% else %}
-            <div class="w-12 h-12 rounded-md bg-stone-100 shrink-0"></div>
-            {% endif %}
-            <div>
-                <p class="font-medium">{{ good.name|default:"—" }}</p>
-                <p class="text-sm text-stone-500">{{ good.vintage_year|default:"—" }} · <span class="text-amber-700 font-medium">{{ good.price|default:"—" }} {{ good.currency }}</span></p>
-            </div>
-        </a>
-    </li>
+    {% include 'good_md.html' %}
     {% empty %}
-    <li class="px-4 py-3 text-stone-500">{% if q %}No goods match "{{ q }}".{% else %}No goods yet.{% endif %}</li>
+    <li class="col-span-full text-center py-16 text-stone-500">{% if q %}{% blocktrans %}No goods match "{{ q }}".{% endblocktrans %}{% else %}{% trans "No goods yet." %}{% endif %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

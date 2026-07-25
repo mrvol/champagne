@@ -1,0 +1,26 @@
+{% load i18n %}
+<li class="bg-white rounded-xl border border-stone-200 flex flex-col h-full transition duration-200 ease-out hover:border-stone-300 hover:shadow-lg hover:-translate-y-0.5">
+    <a href="{% url 'good_detail' good.pk %}" class="flex-1 flex items-center gap-3 p-3 active:bg-stone-100 md:flex-col md:items-stretch md:text-center md:p-4">
+        {% if good.photo %}
+        <div class="w-12 h-12 md:w-full md:h-48 rounded-md border border-stone-200 overflow-hidden shrink-0">
+            <img src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-full h-full object-cover transition duration-500 ease-out hover:scale-105">
+        </div>
+        {% else %}
+        <div class="w-12 h-12 md:w-full md:h-48 rounded-md bg-stone-100 shrink-0"></div>
+        {% endif %}
+        <div class="md:mt-3">
+            <p class="font-medium">{{ good.name|default:"—" }}</p>
+            <p class="text-sm text-stone-500">{{ good.vintage_year|default:"—" }} · <span class="text-gold font-medium">{{ good.price|default:"—" }} {{ good.currency }}</span></p>
+            <p class="text-xs text-stone-500 mt-1">{% blocktrans with count=good.available|default:0 %}{{ count }} in stock{% endblocktrans %}</p>
+        </div>
+    </a>
+    {% if good.available|default:0 > 0 %}
+    <form method="post" action="{% url 'add_to_cart' good.pk %}" class="flex gap-2 px-3 pb-3 md:px-4 md:pb-4">
+        {% csrf_token %}
+        <input type="number" name="quantity" value="1" min="1" max="{{ good.available }}" class="w-16 border border-stone-300 rounded-md p-1 text-sm">
+        <button type="submit" class="flex-1 bg-green-900 text-white rounded-md py-1 text-sm">{% trans "Add to cart" %}</button>
+    </form>
+    {% else %}
+    <p class="px-3 pb-3 md:px-4 md:pb-4 text-sm text-stone-500">{% trans "Out of stock" %}</p>
+    {% endif %}
+</li>

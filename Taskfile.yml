@@ -5,6 +5,11 @@ tasks:
     cmds:
       - uv run python manage.py runserver 8989
 
+  migrate:
+    cmds:
+      - uv run python manage.py makemigrations
+      - uv run python manage.py migrate
+
   reset:
     cmds:
       - find address cart company discount goods mp order payment person price review transaction warehouse -type f -path '*/migrations/*.py' ! -name '__init__.py' -print -delete

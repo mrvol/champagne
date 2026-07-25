@@ -1,10 +1,20 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Review #{{ review.pk }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Author</dt><dd>{{ review.author }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Rating</dt><dd>{{ review.rating }}/5</dd></div>
-    <div class="px-4 py-3"><dt class="text-stone-500 mb-1">Comment</dt><dd>{{ review.comment|default:"—" }}</dd></div>
-</dl>
-<a href="{% url 'review_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{% blocktrans with pk=review.pk %}Review #{{ pk }}{% endblocktrans %}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Author" %}</p>
+        <p class="font-medium">{{ review.author }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Rating" %}</p>
+        <p class="font-medium">{{ review.rating }}/5</p>
+    </div>
+    <div class="col-span-2">
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Comment" %}</p>
+        <p class="font-medium">{{ review.comment|default:"—" }}</p>
+    </div>
+</div>
+<a href="{% url 'review_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

@@ -1,33 +1,92 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl{% endblock %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">{{ good.name|default:"Good" }}</h2>
-{% if good.photo %}
-<img id="main-photo" src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-full rounded-lg border border-stone-200 mb-3 aspect-square object-cover">
-{% endif %}
-{% if good.photos.all %}
-<div class="flex gap-2 overflow-x-auto mb-3">
-    {% for photo in good.photos.all %}
-    <img src="{{ photo.image.url }}" alt="{{ photo.description|default:good.name }}" class="w-16 h-16 rounded-md border border-stone-200 object-cover shrink-0 cursor-pointer" onclick="document.getElementById('main-photo').src = this.src">
-    {% endfor %}
+{% trans "Good" as default_good_name %}
+<div class="md:grid md:grid-cols-2 md:gap-10">
+    <div>
+        {% if good.photo %}
+        <img id="main-photo" src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-full rounded-xl border border-stone-200 mb-3 aspect-square object-cover shadow-sm">
+        {% else %}
+        <div class="w-full rounded-xl bg-stone-100 mb-3 aspect-square"></div>
+        {% endif %}
+        {% if good.photos.all %}
+        <div class="flex gap-2 overflow-x-auto mb-3">
+            {% for photo in good.photos.all %}
+            <img src="{{ photo.image.url }}" alt="{{ photo.description|default:good.name }}" class="w-16 h-16 rounded-md border border-stone-200 object-cover shrink-0 cursor-pointer" onclick="document.getElementById('main-photo').src = this.src">
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <div>
+        {% if good.company %}
+        <a href="{% url 'company_detail' good.company.pk %}" class="text-sm text-stone-500 hover:text-green-800">{{ good.company }}</a>
+        {% endif %}
+        <h1 class="font-serif text-3xl md:text-4xl font-semibold text-green-900 mt-1">{{ good.name|default:default_good_name }}</h1>
+        <p class="text-stone-500 mt-1">
+            {{ good.vintage_year|default:"—" }}
+            {% if good.region %} · {{ good.region }}{% endif %}
+        </p>
+        <p class="text-2xl text-gold font-medium mt-4">{{ good.price|default:"—" }} {{ good.currency }}</p>
+
+        {% if good.description %}
+        <p class="text-stone-700 leading-relaxed mt-4">{{ good.description }}</p>
+        {% endif %}
+
+        {% if good.bullets %}
+        <ul class="mt-4 space-y-1.5">
+            {% for bullet in good.bullets %}
+            <li class="text-sm text-stone-700 flex items-start gap-2">
+                <span class="text-gold mt-1">·</span>
+                <span>{{ bullet }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if available > 0 %}
+        <form method="post" action="{% url 'add_to_cart' good.pk %}" class="mt-6 flex gap-2">
+            {% csrf_token %}
+            <input type="number" name="quantity" value="1" min="1" max="{{ available }}" class="w-20 border border-stone-300 rounded-md p-2 text-sm">
+            <button type="submit" class="flex-1 bg-green-900 text-white rounded-md py-2 text-sm transition hover:bg-green-800">{% trans "Add to cart" %}</button>
+        </form>
+        {% else %}
+        <p class="mt-6 text-sm text-stone-500">{% trans "Out of stock" %}</p>
+        {% endif %}
+
+        <div class="grid grid-cols-2 gap-6 border-t border-stone-200 mt-6 pt-6">
+            {% if grape_varieties %}
+            <div class="col-span-2">
+                <p class="text-xs uppercase tracking-wide text-stone-500 mb-2">{% trans "Grape Varieties" %}</p>
+                <div class="flex flex-wrap gap-2">
+                    {% for variety in grape_varieties %}
+                    <span class="text-sm bg-stone-100 text-stone-700 rounded-full px-3 py-1">{{ variety }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            {% if good.volume_ml %}
+            <div>
+                <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Volume" %}</p>
+                <p class="font-medium">{{ good.volume_ml }} ml</p>
+            </div>
+            {% endif %}
+            {% if good.abv %}
+            <div>
+                <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "ABV" %}</p>
+                <p class="font-medium">{{ good.abv }}%</p>
+            </div>
+            {% endif %}
+            {% if good.sku %}
+            <div>
+                <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "SKU" %}</p>
+                <p class="font-medium">{{ good.sku }}</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
-{% endif %}
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Company</dt><dd>{{ good.company }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">SKU</dt><dd>{{ good.sku|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Vintage</dt><dd>{{ good.vintage_year|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Region</dt><dd>{{ good.region|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Grape variety</dt><dd>{{ good.grape_variety|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Volume</dt><dd>{{ good.volume_ml|default:"—" }} ml</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">ABV</dt><dd>{{ good.abv|default:"—" }}%</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Price</dt><dd class="text-amber-700 font-medium">{{ good.price|default:"—" }} {{ good.currency }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">In stock</dt><dd>{{ available }}</dd></div>
-</dl>
-{% if available > 0 %}
-<form method="post" action="{% url 'add_to_cart' good.pk %}" class="mt-4 flex gap-2">
-    {% csrf_token %}
-    <input type="number" name="quantity" value="1" min="1" max="{{ available }}" class="w-20 border border-stone-300 rounded-md p-2 text-sm">
-    <button type="submit" class="flex-1 bg-green-900 text-white rounded-md py-2 text-sm">Add to cart</button>
-</form>
-{% endif %}
-<a href="{% url 'good_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+<a href="{% url 'good_list' %}" class="inline-block mt-8 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

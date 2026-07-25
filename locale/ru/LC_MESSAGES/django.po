@@ -1,0 +1,571 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-25 20:22+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: cart/views.py:29
+#, python-format
+msgid "%(name)s is out of stock."
+msgstr "%(name)s нет в наличии."
+
+#: cart/views.py:32
+#, python-format
+msgid "Only %(available)s of %(name)s in stock."
+msgstr "В наличии только %(available)s ед. товара %(name)s."
+
+#: cart/views.py:50
+#, python-format
+msgid "You must be at least %(age)s to place an order."
+msgstr "Для оформления заказа необходимо достичь %(age)s лет."
+
+#: person/views.py:40
+msgid "That email and password don't match."
+msgstr "Неверный email или пароль."
+
+#: person/views.py:52
+msgid "Enter a valid work email."
+msgstr "Введите действительный рабочий email."
+
+#: person/views.py:54
+msgid "The password needs at least 8 characters."
+msgstr "Пароль должен содержать не менее 8 символов."
+
+#: person/views.py:56
+msgid "This email already has an account. Sign in instead."
+msgstr "Для этого email уже есть аккаунт. Войдите вместо регистрации."
+
+#: person/views.py:58
+msgid "Enter your date of birth."
+msgstr "Укажите дату рождения."
+
+#: person/views.py:60
+#, python-format
+msgid "You must be at least %(age)s to sign up."
+msgstr "Для регистрации необходимо достичь %(age)s лет."
+
+#: templates/address_detail.html:4 templates/warehouse_detail.html:16
+msgid "Address"
+msgstr "Адрес"
+
+#: templates/address_detail.html:8 templates/transaction_detail.html:11
+msgid "Type"
+msgstr "Тип"
+
+#: templates/address_detail.html:12
+msgid "Line 2"
+msgstr "Адрес, строка 2"
+
+#: templates/address_detail.html:16 templates/warehouse_detail.html:12
+msgid "City"
+msgstr "Город"
+
+#: templates/address_detail.html:20 templates/company_detail.html:60
+msgid "Region"
+msgstr "Регион"
+
+#: templates/address_detail.html:24
+msgid "Postal code"
+msgstr "Почтовый индекс"
+
+#: templates/address_detail.html:28 templates/user_detail.html:15
+#: templates/warehouse_detail.html:8
+msgid "Country"
+msgstr "Страна"
+
+#: templates/address_detail.html:32
+msgid "User"
+msgstr "Пользователь"
+
+#: templates/address_detail.html:36 templates/company_goods.html:17
+#: templates/good_detail.html:91 templates/order_detail.html:27
+#: templates/payment_detail.html:27 templates/review_detail.html:19
+#: templates/stock_detail.html:19 templates/transaction_detail.html:31
+#: templates/user_detail.html:27 templates/warehouse_detail.html:20
+msgid "Back"
+msgstr "Назад"
+
+#: templates/address_list.html:4
+msgid "Addresses"
+msgstr "Адреса"
+
+#: templates/address_list.html:14
+msgid "No addresses yet."
+msgstr "Пока нет адресов."
+
+#: templates/base.html:69 templates/base.html:102 templates/cart_detail.html:4
+msgid "Cart"
+msgstr "Корзина"
+
+#: templates/base.html:70
+msgid "Logout"
+msgstr "Выйти"
+
+#: templates/base.html:72 templates/base.html:105 templates/login.html:4
+#: templates/login.html:16 templates/register.html:26
+msgid "Sign in"
+msgstr "Войти"
+
+#: templates/base.html:73 templates/login.html:62 templates/register.html:4
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: templates/base.html:99
+msgid "Home"
+msgstr "Главная"
+
+#: templates/base.html:100 templates/good_list.html:7
+msgid "Goods"
+msgstr "Товары"
+
+#: templates/base.html:103 templates/order_list.html:4
+msgid "Orders"
+msgstr "Заказы"
+
+#: templates/cart_detail.html:13
+msgid "Remove"
+msgstr "Удалить"
+
+#: templates/cart_detail.html:18
+msgid "Your cart is empty."
+msgstr "Ваша корзина пуста."
+
+#: templates/cart_detail.html:25 templates/order_detail.html:15
+msgid "Delivery address"
+msgstr "Адрес доставки"
+
+#: templates/cart_detail.html:31
+msgid "Place order"
+msgstr "Оформить заказ"
+
+#: templates/company_detail.html:6 templates/company_goods.html:6
+msgid "Company"
+msgstr "Дом"
+
+#: templates/company_detail.html:28 templates/company_detail.html:33
+#: templates/company_md.html:28
+msgid "Verified producer"
+msgstr "Проверенный производитель"
+
+#: templates/company_detail.html:41 templates/company_md.html:33
+#, python-format
+msgid "Est. %(year)s"
+msgstr "С %(year)s года"
+
+#: templates/company_detail.html:50
+msgid "Our Story"
+msgstr "Наша история"
+
+#: templates/company_detail.html:66
+msgid "Founded"
+msgstr "Основана"
+
+#: templates/company_detail.html:72
+msgid "Speciality"
+msgstr "Специализация"
+
+#: templates/company_detail.html:78
+msgid "Annual Production"
+msgstr "Годовое производство"
+
+#: templates/company_detail.html:79
+#, python-format
+msgid "%(count)s bottles"
+msgstr "%(count)s бутылок"
+
+#: templates/company_detail.html:86 templates/good_detail.html:62
+msgid "Grape Varieties"
+msgstr "Сорта винограда"
+
+#: templates/company_detail.html:97
+msgid "Certifications"
+msgstr "Сертификаты"
+
+#: templates/company_detail.html:110
+msgid "Gallery"
+msgstr "Галерея"
+
+#: templates/company_detail.html:124 templates/home.html:20
+msgid "Featured Wines"
+msgstr "Рекомендуемые вина"
+
+#: templates/company_detail.html:125
+#, python-format
+msgid "View all (%(count)s)"
+msgstr "Смотреть все (%(count)s)"
+
+#: templates/company_detail.html:137
+msgid "Contact"
+msgstr "Контакты"
+
+#: templates/company_detail.html:141
+msgid "Visit website"
+msgstr "Перейти на сайт"
+
+#: templates/company_detail.html:146
+msgid "Back to producers"
+msgstr "Назад к производителям"
+
+#: templates/company_goods.html:8
+#, python-format
+msgid "%(name)s — Goods"
+msgstr "%(name)s — Товары"
+
+#: templates/company_goods.html:14
+msgid "This company has no goods yet."
+msgstr "У этого дома пока нет товаров."
+
+#: templates/company_list.html:7
+msgid "Producers"
+msgstr "Производители"
+
+#: templates/company_list.html:8
+msgid "The wine producers behind our champagnes."
+msgstr "Производители наших шампанских вин."
+
+#: templates/company_list.html:15
+msgid "No producers yet."
+msgstr "Пока нет производителей."
+
+#: templates/good_detail.html:6 templates/stock_detail.html:11
+msgid "Good"
+msgstr "Товар"
+
+#: templates/good_detail.html:53 templates/good_md.html:21
+msgid "Add to cart"
+msgstr "В корзину"
+
+#: templates/good_detail.html:56 templates/good_md.html:24
+msgid "Out of stock"
+msgstr "Нет в наличии"
+
+#: templates/good_detail.html:72
+msgid "Volume"
+msgstr "Объём"
+
+#: templates/good_detail.html:78
+msgid "ABV"
+msgstr "Крепость"
+
+#: templates/good_detail.html:84
+msgid "SKU"
+msgstr "Артикул"
+
+#: templates/good_list.html:10
+msgid "Search by name, region, grape…"
+msgstr "Поиск по названию, региону, сорту…"
+
+#: templates/good_list.html:16
+#, python-format
+msgid "No goods match \"%(q)s\"."
+msgstr "Товары по запросу «%(q)s» не найдены."
+
+#: templates/good_list.html:16 templates/home.html:27
+msgid "No goods yet."
+msgstr "Пока нет товаров."
+
+#: templates/good_md.html:14
+#, python-format
+msgid "%(count)s in stock"
+msgstr "%(count)s в наличии"
+
+#: templates/home.html:13
+msgid "Exceptional champagne, direct from the estates that craft it."
+msgstr "Исключительное шампанское напрямую от создающих его поместий."
+
+#: templates/home.html:14 templates/home.html:21
+msgid "Shop all champagnes"
+msgstr "Смотреть всё шампанское"
+
+#: templates/home.html:35
+msgid "A Collection of Prestigious Estates"
+msgstr "Коллекция престижных поместий"
+
+#: templates/home.html:36
+msgid ""
+"Every wine on Champagne comes from a producer we've verified in person — "
+"their heritage, craft, and story are part of what you're buying."
+msgstr "Каждое вино на Champagne — от производителя, которого мы лично проверили: его наследие, мастерство и история — часть того, что вы покупаете."
+
+#: templates/home.html:44
+msgid "Meet all our producers"
+msgstr "Смотреть всех производителей"
+
+#: templates/home.html:51
+msgid "Passkey"
+msgstr "Ключ доступа"
+
+#: templates/home.html:52
+msgid "Add a passkey for this device"
+msgstr "Добавить ключ доступа для этого устройства"
+
+#: templates/home.html:75
+msgid "Passkey added."
+msgstr "Ключ доступа добавлен."
+
+#: templates/home.html:75
+msgid "Could not add passkey."
+msgstr "Не удалось добавить ключ доступа."
+
+#: templates/home.html:77
+msgid "Passkey setup was cancelled or failed."
+msgstr "Настройка ключа доступа отменена или не удалась."
+
+#: templates/login.html:9 templates/register.html:13
+#: templates/user_detail.html:7
+msgid "Email"
+msgstr "Email"
+
+#: templates/login.html:13 templates/register.html:17
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/login.html:20
+msgid "Sign in with a passkey"
+msgstr "Войти с ключом доступа"
+
+#: templates/login.html:27
+msgid "Enter your email above first."
+msgstr "Сначала введите email выше."
+
+#: templates/login.html:34
+msgid "No passkey registered for that email."
+msgstr "Для этого email не зарегистрирован ключ доступа."
+
+#: templates/login.html:55
+msgid "Passkey sign-in failed."
+msgstr "Не удалось войти с ключом доступа."
+
+#: templates/login.html:58
+msgid "Passkey sign-in was cancelled or failed."
+msgstr "Вход с ключом доступа отменён или не удался."
+
+#: templates/login.html:62
+msgid "No account?"
+msgstr "Нет аккаунта?"
+
+#: templates/order_detail.html:4 templates/order_list.html:9
+#, python-format
+msgid "Order #%(pk)s"
+msgstr "Заказ №%(pk)s"
+
+#: templates/order_detail.html:7
+msgid "Buyer"
+msgstr "Покупатель"
+
+#: templates/order_detail.html:11
+msgid "Seller"
+msgstr "Продавец"
+
+#: templates/order_detail.html:19 templates/payment_detail.html:19
+#: templates/transaction_detail.html:23
+msgid "Status"
+msgstr "Статус"
+
+#: templates/order_detail.html:23
+msgid "Total"
+msgstr "Итого"
+
+#: templates/order_list.html:14
+msgid "No orders yet."
+msgstr "Пока нет заказов."
+
+#: templates/payment_detail.html:4
+#, python-format
+msgid "Payment #%(pk)s"
+msgstr "Платёж №%(pk)s"
+
+#: templates/payment_detail.html:7
+msgid "Order"
+msgstr "Заказ"
+
+#: templates/payment_detail.html:11
+msgid "Payer"
+msgstr "Плательщик"
+
+#: templates/payment_detail.html:15 templates/transaction_detail.html:19
+msgid "Amount"
+msgstr "Сумма"
+
+#: templates/payment_detail.html:23
+msgid "Provider"
+msgstr "Провайдер"
+
+#: templates/payment_list.html:4
+msgid "Payments"
+msgstr "Платежи"
+
+#: templates/payment_list.html:14
+msgid "No payments yet."
+msgstr "Пока нет платежей."
+
+#: templates/register.html:9
+msgid "Name"
+msgstr "Имя"
+
+#: templates/register.html:21
+msgid "Date of birth"
+msgstr "Дата рождения"
+
+#: templates/register.html:24
+msgid "Create account"
+msgstr "Создать аккаунт"
+
+#: templates/register.html:26
+msgid "Already have an account?"
+msgstr "Уже есть аккаунт?"
+
+#: templates/review_detail.html:4
+#, python-format
+msgid "Review #%(pk)s"
+msgstr "Отзыв №%(pk)s"
+
+#: templates/review_detail.html:7
+msgid "Author"
+msgstr "Автор"
+
+#: templates/review_detail.html:11
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: templates/review_detail.html:15
+msgid "Comment"
+msgstr "Комментарий"
+
+#: templates/review_list.html:4
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: templates/review_list.html:14
+msgid "No reviews yet."
+msgstr "Пока нет отзывов."
+
+#: templates/stock_detail.html:4
+#, python-format
+msgid "Stock #%(pk)s"
+msgstr "Остаток №%(pk)s"
+
+#: templates/stock_detail.html:7 templates/warehouse_detail.html:4
+msgid "Warehouse"
+msgstr "Склад"
+
+#: templates/stock_detail.html:15
+msgid "Quantity"
+msgstr "Количество"
+
+#: templates/stock_list.html:4
+msgid "Stock"
+msgstr "Остатки"
+
+#: templates/stock_list.html:10
+#, python-format
+msgid "%(warehouse)s · qty %(qty)s"
+msgstr "%(warehouse)s · кол-во %(qty)s"
+
+#: templates/stock_list.html:14
+msgid "No stock yet."
+msgstr "Пока нет остатков."
+
+#: templates/transaction_detail.html:4
+#, python-format
+msgid "Transaction #%(pk)s"
+msgstr "Транзакция №%(pk)s"
+
+#: templates/transaction_detail.html:7
+msgid "Payment"
+msgstr "Платёж"
+
+#: templates/transaction_detail.html:15
+msgid "Method"
+msgstr "Способ"
+
+#: templates/transaction_detail.html:27
+msgid "Provider ref"
+msgstr "Референс провайдера"
+
+#: templates/transaction_list.html:4
+msgid "Transactions"
+msgstr "Транзакции"
+
+#: templates/transaction_list.html:14
+msgid "No transactions yet."
+msgstr "Пока нет транзакций."
+
+#: templates/user_detail.html:11
+msgid "Phone"
+msgstr "Телефон"
+
+#: templates/user_detail.html:19
+msgid "Roles"
+msgstr "Роли"
+
+#: templates/user_detail.html:23
+msgid "KYC status"
+msgstr "Статус KYC"
+
+#: templates/user_list.html:4
+msgid "Users"
+msgstr "Пользователи"
+
+#: templates/user_list.html:14
+msgid "No users yet."
+msgstr "Пока нет пользователей."
+
+#: templates/warehouse_list.html:4
+msgid "Warehouses"
+msgstr "Склады"
+
+#: templates/warehouse_list.html:14
+msgid "No warehouses yet."
+msgstr "Пока нет складов."
+
+#~ msgid "Vintage"
+#~ msgstr "Винтаж"
+
+#~ msgid "Grape variety"
+#~ msgstr "Сорт винограда"
+
+#~ msgid "Price"
+#~ msgstr "Цена"
+
+#~ msgid "In stock"
+#~ msgstr "В наличии"
+
+#~ msgid "Featured"
+#~ msgstr "Рекомендуем"
+
+#~ msgid "Registration #"
+#~ msgstr "Рег. номер"
+
+#~ msgid "Tax ID"
+#~ msgstr "ИНН"
+
+#~ msgid "VAT number"
+#~ msgstr "Номер НДС"
+
+#~ msgid "Industry"
+#~ msgstr "Отрасль"
+
+#~ msgid "Verified seller"
+#~ msgstr "Проверенный продавец"
+
+#~ msgid "Companies"
+#~ msgstr "Дома"
+
+#~ msgid "No companies yet."
+#~ msgstr "Пока нет домов."

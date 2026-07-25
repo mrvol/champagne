@@ -1,15 +1,147 @@
 {% extends "base.html" %}
+{% load i18n humanize %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">{{ company.legal_name|default:"Company" }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Registration #</dt><dd>{{ company.registration_number|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Country</dt><dd>{{ company.country|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Tax ID</dt><dd>{{ company.tax_id|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">VAT number</dt><dd>{{ company.vat_number|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Industry</dt><dd>{{ company.industry|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Website</dt><dd>{{ company.website|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Rating</dt><dd>{{ company.rating }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Verified seller</dt><dd>{{ company.verified_seller }}</dd></div>
-</dl>
-<a href="{% url 'company_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+{% trans "Company" as default_company_name %}
+
+<section class="relative -mx-4 rounded-b-2xl md:rounded-2xl overflow-hidden mb-10 md:mb-16">
+    <div class="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] w-full {% if not company.hero_photo %}bg-gradient-to-br from-green-900 to-stone-900{% endif %}">
+        {% if company.hero_photo %}
+        <img src="{{ company.hero_photo.image.url }}" alt="" class="w-full h-full object-cover">
+        {% endif %}
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent"></div>
+
+    <div class="absolute inset-x-0 bottom-0 p-5 md:p-10 flex items-end gap-4 md:gap-6">
+        {% if company.logo_url %}
+        <img src="{{ company.logo_url }}" alt="{{ company.legal_name }}" class="fade-up w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-white/80 object-cover bg-white shadow-lg shrink-0">
+        {% else %}
+        <div class="fade-up w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-white/80 bg-white/90 shadow-lg shrink-0 flex items-center justify-center text-2xl md:text-3xl font-medium text-green-900">
+            {{ company.legal_name|default:default_company_name|slice:":1" }}
+        </div>
+        {% endif %}
+        <div class="min-w-0 pb-1">
+            <h1 class="fade-up font-serif text-3xl md:text-5xl font-semibold text-white flex items-center gap-2" style="animation-delay:.1s">
+                <span class="truncate">{{ company.legal_name|default:default_company_name }}</span>
+                {% if company.verified_seller %}
+                <span class="inline-flex items-center justify-center w-5 h-5 md:w-6 md:h-6 rounded-full bg-white/20 shrink-0" title="{% trans 'Verified producer' %}">
+                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-white" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16Zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5Z" clip-rule="evenodd" />
+                    </svg>
+                </span>
+                <span class="sr-only">{% trans "Verified producer" %}</span>
+                {% endif %}
+            </h1>
+            {% if company.tagline %}
+            <p class="fade-up text-white/90 mt-1 md:text-lg" style="animation-delay:.2s">{{ company.tagline }}</p>
+            {% endif %}
+            <p class="fade-up text-white/70 text-sm mt-2 flex items-center gap-3 flex-wrap" style="animation-delay:.3s">
+                {% if company.region %}<span>{{ company.region }}</span>{% endif %}
+                {% if company.founded_date %}<span>{% blocktrans with year=company.founded_date.year %}Est. {{ year }}{% endblocktrans %}</span>{% endif %}
+                {% if company.rating > 0 %}<span>★ {{ company.rating }}</span>{% endif %}
+            </p>
+        </div>
+    </div>
+</section>
+
+{% if company.story %}
+<section class="max-w-2xl mx-auto text-center mb-12 md:mb-16 px-2">
+    <h2 class="font-serif italic text-2xl md:text-3xl text-green-900 mb-4">{% trans "Our Story" %}</h2>
+    <p class="text-stone-700 leading-relaxed md:text-lg">{{ company.story }}</p>
+</section>
+{% endif %}
+
+{% if company.region or company.founded_date or company.annual_production or company.industry or grape_varieties or company.certifications %}
+<section class="mb-12 md:mb-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 border-y border-stone-200 py-6 md:py-8">
+        {% if company.region %}
+        <div>
+            <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Region" %}</p>
+            <p class="font-medium">{{ company.region }}</p>
+        </div>
+        {% endif %}
+        {% if company.founded_date %}
+        <div>
+            <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Founded" %}</p>
+            <p class="font-medium">{{ company.founded_date.year }}</p>
+        </div>
+        {% endif %}
+        {% if company.industry %}
+        <div>
+            <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Speciality" %}</p>
+            <p class="font-medium">{{ company.industry }}</p>
+        </div>
+        {% endif %}
+        {% if company.annual_production %}
+        <div>
+            <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Annual Production" %}</p>
+            <p class="font-medium">{% blocktrans with count=company.annual_production|intcomma %}{{ count }} bottles{% endblocktrans %}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    {% if grape_varieties %}
+    <div class="mt-6">
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-2">{% trans "Grape Varieties" %}</p>
+        <div class="flex flex-wrap gap-2">
+            {% for variety in grape_varieties %}
+            <span class="text-sm bg-stone-100 text-stone-700 rounded-full px-3 py-1">{{ variety }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if company.certifications %}
+    <div class="mt-4">
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-2">{% trans "Certifications" %}</p>
+        <div class="flex flex-wrap gap-2">
+            {% for cert in company.certifications %}
+            <span class="text-sm border border-stone-300 text-stone-700 rounded-full px-3 py-1">{{ cert }}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</section>
+{% endif %}
+
+{% if gallery_photos %}
+<section class="mb-12 md:mb-16">
+    <h2 class="font-serif text-2xl md:text-3xl font-semibold text-green-900 mb-5">{% trans "Gallery" %}</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
+        {% for photo in gallery_photos %}
+        <div class="aspect-square rounded-xl overflow-hidden bg-stone-100">
+            <img src="{{ photo.image.url }}" alt="{{ photo.description|default:'' }}" class="w-full h-full object-cover transition duration-700 ease-out hover:scale-110">
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% endif %}
+
+{% if featured_goods %}
+<section class="mb-12 md:mb-16">
+    <div class="flex items-baseline justify-between mb-5 gap-3">
+        <h2 class="font-serif text-2xl md:text-3xl font-semibold text-green-900">{% trans "Featured Wines" %}</h2>
+        <a href="{% url 'company_goods' company.pk %}" class="text-sm text-green-800 shrink-0">{% blocktrans with count=company.goods.count %}View all ({{ count }}){% endblocktrans %}</a>
+    </div>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">
+        {% for good in featured_goods %}
+        {% include 'good_md.html' %}
+        {% endfor %}
+    </ul>
+</section>
+{% endif %}
+
+{% if company.contact_email or company.contact_phone or company.website %}
+<section class="mb-10 md:mb-12">
+    <h2 class="text-xs uppercase tracking-wide text-stone-500 mb-3">{% trans "Contact" %}</h2>
+    <div class="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm">
+        {% if company.contact_email %}<a href="mailto:{{ company.contact_email }}" class="text-green-800">{{ company.contact_email }}</a>{% endif %}
+        {% if company.contact_phone %}<span class="text-stone-700">{{ company.contact_phone }}</span>{% endif %}
+        {% if company.website %}<a href="{{ company.website }}" target="_blank" rel="noopener" class="text-green-800">{% trans "Visit website" %}</a>{% endif %}
+    </div>
+</section>
+{% endif %}
+
+<a href="{% url 'company_list' %}" class="inline-block text-sm text-stone-500">&larr; {% trans "Back to producers" %}</a>
 {% endblock %}

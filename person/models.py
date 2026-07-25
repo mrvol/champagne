@@ -43,6 +43,7 @@ class User(AbstractUser, BaseModel):
     bio = models.TextField(blank=True, null=True)
     gender = models.CharField(max_length=32, blank=True, null=True)
     language = models.JSONField(default=list, blank=True)  # list of ISO 639-1 codes
+    ui_language = models.CharField(max_length=8, blank=True, default='')  # site UI language, e.g. 'en', 'fr', 'ru'
     timezone = models.CharField(max_length=64, blank=True, null=True)
     primary_address = models.ForeignKey('address.Address', on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
     roles = models.JSONField(default=list, blank=True)  # e.g. ['buyer', 'seller']

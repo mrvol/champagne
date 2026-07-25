@@ -1,16 +1,17 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Stock</h2>
-<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-5">{% trans "Stock" %}</h2>
+<ul class="space-y-3">
     {% for item in stock %}
     <li>
-        <a href="{% url 'stock_detail' item.pk %}" class="block px-4 py-3 active:bg-stone-100">
+        <a href="{% url 'stock_detail' item.pk %}" class="block bg-white rounded-xl border border-stone-200 px-4 py-3.5 transition duration-200 ease-out hover:border-stone-300 hover:shadow-md">
             <p class="font-medium">{{ item.good }}</p>
-            <p class="text-sm text-stone-500">{{ item.warehouse }} · qty {{ item.quantity }}</p>
+            <p class="text-sm text-stone-500">{% blocktrans with warehouse=item.warehouse qty=item.quantity %}{{ warehouse }} · qty {{ qty }}{% endblocktrans %}</p>
         </a>
     </li>
     {% empty %}
-    <li class="px-4 py-3 text-stone-500">No stock yet.</li>
+    <li class="text-center py-16 text-stone-500">{% trans "No stock yet." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

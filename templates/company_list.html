@@ -1,16 +1,18 @@
 {% extends "base.html" %}
+{% load i18n %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Companies</h2>
-<ul class="divide-y divide-stone-200 bg-white rounded-lg border border-stone-200">
+<div class="mb-6 md:mb-8 text-center">
+    <h2 class="font-serif italic text-3xl md:text-4xl text-green-900">{% trans "Producers" %}</h2>
+    <p class="text-sm text-stone-500 mt-2 max-w-md mx-auto">{% trans "The wine producers behind our champagnes." %}</p>
+</div>
+
+<ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
     {% for company in companies %}
-    <li>
-        <a href="{% url 'company_detail' company.pk %}" class="block px-4 py-3 active:bg-stone-100">
-            <p class="font-medium">{{ company.legal_name|default:"—" }}</p>
-            <p class="text-sm text-stone-500">{{ company.country|default:"—" }}</p>
-        </a>
-    </li>
+    {% include 'company_md.html' %}
     {% empty %}
-    <li class="px-4 py-3 text-stone-500">No companies yet.</li>
+    <li class="col-span-full text-center py-16 text-stone-500">{% trans "No producers yet." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

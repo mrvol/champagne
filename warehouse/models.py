@@ -10,6 +10,9 @@ class Warehouse(BaseModel):
     city = models.CharField(max_length=128, blank=True, null=True)
     address = models.TextField(blank=True, null=True)
 
+    def __str__(self):
+        return self.name or f'Warehouse #{self.pk}'
+
 
 class Stock(BaseModel):
     warehouse = models.ForeignKey(Warehouse, on_delete=models.CASCADE, related_name='stock')

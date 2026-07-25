@@ -1,13 +1,32 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block content %}
-<h2 class="text-base font-medium mb-3">Transaction #{{ transaction.pk }}</h2>
-<dl class="bg-white rounded-lg border border-stone-200 divide-y divide-stone-200 text-sm">
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Payment</dt><dd>{{ transaction.payment }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Type</dt><dd>{{ transaction.type }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Method</dt><dd>{{ transaction.method|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Amount</dt><dd>{{ transaction.amount }} {{ transaction.currency }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Status</dt><dd>{{ transaction.status|default:"—" }}</dd></div>
-    <div class="px-4 py-3 flex justify-between"><dt class="text-stone-500">Provider ref</dt><dd>{{ transaction.provider_reference|default:"—" }}</dd></div>
-</dl>
-<a href="{% url 'transaction_list' %}" class="inline-block mt-4 text-sm text-stone-500">&larr; Back</a>
+<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{% blocktrans with pk=transaction.pk %}Transaction #{{ pk }}{% endblocktrans %}</h2>
+<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Payment" %}</p>
+        <p class="font-medium">{{ transaction.payment }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Type" %}</p>
+        <p class="font-medium">{{ transaction.type }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Method" %}</p>
+        <p class="font-medium">{{ transaction.method|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Amount" %}</p>
+        <p class="font-medium text-gold">{{ transaction.amount }} {{ transaction.currency }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Status" %}</p>
+        <p class="font-medium">{{ transaction.status|default:"—" }}</p>
+    </div>
+    <div>
+        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Provider ref" %}</p>
+        <p class="font-medium">{{ transaction.provider_reference|default:"—" }}</p>
+    </div>
+</div>
+<a href="{% url 'transaction_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
 {% endblock %}

@@ -2,18 +2,30 @@ import json
 import os
 
 import cbor2
+from django.conf import settings
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import Group
 from django.http import HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.dateparse import parse_date
+from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
+from django.views.i18n import set_language as django_set_language
 
 from person.models import MIN_AGE, User, WebAuthnCredential, age_from_birthday
 from person.passkeys import (
     b64url_decode, b64url_encode, parse_attested_credential_data,
     sign_count_from_auth_data, verify_assertion_signature,
 )
+
+
+def set_language(request):
+    response = django_set_language(request)
+    lang = request.POST.get('language')
+    if request.user.is_authenticated and lang in dict(settings.LANGUAGES):
+        request.user.ui_language = lang
+        request.user.save(update_fields=['ui_language'])
+    return response
 
 
 def login_view(request):
@@ -25,7 +37,7 @@ def login_view(request):
             auth_login(request, user)
             nxt = request.GET.get('next', '')
             return redirect(nxt if nxt.startswith('/') else 'home')
-        error = "That email and password don't match."
+        error = _("That email and password don't match.")
     return render(request, 'login.html', {'error': error})
 
 
@@ -37,15 +49,15 @@ def register(request):
         first, _, last = request.POST.get('name', '').strip().partition(' ')
         birthday = parse_date(request.POST.get('birthday', ''))
         if '@' not in email:
-            error = 'Enter a valid work email.'
+            error = _('Enter a valid work email.')
         elif len(password) < 8:
-            error = 'The password needs at least 8 characters.'
+            error = _('The password needs at least 8 characters.')
         elif User.objects.filter(username=email).exists():
-            error = 'This email already has an account. Sign in instead.'
+            error = _('This email already has an account. Sign in instead.')
         elif not birthday:
-            error = 'Enter your date of birth.'
+            error = _('Enter your date of birth.')
         elif age_from_birthday(birthday) < MIN_AGE:
-            error = f'You must be at least {MIN_AGE} to sign up.'
+            error = _('You must be at least %(age)s to sign up.') % {'age': MIN_AGE}
         else:
             user = User.objects.create_user(username=email, email=email, password=password,
                                             first_name=first, last_name=last, birthday=birthday)
