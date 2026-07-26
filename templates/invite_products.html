@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+{% include 'invite_steps.html' with current_step='products' %}
+<div class="text-center mb-8">
+    <h2 class="font-serif italic text-3xl text-green-900">{% trans "Your Wines" %}</h2>
+    <p class="text-stone-600 mt-2">{% trans "Add every wine you'd like to offer. You can keep editing until you submit for review." %}</p>
+</div>
+
+<a href="{% url 'invite_product_add' invitation.token %}" class="inline-block mb-6 bg-green-900 text-white rounded-md px-5 py-2.5 text-sm transition hover:bg-green-800">{% trans "Add a wine" %}</a>
+
+<ul class="space-y-3 mb-8">
+    {% for good in goods %}
+    <li class="bg-white rounded-xl border border-stone-200 px-5 py-4 flex items-center justify-between gap-4">
+        <div class="min-w-0">
+            <p class="font-medium truncate">{{ good.name|default:"—" }}</p>
+            <p class="text-sm text-stone-500">{{ good.vintage_year|default:"—" }} · {{ good.get_wine_type_display|default:"—" }}</p>
+        </div>
+        <div class="flex items-center gap-3 shrink-0 text-sm">
+            <a href="{% url 'invite_product_edit' invitation.token good.pk %}" class="text-green-800">{% trans "Edit" %}</a>
+            <form method="post" action="{% url 'invite_product_delete' invitation.token good.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="text-stone-500">{% trans "Remove" %}</button>
+            </form>
+        </div>
+    </li>
+    {% empty %}
+    <li class="text-center py-12 text-stone-500">{% trans "No wines added yet." %}</li>
+    {% endfor %}
+</ul>
+
+<form method="post" class="flex justify-end">
+    {% csrf_token %}
+    <button type="submit" name="continue" class="bg-green-900 text-white rounded-md px-6 py-2.5 text-sm transition hover:bg-green-800">{% trans "Continue to review" %}</button>
+</form>
+{% endblock %}

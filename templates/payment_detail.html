@@ -13,7 +13,7 @@
     </div>
     <div>
         <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Amount" %}</p>
-        <p class="font-medium text-gold">{{ payment.amount }} {{ payment.currency }}</p>
+        <p class="font-medium text-gold">{{ payment.amount }} {{ payment.get_currency_display }}</p>
     </div>
     <div>
         <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Status" %}</p>

@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  /* z-index keysheet: bottom to top */
+  --z-index-card-action: 10; /* per-card controls (e.g. edit button); scoped via `isolate` on the card */
+  --z-index-chrome: 20;      /* persistent page chrome: sticky header, fixed bottom nav */
+  --z-index-modal: 50;       /* full-screen dialogs/overlays, portaled to <body> */
+
+  /* staff dashboard semantic colors, separate from the brand accent (green/gold) */
+  --color-good: #3f7d5c;
+  --color-good-soft: #e7f1ec;
+  --color-warning: #a9711d;
+  --color-warning-soft: #f7ecd7;
+  --color-critical: #7a2530;
+  --color-critical-soft: #f6e6e8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-good: #5fbf90;
+    --color-good-soft: #1a2c22;
+    --color-warning: #d9a04a;
+    --color-warning-soft: #2e2517;
+    --color-critical: #d9808a;
+    --color-critical-soft: #33201f;
+  }
+}

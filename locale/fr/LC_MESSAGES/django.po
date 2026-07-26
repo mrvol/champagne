@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-25 20:22+0000\n"
+"POT-Creation-Date: 2026-07-25 21:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,6 +32,37 @@ msgstr "Il ne reste que %(available)s de %(name)s en stock."
 msgid "You must be at least %(age)s to place an order."
 msgstr "Vous devez avoir au moins %(age)s ans pour passer une commande."
 
+#: invite/views.py:55
+msgid "That password doesn't match this invitation's account."
+msgstr "Ce mot de passe ne correspond pas au compte de cette invitation."
+
+#: invite/views.py:64 person/views.py:54
+msgid "The password needs at least 8 characters."
+msgstr "Le mot de passe doit contenir au moins 8 caractères."
+
+#: invite/views.py:66
+msgid ""
+"An account already exists for this email. Contact support to relink your "
+"invitation."
+msgstr "Un compte existe déjà pour cet e-mail. Contactez le support pour relier votre invitation."
+
+#: invite/views.py:68 person/views.py:58
+msgid "Enter your date of birth."
+msgstr "Saisissez votre date de naissance."
+
+#: invite/views.py:70 person/views.py:60
+#, python-format
+msgid "You must be at least %(age)s to sign up."
+msgstr "Vous devez avoir au moins %(age)s ans pour vous inscrire."
+
+#: invite/views.py:104
+msgid "Progress saved."
+msgstr "Progression enregistrée."
+
+#: invite/views.py:136
+msgid "Wine saved."
+msgstr "Vin enregistré."
+
 #: person/views.py:40
 msgid "That email and password don't match."
 msgstr "Cet e-mail et ce mot de passe ne correspondent pas."
@@ -40,22 +71,9 @@ msgstr "Cet e-mail et ce mot de passe ne correspondent pas."
 msgid "Enter a valid work email."
 msgstr "Saisissez une adresse e-mail professionnelle valide."
 
-#: person/views.py:54
-msgid "The password needs at least 8 characters."
-msgstr "Le mot de passe doit contenir au moins 8 caractères."
-
 #: person/views.py:56
 msgid "This email already has an account. Sign in instead."
 msgstr "Cet e-mail possède déjà un compte. Connectez-vous à la place."
-
-#: person/views.py:58
-msgid "Enter your date of birth."
-msgstr "Saisissez votre date de naissance."
-
-#: person/views.py:60
-#, python-format
-msgid "You must be at least %(age)s to sign up."
-msgstr "Vous devez avoir au moins %(age)s ans pour vous inscrire."
 
 #: templates/address_detail.html:4 templates/warehouse_detail.html:16
 msgid "Address"
@@ -106,36 +124,42 @@ msgstr "Adresses"
 msgid "No addresses yet."
 msgstr "Aucune adresse pour le moment."
 
-#: templates/base.html:69 templates/base.html:102 templates/cart_detail.html:4
-msgid "Cart"
-msgstr "Panier"
-
-#: templates/base.html:70
-msgid "Logout"
-msgstr "Déconnexion"
-
-#: templates/base.html:72 templates/base.html:105 templates/login.html:4
-#: templates/login.html:16 templates/register.html:26
-msgid "Sign in"
-msgstr "Se connecter"
-
-#: templates/base.html:73 templates/login.html:62 templates/register.html:4
-msgid "Sign up"
-msgstr "S'inscrire"
-
-#: templates/base.html:99
+#: templates/base.html:111 templates/base.html:174
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/base.html:100 templates/good_list.html:7
+#: templates/base.html:112 templates/base.html:178 templates/good_list.html:7
 msgid "Goods"
 msgstr "Produits"
 
-#: templates/base.html:103 templates/order_list.html:4
+#: templates/base.html:113 templates/base.html:182
+#: templates/company_list.html:7
+msgid "Producers"
+msgstr "Producteurs"
+
+#: templates/base.html:115 templates/base.html:187 templates/cart_detail.html:4
+msgid "Cart"
+msgstr "Panier"
+
+#: templates/base.html:116 templates/base.html:191 templates/order_list.html:4
 msgid "Orders"
 msgstr "Commandes"
 
-#: templates/cart_detail.html:13
+#: templates/base.html:121 templates/base.html:141
+msgid "Logout"
+msgstr "Déconnexion"
+
+#: templates/base.html:123 templates/base.html:143 templates/base.html:196
+#: templates/login.html:4 templates/login.html:16 templates/register.html:26
+msgid "Sign in"
+msgstr "Se connecter"
+
+#: templates/base.html:124 templates/base.html:144 templates/login.html:62
+#: templates/register.html:4
+msgid "Sign up"
+msgstr "S'inscrire"
+
+#: templates/cart_detail.html:13 templates/invite_products.html:23
 msgid "Remove"
 msgstr "Supprimer"
 
@@ -152,6 +176,7 @@ msgid "Place order"
 msgstr "Passer la commande"
 
 #: templates/company_detail.html:6 templates/company_goods.html:6
+#: templates/invite_review.html:12 templates/invite_steps.html:5
 msgid "Company"
 msgstr "Maison"
 
@@ -228,10 +253,6 @@ msgstr "%(name)s — Produits"
 msgid "This company has no goods yet."
 msgstr "Cette maison n'a pas encore de produits."
 
-#: templates/company_list.html:7
-msgid "Producers"
-msgstr "Producteurs"
-
 #: templates/company_list.html:8
 msgid "The wine producers behind our champagnes."
 msgstr "Les producteurs de nos champagnes."
@@ -298,7 +319,10 @@ msgstr "Une sélection de domaines prestigieux"
 msgid ""
 "Every wine on Champagne comes from a producer we've verified in person — "
 "their heritage, craft, and story are part of what you're buying."
-msgstr "Chaque vin de Champagne provient d'un producteur que nous avons vérifié en personne — son héritage, son savoir-faire et son histoire font partie de ce que vous achetez."
+msgstr ""
+"Chaque vin de Champagne provient d'un producteur que nous avons vérifié en "
+"personne — son héritage, son savoir-faire et son histoire font partie de ce "
+"que vous achetez."
 
 #: templates/home.html:44
 msgid "Meet all our producers"
@@ -324,14 +348,221 @@ msgstr "Impossible d'ajouter la clé d'accès."
 msgid "Passkey setup was cancelled or failed."
 msgstr "La configuration de la clé d'accès a été annulée ou a échoué."
 
+#: templates/invite_account.html:7
+msgid "Welcome to Champagne"
+msgstr "Bienvenue sur Champagne"
+
+#: templates/invite_account.html:8
+msgid ""
+"You've been invited to join as a Wine House. Create your account to begin."
+msgstr "Vous avez été invité à rejoindre en tant que maison de champagne. Créez votre compte pour commencer."
+
+#: templates/invite_account.html:14 templates/invite_login.html:14
 #: templates/login.html:9 templates/register.html:13
 #: templates/user_detail.html:7
 msgid "Email"
 msgstr "E-mail"
 
+#: templates/invite_account.html:18 templates/register.html:9
+msgid "Name"
+msgstr "Nom"
+
+#: templates/invite_account.html:22 templates/invite_login.html:18
 #: templates/login.html:13 templates/register.html:17
 msgid "Password"
 msgstr "Mot de passe"
+
+#: templates/invite_account.html:26 templates/register.html:21
+msgid "Date of birth"
+msgstr "Date de naissance"
+
+#: templates/invite_account.html:29
+msgid "Create account & continue"
+msgstr "Créer le compte et continuer"
+
+#: templates/invite_company.html:8
+msgid "Your Wine House"
+msgstr "Votre maison"
+
+#: templates/invite_company.html:9
+msgid ""
+"Tell us about your estate. Progress saves as you go, so you can return at "
+"any time."
+msgstr "Parlez-nous de votre domaine. La progression est enregistrée au fur et à mesure, vous pouvez donc revenir à tout moment."
+
+#: templates/invite_company.html:16
+msgid "Company Information"
+msgstr "Informations sur l'entreprise"
+
+#: templates/invite_company.html:30
+msgid "Business Contact"
+msgstr "Contact commercial"
+
+#: templates/invite_company.html:43
+msgid "Address & Location"
+msgstr "Adresse et localisation"
+
+#: templates/invite_company.html:56
+msgid "Banking & Financial"
+msgstr "Coordonnées bancaires et financières"
+
+#: templates/invite_company.html:69
+msgid "Public Profile"
+msgstr "Profil public"
+
+#: templates/invite_company.html:81
+msgid "Cover image"
+msgstr "Image de couverture"
+
+#: templates/invite_company.html:85
+msgid "Winery photos"
+msgstr "Photos du chai"
+
+#: templates/invite_company.html:89
+msgid "Vineyard photos"
+msgstr "Photos du vignoble"
+
+#: templates/invite_company.html:93
+msgid "Cellar photos"
+msgstr "Photos de la cave"
+
+#: templates/invite_company.html:100
+msgid "Save progress"
+msgstr "Enregistrer la progression"
+
+#: templates/invite_company.html:101
+msgid "Save & continue to wines"
+msgstr "Enregistrer et continuer vers les vins"
+
+#: templates/invite_completed.html:5
+msgid "Thank you"
+msgstr "Merci"
+
+#: templates/invite_completed.html:6
+msgid ""
+"Your Wine House profile has been submitted and our team will review it "
+"shortly. We'll be in touch once you're live on Champagne."
+msgstr "Le profil de votre maison a été soumis et notre équipe l'examinera prochainement. Nous vous recontacterons dès que vous serez en ligne sur Champagne."
+
+#: templates/invite_completed.html:7 templates/invite_invalid.html:15
+msgid "Back to home"
+msgstr "Retour à l'accueil"
+
+#: templates/invite_invalid.html:6
+msgid "Onboarding already completed"
+msgstr "Intégration déjà terminée"
+
+#: templates/invite_invalid.html:7
+msgid "Invitation revoked"
+msgstr "Invitation révoquée"
+
+#: templates/invite_invalid.html:8
+msgid "Invitation expired"
+msgstr "Invitation expirée"
+
+#: templates/invite_invalid.html:11
+msgid ""
+"This invitation has already been completed. If you need to make changes, "
+"please contact us."
+msgstr "Cette invitation a déjà été complétée. Si vous devez apporter des modifications, veuillez nous contacter."
+
+#: templates/invite_invalid.html:12
+msgid "This invitation is no longer valid. Please contact us for a new one."
+msgstr "Cette invitation n'est plus valide. Veuillez nous contacter pour en obtenir une nouvelle."
+
+#: templates/invite_invalid.html:13
+msgid "This invitation link has expired. Please contact us for a new one."
+msgstr "Ce lien d'invitation a expiré. Veuillez nous contacter pour en obtenir un nouveau."
+
+#: templates/invite_login.html:7
+msgid "Welcome back"
+msgstr "Content de vous revoir"
+
+#: templates/invite_login.html:8
+msgid "Sign in to continue your Wine House onboarding."
+msgstr "Connectez-vous pour poursuivre l'intégration de votre maison."
+
+#: templates/invite_login.html:21
+msgid "Sign in & continue"
+msgstr "Se connecter et continuer"
+
+#: templates/invite_product_form.html:6
+msgid "Edit Wine"
+msgstr "Modifier le vin"
+
+#: templates/invite_product_form.html:6
+msgid "Add a Wine"
+msgstr "Ajouter un vin"
+
+#: templates/invite_product_form.html:20
+msgid "Photo"
+msgstr "Photo"
+
+#: templates/invite_product_form.html:23
+msgid "Save wine"
+msgstr "Enregistrer le vin"
+
+#: templates/invite_product_form.html:25
+msgid "Back to wines"
+msgstr "Retour aux vins"
+
+#: templates/invite_products.html:6
+msgid "Your Wines"
+msgstr "Vos vins"
+
+#: templates/invite_products.html:7
+msgid ""
+"Add every wine you'd like to offer. You can keep editing until you submit "
+"for review."
+msgstr "Ajoutez tous les vins que vous souhaitez proposer. Vous pouvez continuer à les modifier jusqu'à la soumission pour vérification."
+
+#: templates/invite_products.html:10
+msgid "Add a wine"
+msgstr "Ajouter un vin"
+
+#: templates/invite_products.html:20 templates/invite_review.html:13
+#: templates/invite_review.html:22
+msgid "Edit"
+msgstr "Modifier"
+
+#: templates/invite_products.html:28
+msgid "No wines added yet."
+msgstr "Aucun vin ajouté pour le moment."
+
+#: templates/invite_products.html:34
+msgid "Continue to review"
+msgstr "Continuer vers la vérification"
+
+#: templates/invite_review.html:6
+msgid "Review & Submit"
+msgstr "Vérification et soumission"
+
+#: templates/invite_review.html:7
+msgid "Take one last look. You can still edit any section before submitting."
+msgstr "Jetez un dernier coup d'œil. Vous pouvez encore modifier chaque section avant de soumettre."
+
+#: templates/invite_review.html:21 templates/invite_steps.html:7
+msgid "Wines"
+msgstr "Vins"
+
+#: templates/invite_review.html:24
+#, python-format
+msgid "%(counter)s wine ready for review"
+msgid_plural "%(counter)s wines ready for review"
+msgstr[0] "%(counter)s vin prêt pour la vérification"
+msgstr[1] "%(counter)s vins prêts pour la vérification"
+
+#: templates/invite_review.html:29
+msgid "Submit for review"
+msgstr "Soumettre pour vérification"
+
+#: templates/invite_steps.html:3
+msgid "Account"
+msgstr "Compte"
+
+#: templates/invite_steps.html:9
+msgid "Review"
+msgstr "Vérification"
 
 #: templates/login.html:20
 msgid "Sign in with a passkey"
@@ -411,14 +642,6 @@ msgstr "Paiements"
 #: templates/payment_list.html:14
 msgid "No payments yet."
 msgstr "Aucun paiement pour le moment."
-
-#: templates/register.html:9
-msgid "Name"
-msgstr "Nom"
-
-#: templates/register.html:21
-msgid "Date of birth"
-msgstr "Date de naissance"
 
 #: templates/register.html:24
 msgid "Create account"

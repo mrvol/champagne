@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-25 20:22+0000\n"
+"POT-Creation-Date: 2026-07-25 21:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,6 +34,37 @@ msgstr "В наличии только %(available)s ед. товара %(name)s
 msgid "You must be at least %(age)s to place an order."
 msgstr "Для оформления заказа необходимо достичь %(age)s лет."
 
+#: invite/views.py:55
+msgid "That password doesn't match this invitation's account."
+msgstr "Этот пароль не подходит к аккаунту этого приглашения."
+
+#: invite/views.py:64 person/views.py:54
+msgid "The password needs at least 8 characters."
+msgstr "Пароль должен содержать не менее 8 символов."
+
+#: invite/views.py:66
+msgid ""
+"An account already exists for this email. Contact support to relink your "
+"invitation."
+msgstr "Аккаунт с этим email уже существует. Обратитесь в поддержку, чтобы привязать приглашение."
+
+#: invite/views.py:68 person/views.py:58
+msgid "Enter your date of birth."
+msgstr "Укажите дату рождения."
+
+#: invite/views.py:70 person/views.py:60
+#, python-format
+msgid "You must be at least %(age)s to sign up."
+msgstr "Для регистрации необходимо достичь %(age)s лет."
+
+#: invite/views.py:104
+msgid "Progress saved."
+msgstr "Прогресс сохранён."
+
+#: invite/views.py:136
+msgid "Wine saved."
+msgstr "Вино сохранено."
+
 #: person/views.py:40
 msgid "That email and password don't match."
 msgstr "Неверный email или пароль."
@@ -42,22 +73,9 @@ msgstr "Неверный email или пароль."
 msgid "Enter a valid work email."
 msgstr "Введите действительный рабочий email."
 
-#: person/views.py:54
-msgid "The password needs at least 8 characters."
-msgstr "Пароль должен содержать не менее 8 символов."
-
 #: person/views.py:56
 msgid "This email already has an account. Sign in instead."
 msgstr "Для этого email уже есть аккаунт. Войдите вместо регистрации."
-
-#: person/views.py:58
-msgid "Enter your date of birth."
-msgstr "Укажите дату рождения."
-
-#: person/views.py:60
-#, python-format
-msgid "You must be at least %(age)s to sign up."
-msgstr "Для регистрации необходимо достичь %(age)s лет."
 
 #: templates/address_detail.html:4 templates/warehouse_detail.html:16
 msgid "Address"
@@ -108,36 +126,42 @@ msgstr "Адреса"
 msgid "No addresses yet."
 msgstr "Пока нет адресов."
 
-#: templates/base.html:69 templates/base.html:102 templates/cart_detail.html:4
-msgid "Cart"
-msgstr "Корзина"
-
-#: templates/base.html:70
-msgid "Logout"
-msgstr "Выйти"
-
-#: templates/base.html:72 templates/base.html:105 templates/login.html:4
-#: templates/login.html:16 templates/register.html:26
-msgid "Sign in"
-msgstr "Войти"
-
-#: templates/base.html:73 templates/login.html:62 templates/register.html:4
-msgid "Sign up"
-msgstr "Регистрация"
-
-#: templates/base.html:99
+#: templates/base.html:111 templates/base.html:174
 msgid "Home"
 msgstr "Главная"
 
-#: templates/base.html:100 templates/good_list.html:7
+#: templates/base.html:112 templates/base.html:178 templates/good_list.html:7
 msgid "Goods"
 msgstr "Товары"
 
-#: templates/base.html:103 templates/order_list.html:4
+#: templates/base.html:113 templates/base.html:182
+#: templates/company_list.html:7
+msgid "Producers"
+msgstr "Производители"
+
+#: templates/base.html:115 templates/base.html:187 templates/cart_detail.html:4
+msgid "Cart"
+msgstr "Корзина"
+
+#: templates/base.html:116 templates/base.html:191 templates/order_list.html:4
 msgid "Orders"
 msgstr "Заказы"
 
-#: templates/cart_detail.html:13
+#: templates/base.html:121 templates/base.html:141
+msgid "Logout"
+msgstr "Выйти"
+
+#: templates/base.html:123 templates/base.html:143 templates/base.html:196
+#: templates/login.html:4 templates/login.html:16 templates/register.html:26
+msgid "Sign in"
+msgstr "Войти"
+
+#: templates/base.html:124 templates/base.html:144 templates/login.html:62
+#: templates/register.html:4
+msgid "Sign up"
+msgstr "Регистрация"
+
+#: templates/cart_detail.html:13 templates/invite_products.html:23
 msgid "Remove"
 msgstr "Удалить"
 
@@ -154,6 +178,7 @@ msgid "Place order"
 msgstr "Оформить заказ"
 
 #: templates/company_detail.html:6 templates/company_goods.html:6
+#: templates/invite_review.html:12 templates/invite_steps.html:5
 msgid "Company"
 msgstr "Дом"
 
@@ -230,10 +255,6 @@ msgstr "%(name)s — Товары"
 msgid "This company has no goods yet."
 msgstr "У этого дома пока нет товаров."
 
-#: templates/company_list.html:7
-msgid "Producers"
-msgstr "Производители"
-
 #: templates/company_list.html:8
 msgid "The wine producers behind our champagnes."
 msgstr "Производители наших шампанских вин."
@@ -300,7 +321,9 @@ msgstr "Коллекция престижных поместий"
 msgid ""
 "Every wine on Champagne comes from a producer we've verified in person — "
 "their heritage, craft, and story are part of what you're buying."
-msgstr "Каждое вино на Champagne — от производителя, которого мы лично проверили: его наследие, мастерство и история — часть того, что вы покупаете."
+msgstr ""
+"Каждое вино на Champagne — от производителя, которого мы лично проверили: "
+"его наследие, мастерство и история — часть того, что вы покупаете."
 
 #: templates/home.html:44
 msgid "Meet all our producers"
@@ -326,14 +349,223 @@ msgstr "Не удалось добавить ключ доступа."
 msgid "Passkey setup was cancelled or failed."
 msgstr "Настройка ключа доступа отменена или не удалась."
 
+#: templates/invite_account.html:7
+msgid "Welcome to Champagne"
+msgstr "Добро пожаловать на Champagne"
+
+#: templates/invite_account.html:8
+msgid ""
+"You've been invited to join as a Wine House. Create your account to begin."
+msgstr "Вас пригласили присоединиться в качестве винного дома. Создайте аккаунт, чтобы начать."
+
+#: templates/invite_account.html:14 templates/invite_login.html:14
 #: templates/login.html:9 templates/register.html:13
 #: templates/user_detail.html:7
 msgid "Email"
 msgstr "Email"
 
+#: templates/invite_account.html:18 templates/register.html:9
+msgid "Name"
+msgstr "Имя"
+
+#: templates/invite_account.html:22 templates/invite_login.html:18
 #: templates/login.html:13 templates/register.html:17
 msgid "Password"
 msgstr "Пароль"
+
+#: templates/invite_account.html:26 templates/register.html:21
+msgid "Date of birth"
+msgstr "Дата рождения"
+
+#: templates/invite_account.html:29
+msgid "Create account & continue"
+msgstr "Создать аккаунт и продолжить"
+
+#: templates/invite_company.html:8
+msgid "Your Wine House"
+msgstr "Ваш винный дом"
+
+#: templates/invite_company.html:9
+msgid ""
+"Tell us about your estate. Progress saves as you go, so you can return at "
+"any time."
+msgstr "Расскажите о своём поместье. Прогресс сохраняется по ходу дела, поэтому вы можете вернуться в любой момент."
+
+#: templates/invite_company.html:16
+msgid "Company Information"
+msgstr "Информация о компании"
+
+#: templates/invite_company.html:30
+msgid "Business Contact"
+msgstr "Деловой контакт"
+
+#: templates/invite_company.html:43
+msgid "Address & Location"
+msgstr "Адрес и местоположение"
+
+#: templates/invite_company.html:56
+msgid "Banking & Financial"
+msgstr "Банковские и финансовые реквизиты"
+
+#: templates/invite_company.html:69
+msgid "Public Profile"
+msgstr "Публичный профиль"
+
+#: templates/invite_company.html:81
+msgid "Cover image"
+msgstr "Обложка"
+
+#: templates/invite_company.html:85
+msgid "Winery photos"
+msgstr "Фото винодельни"
+
+#: templates/invite_company.html:89
+msgid "Vineyard photos"
+msgstr "Фото виноградника"
+
+#: templates/invite_company.html:93
+msgid "Cellar photos"
+msgstr "Фото погреба"
+
+#: templates/invite_company.html:100
+msgid "Save progress"
+msgstr "Сохранить прогресс"
+
+#: templates/invite_company.html:101
+msgid "Save & continue to wines"
+msgstr "Сохранить и перейти к винам"
+
+#: templates/invite_completed.html:5
+msgid "Thank you"
+msgstr "Спасибо"
+
+#: templates/invite_completed.html:6
+msgid ""
+"Your Wine House profile has been submitted and our team will review it "
+"shortly. We'll be in touch once you're live on Champagne."
+msgstr "Профиль вашего винного дома отправлен, наша команда скоро его рассмотрит. Мы свяжемся с вами, как только вы появитесь на Champagne."
+
+#: templates/invite_completed.html:7 templates/invite_invalid.html:15
+msgid "Back to home"
+msgstr "На главную"
+
+#: templates/invite_invalid.html:6
+msgid "Onboarding already completed"
+msgstr "Регистрация уже завершена"
+
+#: templates/invite_invalid.html:7
+msgid "Invitation revoked"
+msgstr "Приглашение отозвано"
+
+#: templates/invite_invalid.html:8
+msgid "Invitation expired"
+msgstr "Срок действия приглашения истёк"
+
+#: templates/invite_invalid.html:11
+msgid ""
+"This invitation has already been completed. If you need to make changes, "
+"please contact us."
+msgstr "Это приглашение уже завершено. Если нужно внести изменения, свяжитесь с нами."
+
+#: templates/invite_invalid.html:12
+msgid "This invitation is no longer valid. Please contact us for a new one."
+msgstr "Это приглашение больше не действительно. Свяжитесь с нами, чтобы получить новое."
+
+#: templates/invite_invalid.html:13
+msgid "This invitation link has expired. Please contact us for a new one."
+msgstr "Срок действия этой ссылки-приглашения истёк. Свяжитесь с нами, чтобы получить новую."
+
+#: templates/invite_login.html:7
+msgid "Welcome back"
+msgstr "С возвращением"
+
+#: templates/invite_login.html:8
+msgid "Sign in to continue your Wine House onboarding."
+msgstr "Войдите, чтобы продолжить регистрацию винного дома."
+
+#: templates/invite_login.html:21
+msgid "Sign in & continue"
+msgstr "Войти и продолжить"
+
+#: templates/invite_product_form.html:6
+msgid "Edit Wine"
+msgstr "Редактировать вино"
+
+#: templates/invite_product_form.html:6
+msgid "Add a Wine"
+msgstr "Добавить вино"
+
+#: templates/invite_product_form.html:20
+msgid "Photo"
+msgstr "Фото"
+
+#: templates/invite_product_form.html:23
+msgid "Save wine"
+msgstr "Сохранить вино"
+
+#: templates/invite_product_form.html:25
+msgid "Back to wines"
+msgstr "Назад к винам"
+
+#: templates/invite_products.html:6
+msgid "Your Wines"
+msgstr "Ваши вина"
+
+#: templates/invite_products.html:7
+msgid ""
+"Add every wine you'd like to offer. You can keep editing until you submit "
+"for review."
+msgstr "Добавьте все вина, которые хотите предложить. Вы сможете редактировать их вплоть до отправки на проверку."
+
+#: templates/invite_products.html:10
+msgid "Add a wine"
+msgstr "Добавить вино"
+
+#: templates/invite_products.html:20 templates/invite_review.html:13
+#: templates/invite_review.html:22
+msgid "Edit"
+msgstr "Редактировать"
+
+#: templates/invite_products.html:28
+msgid "No wines added yet."
+msgstr "Пока нет добавленных вин."
+
+#: templates/invite_products.html:34
+msgid "Continue to review"
+msgstr "Перейти к проверке"
+
+#: templates/invite_review.html:6
+msgid "Review & Submit"
+msgstr "Проверка и отправка"
+
+#: templates/invite_review.html:7
+msgid "Take one last look. You can still edit any section before submitting."
+msgstr "Проверьте всё в последний раз. Вы всё ещё можете изменить любой раздел перед отправкой."
+
+#: templates/invite_review.html:21 templates/invite_steps.html:7
+msgid "Wines"
+msgstr "Вина"
+
+#: templates/invite_review.html:24
+#, python-format
+msgid "%(counter)s wine ready for review"
+msgid_plural "%(counter)s wines ready for review"
+msgstr[0] "%(counter)s вино готово к проверке"
+msgstr[1] "%(counter)s вина готовы к проверке"
+msgstr[2] "%(counter)s вин готово к проверке"
+msgstr[3] "%(counter)s вин готово к проверке"
+
+#: templates/invite_review.html:29
+msgid "Submit for review"
+msgstr "Отправить на проверку"
+
+#: templates/invite_steps.html:3
+msgid "Account"
+msgstr "Аккаунт"
+
+#: templates/invite_steps.html:9
+msgid "Review"
+msgstr "Проверка"
 
 #: templates/login.html:20
 msgid "Sign in with a passkey"
@@ -413,14 +645,6 @@ msgstr "Платежи"
 #: templates/payment_list.html:14
 msgid "No payments yet."
 msgstr "Пока нет платежей."
-
-#: templates/register.html:9
-msgid "Name"
-msgstr "Имя"
-
-#: templates/register.html:21
-msgid "Date of birth"
-msgstr "Дата рождения"
 
 #: templates/register.html:24
 msgid "Create account"

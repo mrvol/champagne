@@ -1,11 +1,12 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n vite %}
 {% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl{% endblock %}
 {% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl{% endblock %}
 {% block content %}
 {% trans "Good" as default_good_name %}
 <div class="md:grid md:grid-cols-2 md:gap-10">
-    <div>
+    <div class="relative isolate">
+        <div data-good-edit-widget data-pk="{{ good.pk }}"></div>
         {% if good.photo %}
         <img id="main-photo" src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-full rounded-xl border border-stone-200 mb-3 aspect-square object-cover shadow-sm">
         {% else %}
@@ -29,7 +30,7 @@
             {{ good.vintage_year|default:"—" }}
             {% if good.region %} · {{ good.region }}{% endif %}
         </p>
-        <p class="text-2xl text-gold font-medium mt-4">{{ good.price|default:"—" }} {{ good.currency }}</p>
+        <p class="text-2xl text-gold font-medium mt-4">{{ good.price|default:"—" }} {{ good.get_currency_display }}</p>
 
         {% if good.description %}
         <p class="text-stone-700 leading-relaxed mt-4">{{ good.description }}</p>
@@ -89,4 +90,11 @@
     </div>
 </div>
 <a href="{% url 'good_list' %}" class="inline-block mt-8 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
+{% endblock %}
+{% block extra_js %}
+{% vite_css 'src/entries/good_card.js' as good_card_css %}
+{% for href in good_card_css %}
+<link rel="stylesheet" href="{{ href }}">
+{% endfor %}
+<script type="module" src="{% vite_asset 'src/entries/good_card.js' %}"></script>
 {% endblock %}

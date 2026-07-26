@@ -5,7 +5,8 @@ import cbor2
 from django.conf import settings
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import Group
-from django.http import HttpResponseBadRequest, JsonResponse
+from django.forms import modelform_factory
+from django.http import Http404, HttpResponseBadRequest, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.dateparse import parse_date
 from django.utils.translation import gettext as _
@@ -46,7 +47,7 @@ def register(request):
     if request.POST:
         email = request.POST.get('email', '').strip().lower()
         password = request.POST.get('password', '')
-        first, _, last = request.POST.get('name', '').strip().partition(' ')
+        first, _sep, last = request.POST.get('name', '').strip().partition(' ')
         birthday = parse_date(request.POST.get('birthday', ''))
         if '@' not in email:
             error = _('Enter a valid work email.')
@@ -91,6 +92,46 @@ def user_list(request):
 def user_detail(request, pk):
     user = get_object_or_404(User, pk=pk)
     return render(request, 'user_detail.html', {'user': user})
+
+
+USER_FIELDS = ['username', 'email', 'first_name', 'last_name', 'phone', 'country', 'is_staff', 'is_active']
+
+
+def user_detail_api(request, pk=None):
+    if not request.user.is_staff:
+        return JsonResponse({'error': 'forbidden'}, status=403)
+
+    if request.method == 'POST' and len(request.POST):
+        instance = get_object_or_404(User, pk=pk) if pk else User()
+        fields = [f for f in USER_FIELDS if f in request.POST]
+        form = modelform_factory(User, fields=fields)(data=request.POST, instance=instance)
+        if form.is_valid():
+            user = form.save(commit=False)
+            if 'roles' in request.POST:
+                user.roles = [r.strip() for r in request.POST['roles'].split(',') if r.strip()]
+            password = request.POST.get('password', '').strip()
+            if password:
+                user.set_password(password)
+            elif not pk:
+                return JsonResponse({'error': 'Password is required for new users.'}, status=400)
+            user.save()
+            pk = user.pk
+        else:
+            return JsonResponse({'error': form.errors.as_text()}, status=400)
+
+    qs = User.objects.all()
+    if pk:
+        qs = qs.filter(pk=pk)
+    data = User.as_json(qs)
+    if pk:
+        if not data:
+            raise Http404
+        return JsonResponse(data[0])
+    return JsonResponse(data, safe=False)
+
+
+def staff_user_list(request):
+    return render(request, 'staff_user_list.html')
 
 
 def passkey_register_options(request):

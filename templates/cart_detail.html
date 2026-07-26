@@ -7,7 +7,7 @@
     <li class="px-5 py-4 flex items-center justify-between gap-3">
         <span>{{ item.good.name }} × {{ item.quantity }}</span>
         <div class="flex items-center gap-3">
-            <span class="text-gold font-medium">{{ item.good.price }} {{ item.good.currency }}</span>
+            <span class="text-gold font-medium">{{ item.good.price }} {{ item.good.get_currency_display }}</span>
             <form method="post" action="{% url 'remove_from_cart' item.pk %}">
                 {% csrf_token %}
                 <button type="submit" class="text-sm text-stone-500">{% trans "Remove" %}</button>

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n vite %}
+{% block page_width %}max-w-6xl{% endblock %}
+{% block nav_width %}max-w-6xl{% endblock %}
+{% block content %}
+<div class="mb-4">
+    <h1 class="font-serif italic text-2xl text-green-900">{% trans "Orders" %}</h1>
+</div>
+<div id="staff-orders-table"></div>
+{% endblock %}
+{% block extra_js %}
+{% vite_css 'src/entries/staff_orders.js' as staff_orders_css %}
+{% for href in staff_orders_css %}
+<link rel="stylesheet" href="{{ href }}">
+{% endfor %}
+<script type="module" src="{% vite_asset 'src/entries/staff_orders.js' %}"></script>
+{% endblock %}

@@ -7,7 +7,7 @@
     <li>
         <a href="{% url 'order_detail' order.pk %}" class="block bg-white rounded-xl border border-stone-200 px-4 py-3.5 transition duration-200 ease-out hover:border-stone-300 hover:shadow-md">
             <p class="font-medium">{% blocktrans with pk=order.pk %}Order #{{ pk }}{% endblocktrans %}</p>
-            <p class="text-sm text-stone-500">{{ order.status|default:"—" }} · {{ order.total_amount }} {{ order.currency }}</p>
+            <p class="text-sm text-stone-500">{{ order.status|default:"—" }} · {{ order.total_amount }} {{ order.get_currency_display }}</p>
         </a>
     </li>
     {% empty %}

@@ -3,14 +3,37 @@ from pathlib import Path
 
 import httpx
 from django.conf import settings
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.files.base import ContentFile
 from django.db import models
+from django.db.models import Sum
 
 from company.models import Company
-from person.models import BaseModel
+from person.models import CURRENCY, BaseModel
+
+
+# | Classification                                                            |           Residual Sugar | Taste                                                   |
+# | ------------------------------------------------------------------------- | -----------------------: | ------------------------------------------------------- |
+# | **Brut Nature** (also called **Pas Dosé**, **Dosage Zéro**, **Non Dosé**) | 0–3 g/L (no added sugar) | Bone dry, very crisp, mineral                           |
+# | **Extra Brut**                                                            |                  0–6 g/L | Extremely dry                                           |
+# | **Brut**                                                                  |         Less than 12 g/L | Dry; the most common style (around 80–90% of Champagne) |
+# | **Extra Dry** (*Extra Sec*)                                               |                12–17 g/L | Slightly sweeter than Brut (despite the confusing name) |
+# | **Sec**                                                                   |                17–32 g/L | Noticeably sweet                                        |
+# | **Demi-Sec**                                                              |                32–50 g/L | Sweet; often paired with desserts                       |
+# | **Doux**                                                                  |         More than 50 g/L | Very sweet; now quite rare                              |
 
 
 class Good(BaseModel):
+    SUGAR_LEVEL = (
+        (3, 'Brut Nature'),
+        (6, 'Extra Brut'),
+        (12, 'Brut'),
+        (17, 'Extra Dry (Extra Sec)'),
+        (32, 'Sec'),
+        (50, 'Demi-Sec'),
+        (51, 'Doux'),
+    )
+
     photo = models.ForeignKey('GoodPhoto', on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
     description = models.TextField(blank=True, null=True)
     bullets = models.JSONField(default=list, blank=True)  # short marketing bullet points
@@ -24,7 +47,8 @@ class Good(BaseModel):
     volume_ml = models.PositiveIntegerField(blank=True, null=True)  # bottle size, e.g. 750
     abv = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)  # alcohol by volume %
     price = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    currency = models.CharField(max_length=3, blank=True, null=True)  # ISO 4217
+    currency = models.IntegerField(choices=CURRENCY)  # ISO 4217
+    sugar_level = models.IntegerField(choices=SUGAR_LEVEL, blank=True, null=True)  # upper g/L bound of residual sugar, per classification table above
 
     barcode = models.CharField(max_length=64, blank=True, null=True)
     planted = models.DateField(blank=True, null=True)  # vineyard planting date
@@ -38,12 +62,71 @@ class Good(BaseModel):
     # row_vineyard
     # positionInRow
 
+    # --- Onboarding catalogue fields ---
+    TYPE_STILL = 'still'
+    TYPE_SPARKLING = 'sparkling'
+    TYPE_FORTIFIED = 'fortified'
+    TYPE_DESSERT = 'dessert'
+    TYPE_ROSE = 'rose'
+    TYPE_CHOICES = [
+        (TYPE_STILL, 'Still'),
+        (TYPE_SPARKLING, 'Sparkling'),
+        (TYPE_FORTIFIED, 'Fortified'),
+        (TYPE_DESSERT, 'Dessert'),
+        (TYPE_ROSE, 'Rosé'),
+    ]
+    STOCK_IN_STOCK = 'in_stock'
+    STOCK_LOW_STOCK = 'low_stock'
+    STOCK_OUT_OF_STOCK = 'out_of_stock'
+    STOCK_PRE_ORDER = 'pre_order'
+    STOCK_CHOICES = [
+        (STOCK_IN_STOCK, 'In stock'),
+        (STOCK_LOW_STOCK, 'Low stock'),
+        (STOCK_OUT_OF_STOCK, 'Out of stock'),
+        (STOCK_PRE_ORDER, 'Pre-order'),
+    ]
+
+    wine_type = models.CharField(max_length=16, choices=TYPE_CHOICES, blank=True, null=True)
+    food_pairing = models.TextField(blank=True, null=True)
+    awards = models.JSONField(default=list, blank=True)  # e.g. ["Decanter Gold 2023"]
+    available_quantity = models.PositiveIntegerField(blank=True, null=True)  # simple onboarding-level stock count
+    min_order_quantity = models.PositiveIntegerField(blank=True, null=True)
+    stock_status = models.CharField(max_length=16, choices=STOCK_CHOICES, default=STOCK_IN_STOCK)
+
     def __str__(self):
         return self.name or f'Good #{self.pk}'
 
     @classmethod
     def as_json(cls, qs):
-        return [{'name': g.name, 'main_photo': g.photo.image.url if g.photo else None} for g in qs]
+        qs = qs.annotate(available=Sum('stock__quantity'))
+        return [
+            {
+                'pk': g.pk,
+                'name': g.name,
+                'sku': g.sku,
+                'description': g.description,
+                'vintage_year': g.vintage_year,
+                'region': g.region,
+                'grape_variety': g.grape_variety,
+                'wine_type': g.wine_type,
+                'sugar_level': g.sugar_level,
+                'style': g.get_sugar_level_display() if g.sugar_level else g.get_wine_type_display(),
+                'price': g.price,
+                'currency': g.currency,
+                'volume_ml': g.volume_ml,
+                'abv': g.abv,
+                'available': g.available or 0,
+                'available_quantity': g.available_quantity,
+                'min_order_quantity': g.min_order_quantity,
+                'organic_certified': g.organic_certified,
+                'barcode': g.barcode,
+                'stock_status': g.stock_status,
+                'stock_status_display': g.get_stock_status_display(),
+                'updated': naturaltime(g.changed),
+                'photo_url': g.photo.image.url if g.photo else None,
+            }
+            for g in qs
+        ]
 
     def grape_variety_list(self):
         if not self.grape_variety:
@@ -54,6 +137,18 @@ class Good(BaseModel):
         if self.photos.filter(pk=photo_id).exists():
             self.photo_id = photo_id
             self.save()
+
+    def attach_photo(self, uploaded_file):
+        content = uploaded_file.read()
+        digest = hashlib.md5(content).hexdigest()
+        photo = self.photos.filter(md5=digest).first()
+        if not photo:
+            uploaded_file.seek(0)
+            photo = GoodPhoto.objects.create(good=self, md5=digest, image=uploaded_file)
+        if self.photo_id is None:
+            self.photo_id = photo.pk
+            self.save()
+        return photo
 
     def upload(self, url_or_path):
         if url_or_path.startswith('http://') or url_or_path.startswith('https://'):

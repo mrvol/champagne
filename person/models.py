@@ -6,6 +6,7 @@ from datetime import date
 
 import httpx
 from django.contrib.auth.models import AbstractUser
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.core.files.base import ContentFile
 from django.db import models
 
@@ -14,6 +15,12 @@ from django.db import models
 # at module level would be circular - Order/current_order are imported lazily in methods.
 
 MIN_AGE = 18
+
+CURRENCY = (
+    (1, 'EUR'),
+    (2, 'USD'),
+    (3, 'GBP'),
+)
 
 
 def age_from_birthday(birthday):
@@ -58,6 +65,28 @@ class User(AbstractUser, BaseModel):
 
     def is_of_legal_age(self):
         return bool(self.birthday) and age_from_birthday(self.birthday) >= MIN_AGE
+
+    @classmethod
+    def as_json(cls, qs):
+        return [
+            {
+                'pk': u.pk,
+                'username': u.username,
+                'email': u.email,
+                'name': u.get_full_name() or u.username,
+                'first_name': u.first_name,
+                'last_name': u.last_name,
+                'phone': u.phone,
+                'country': u.country,
+                'roles': u.roles,
+                'is_staff': u.is_staff,
+                'is_active': u.is_active,
+                'email_verified': u.email_verified,
+                'avatar_url': u.avatar.url if u.avatar else None,
+                'date_joined': naturaltime(u.date_joined),
+            }
+            for u in qs
+        ]
 
     def set_avatar_from_url(self, url: str) -> None:
         response = httpx.get(url, timeout=10)

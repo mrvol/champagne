@@ -21,7 +21,7 @@
     </div>
     <div>
         <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Total" %}</p>
-        <p class="font-medium text-gold">{{ order.total_amount }} {{ order.currency }}</p>
+        <p class="font-medium text-gold">{{ order.total_amount }} {{ order.get_currency_display }}</p>
     </div>
 </div>
 <a href="{% url 'order_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>

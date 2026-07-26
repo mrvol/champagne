@@ -1,7 +1,7 @@
 from django.db import models
 
 from payment.models import Payment
-from person.models import BaseModel
+from person.models import CURRENCY, BaseModel
 
 
 class Transaction(BaseModel):
@@ -31,7 +31,7 @@ class Transaction(BaseModel):
     type = models.CharField(max_length=32, choices=TYPE_CHOICES)
     method = models.CharField(max_length=32, choices=METHOD_CHOICES, blank=True, null=True)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
-    currency = models.CharField(max_length=3, blank=True, null=True)  # ISO 4217
+    currency = models.IntegerField(choices=CURRENCY)  # ISO 4217
     status = models.CharField(max_length=32, blank=True, null=True)
     provider = models.CharField(max_length=64, blank=True, null=True)  # e.g. stripe, paypal, gift card issuer
     provider_reference = models.CharField(max_length=128, blank=True, null=True)  # gateway/processor transaction id

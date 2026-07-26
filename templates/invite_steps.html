@@ -1,0 +1,10 @@
+{% load i18n %}
+<nav class="flex items-center justify-center gap-3 mb-10 text-xs uppercase tracking-[0.12em]">
+    <span class="{% if current_step == 'account' %}text-green-900 font-medium{% else %}text-stone-400{% endif %}">{% trans "Account" %}</span>
+    <span class="text-stone-300">/</span>
+    <span class="{% if current_step == 'company' %}text-green-900 font-medium{% else %}text-stone-400{% endif %}">{% trans "Company" %}</span>
+    <span class="text-stone-300">/</span>
+    <span class="{% if current_step == 'products' %}text-green-900 font-medium{% else %}text-stone-400{% endif %}">{% trans "Wines" %}</span>
+    <span class="text-stone-300">/</span>
+    <span class="{% if current_step == 'review' %}text-green-900 font-medium{% else %}text-stone-400{% endif %}">{% trans "Review" %}</span>
+</nav>

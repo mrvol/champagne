@@ -1,4 +1,6 @@
+from django.contrib.humanize.templatetags.humanize import naturaltime
 from django.db import models
+from django.db.models import Sum
 
 from goods.models import Good
 from person.models import BaseModel
@@ -12,6 +14,22 @@ class Warehouse(BaseModel):
 
     def __str__(self):
         return self.name or f'Warehouse #{self.pk}'
+
+    @classmethod
+    def as_json(cls, qs):
+        qs = qs.annotate(stock_count=Sum('stock__quantity'))
+        return [
+            {
+                'pk': w.pk,
+                'name': w.name,
+                'country': w.country,
+                'city': w.city,
+                'address': w.address,
+                'stock_count': w.stock_count or 0,
+                'updated': naturaltime(w.changed),
+            }
+            for w in qs
+        ]
 
 
 class Stock(BaseModel):

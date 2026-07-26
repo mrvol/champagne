@@ -12,3 +12,7 @@ wheels/
 # Django
 db.sqlite3
 media/
+
+# Node
+node_modules/
+static/dist/

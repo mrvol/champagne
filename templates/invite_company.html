@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-3xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-3xl{% endblock %}
+{% block content %}
+{% include 'invite_steps.html' with current_step='company' %}
+<div class="text-center mb-8">
+    <h2 class="font-serif italic text-3xl text-green-900">{% trans "Your Wine House" %}</h2>
+    <p class="text-stone-600 mt-2">{% trans "Tell us about your estate. Progress saves as you go, so you can return at any time." %}</p>
+</div>
+
+<form method="post" enctype="multipart/form-data" class="space-y-8">
+    {% csrf_token %}
+
+    <section class="bg-white rounded-xl border border-stone-200 p-6">
+        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Company Information" %}</h3>
+        <div class="space-y-4">
+            {% for field in form.company_info %}
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}<p class="text-xs text-stone-400 mt-1">{{ field.help_text }}</p>{% endif %}
+                {% for err in field.errors %}<p class="text-xs text-red-600 mt-1">{{ err }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="bg-white rounded-xl border border-stone-200 p-6">
+        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Business Contact" %}</h3>
+        <div class="space-y-4">
+            {% for field in form.contact_info %}
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
+                {{ field }}
+                {% for err in field.errors %}<p class="text-xs text-red-600 mt-1">{{ err }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="bg-white rounded-xl border border-stone-200 p-6">
+        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Address & Location" %}</h3>
+        <div class="space-y-4">
+            {% for field in form.address_info %}
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
+                {{ field }}
+                {% for err in field.errors %}<p class="text-xs text-red-600 mt-1">{{ err }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="bg-white rounded-xl border border-stone-200 p-6">
+        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Banking & Financial" %}</h3>
+        <div class="space-y-4">
+            {% for field in form.banking_info %}
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
+                {{ field }}
+                {% for err in field.errors %}<p class="text-xs text-red-600 mt-1">{{ err }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section class="bg-white rounded-xl border border-stone-200 p-6">
+        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Public Profile" %}</h3>
+        <div class="space-y-4">
+            {% for field in form.profile_info %}
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
+                {{ field }}
+                {% for err in field.errors %}<p class="text-xs text-red-600 mt-1">{{ err }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+        <div class="mt-6 pt-6 border-t border-stone-200 space-y-4">
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{% trans "Cover image" %}</label>
+                <input type="file" name="cover_image" accept="image/*" class="w-full text-sm">
+            </div>
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{% trans "Winery photos" %}</label>
+                <input type="file" name="winery_photos" accept="image/*" multiple class="w-full text-sm">
+            </div>
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{% trans "Vineyard photos" %}</label>
+                <input type="file" name="vineyard_photos" accept="image/*" multiple class="w-full text-sm">
+            </div>
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{% trans "Cellar photos" %}</label>
+                <input type="file" name="cellar_photos" accept="image/*" multiple class="w-full text-sm">
+            </div>
+        </div>
+    </section>
+
+    <div class="flex items-center justify-between gap-4 pt-2 pb-4">
+        <button type="submit" name="save" class="text-sm text-stone-600 border border-stone-300 rounded-md px-5 py-2.5 transition hover:border-stone-400">{% trans "Save progress" %}</button>
+        <button type="submit" name="continue" class="flex-1 bg-green-900 text-white rounded-md py-2.5 text-sm transition hover:bg-green-800">{% trans "Save & continue to wines" %}</button>
+    </div>
+</form>
+{% endblock %}

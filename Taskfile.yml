@@ -5,6 +5,14 @@ tasks:
     cmds:
       - uv run python manage.py runserver 8989
 
+  dev:
+    cmds:
+      - npm run dev
+
+  build:
+    cmds:
+      - npm run build
+
   migrate:
     cmds:
       - uv run python manage.py makemigrations
@@ -12,7 +20,7 @@ tasks:
 
   reset:
     cmds:
-      - find address cart company discount goods mp order payment person price review transaction warehouse -type f -path '*/migrations/*.py' ! -name '__init__.py' -print -delete
+      - find address cart company discount goods invite mp order payment person price review transaction warehouse -type f -path '*/migrations/*.py' ! -name '__init__.py' -print -delete
       - rm -f db.sqlite3
       - uv run python manage.py makemigrations
       - uv run python manage.py migrate

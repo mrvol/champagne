@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="max-w-md mx-auto text-center py-12">
+    <h2 class="font-serif italic text-3xl text-green-900 mb-3">
+        {% if invitation.status == 'completed' %}{% trans "Onboarding already completed" %}
+        {% elif invitation.status == 'revoked' %}{% trans "Invitation revoked" %}
+        {% else %}{% trans "Invitation expired" %}{% endif %}
+    </h2>
+    <p class="text-stone-600">
+        {% if invitation.status == 'completed' %}{% trans "This invitation has already been completed. If you need to make changes, please contact us." %}
+        {% elif invitation.status == 'revoked' %}{% trans "This invitation is no longer valid. Please contact us for a new one." %}
+        {% else %}{% trans "This invitation link has expired. Please contact us for a new one." %}{% endif %}
+    </p>
+    <a href="{% url 'home' %}" class="inline-block mt-6 text-sm text-green-800">{% trans "Back to home" %}</a>
+</div>
+{% endblock %}

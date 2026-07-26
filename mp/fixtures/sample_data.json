@@ -181,7 +181,7 @@
     "volume_ml": 750,
     "abv": "12.50",
     "price": "45.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -214,7 +214,7 @@
     "volume_ml": 750,
     "abv": "12.50",
     "price": "65.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -247,7 +247,7 @@
     "volume_ml": 750,
     "abv": "12.00",
     "price": "58.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -280,7 +280,7 @@
     "volume_ml": 750,
     "abv": "12.50",
     "price": "120.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -313,7 +313,7 @@
     "volume_ml": 750,
     "abv": "12.00",
     "price": "42.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -346,7 +346,7 @@
     "volume_ml": 750,
     "abv": "11.50",
     "price": "39.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -379,7 +379,7 @@
     "volume_ml": 1500,
     "abv": "12.50",
     "price": "195.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -412,7 +412,7 @@
     "volume_ml": 750,
     "abv": "12.50",
     "price": "150.00",
-    "currency": "EUR",
+    "currency": 1,
     "barcode": null,
     "planted": null,
     "soil_type": null,
@@ -663,6 +663,111 @@
   }
 },
 {
+  "model": "warehouse.stock",
+  "pk": 2,
+  "fields": {
+    "title": null,
+    "uid": "1974425f-049e-4494-b84a-6bde8b89db22",
+    "company_ids": [],
+    "created": "2026-07-26T08:33:51.366Z",
+    "changed": "2026-07-26T08:33:51.366Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 2,
+    "quantity": 120
+  }
+},
+{
+  "model": "warehouse.stock",
+  "pk": 3,
+  "fields": {
+    "title": null,
+    "uid": "f69dc4e6-50f4-47c4-893f-9220a3dff579",
+    "company_ids": [],
+    "created": "2026-07-26T08:33:51.367Z",
+    "changed": "2026-07-26T08:33:51.367Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 3,
+    "quantity": 90
+  }
+},
+{
+  "model": "warehouse.stock",
+  "pk": 4,
+  "fields": {
+    "title": null,
+    "uid": "7999665d-0f83-4755-a7d3-46759b4de783",
+    "company_ids": [],
+    "created": "2026-07-26T08:33:51.368Z",
+    "changed": "2026-07-26T08:33:51.368Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 4,
+    "quantity": 60
+  }
+},
+{
+  "model": "warehouse.stock",
+  "pk": 5,
+  "fields": {
+    "title": null,
+    "uid": "a8e24a9b-73e9-432d-a8e3-f20b40ec10fb",
+    "company_ids": [],
+    "created": "2026-07-26T08:33:51.369Z",
+    "changed": "2026-07-26T08:33:51.369Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 5,
+    "quantity": 150
+  }
+},
+{
+  "model": "warehouse.stock",
+  "pk": 6,
+  "fields": {
+    "title": null,
+    "uid": "0e0d21d0-bcea-44a4-98a2-ab78b941eaf0",
+    "company_ids": [],
+    "created": "2026-07-26T08:33:51.369Z",
+    "changed": "2026-07-26T08:33:51.369Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 6,
+    "quantity": 100
+  }
+},
+{
+  "model": "warehouse.stock",
+  "pk": 7,
+  "fields": {
+    "title": null,
+    "uid": "0f435cb2-bfc0-409f-ba17-ef55d5e4cb96",
+    "company_ids": [],
+    "created": "2026-07-26T08:33:51.370Z",
+    "changed": "2026-07-26T08:33:51.370Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 7,
+    "quantity": 40
+  }
+},
+{
+  "model": "warehouse.stock",
+  "pk": 8,
+  "fields": {
+    "title": null,
+    "uid": "08888c71-2916-4713-a5aa-aec28082e5c6",
+    "company_ids": [],
+    "created": "2026-07-26T08:33:51.370Z",
+    "changed": "2026-07-26T08:33:51.370Z",
+    "deleted": null,
+    "warehouse": 1,
+    "good": 8,
+    "quantity": 25
+  }
+},
+{
   "model": "order.order",
   "pk": 1,
   "fields": {
@@ -679,7 +784,7 @@
     "delivery_address": 1,
     "status": "paid",
     "total_amount": "270.00",
-    "currency": "EUR"
+    "currency": 1
   }
 },
 {
@@ -697,7 +802,7 @@
       "amelie.dubois"
     ],
     "amount": "270.00",
-    "currency": "EUR",
+    "currency": 1,
     "status": "captured",
     "provider": "stripe",
     "transaction_id": "pi_3P0examplecharge"
@@ -717,7 +822,7 @@
     "type": "charge",
     "method": "card",
     "amount": "270.00",
-    "currency": "EUR",
+    "currency": 1,
     "status": "succeeded",
     "provider": "stripe",
     "provider_reference": "ch_3P0examplecharge",

@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'cart',
     'price',
     'discount',
+    'invite',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'mp.context_processors.staff_nav',
             ],
         },
     },
@@ -86,8 +88,16 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# No real SMTP configured for this project yet; emails print to the console/log.
+# Swap for 'django.core.mail.backends.smtp.EmailBackend' + EMAIL_HOST/PORT/etc. in production.
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = 'Champagne <no-reply@champagne.example>'
+SITE_BASE_URL = 'http://localhost:8989'
+ADMIN_NOTIFICATION_EMAILS = ['admin@champagne.example']

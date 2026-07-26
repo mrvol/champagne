@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<div class="max-w-md mx-auto">
+    {% include 'invite_steps.html' with current_step='account' %}
+    <div class="text-center mb-8">
+        <h2 class="font-serif italic text-3xl text-green-900">{% trans "Welcome to Champagne" %}</h2>
+        <p class="text-stone-600 mt-2">{% trans "You've been invited to join as a Wine House. Create your account to begin." %}</p>
+    </div>
+    {% if error %}<p class="text-sm text-red-600 mb-3">{{ error }}</p>{% endif %}
+    <form method="post" class="bg-white rounded-xl border border-stone-200 p-6 space-y-4">
+        {% csrf_token %}
+        <div>
+            <label class="block text-sm text-stone-500 mb-1">{% trans "Email" %}</label>
+            <input type="email" value="{{ invitation.contact_email }}" readonly class="w-full border border-stone-200 bg-stone-50 rounded-md p-2 text-sm text-stone-500">
+        </div>
+        <div>
+            <label class="block text-sm text-stone-500 mb-1">{% trans "Name" %}</label>
+            <input type="text" name="name" required class="w-full border border-stone-300 rounded-md p-2 text-sm">
+        </div>
+        <div>
+            <label class="block text-sm text-stone-500 mb-1">{% trans "Password" %}</label>
+            <input type="password" name="password" required class="w-full border border-stone-300 rounded-md p-2 text-sm">
+        </div>
+        <div>
+            <label class="block text-sm text-stone-500 mb-1">{% trans "Date of birth" %}</label>
+            <input type="date" name="birthday" required class="w-full border border-stone-300 rounded-md p-2 text-sm">
+        </div>
+        <button type="submit" class="w-full bg-green-900 text-white rounded-md py-2.5 text-sm transition hover:bg-green-800">{% trans "Create account & continue" %}</button>
+    </form>
+</div>
+{% endblock %}

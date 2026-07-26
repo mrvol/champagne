@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+{% include 'invite_steps.html' with current_step='review' %}
+<div class="text-center mb-8">
+    <h2 class="font-serif italic text-3xl text-green-900">{% trans "Review & Submit" %}</h2>
+    <p class="text-stone-600 mt-2">{% trans "Take one last look. You can still edit any section before submitting." %}</p>
+</div>
+
+<div class="bg-white rounded-xl border border-stone-200 p-6 mb-4">
+    <div class="flex items-center justify-between mb-3">
+        <h3 class="font-serif text-xl text-green-900">{% trans "Company" %}</h3>
+        <a href="{% url 'invite_company' invitation.token %}" class="text-sm text-green-800">{% trans "Edit" %}</a>
+    </div>
+    <p class="font-medium">{{ invitation.company.legal_name|default:"—" }}</p>
+    <p class="text-sm text-stone-500">{{ invitation.company.contact_email|default:"—" }} · {{ invitation.company.city|default:"—" }}{% if invitation.company.country %}, {{ invitation.company.country }}{% endif %}</p>
+</div>
+
+<div class="bg-white rounded-xl border border-stone-200 p-6 mb-8">
+    <div class="flex items-center justify-between mb-3">
+        <h3 class="font-serif text-xl text-green-900">{% trans "Wines" %}</h3>
+        <a href="{% url 'invite_products' invitation.token %}" class="text-sm text-green-800">{% trans "Edit" %}</a>
+    </div>
+    <p class="text-sm text-stone-500">{% blocktrans count counter=goods.count %}{{ counter }} wine ready for review{% plural %}{{ counter }} wines ready for review{% endblocktrans %}</p>
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="w-full bg-green-900 text-white rounded-md py-3 text-sm transition hover:bg-green-800">{% trans "Submit for review" %}</button>
+</form>
+{% endblock %}

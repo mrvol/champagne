@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n vite %}
 {% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block content %}
@@ -16,4 +16,11 @@
     <li class="col-span-full text-center py-16 text-stone-500">{% if q %}{% blocktrans %}No goods match "{{ q }}".{% endblocktrans %}{% else %}{% trans "No goods yet." %}{% endif %}</li>
     {% endfor %}
 </ul>
+{% endblock %}
+{% block extra_js %}
+{% vite_css 'src/entries/good_card.js' as good_card_css %}
+{% for href in good_card_css %}
+<link rel="stylesheet" href="{{ href }}">
+{% endfor %}
+<script type="module" src="{% vite_asset 'src/entries/good_card.js' %}"></script>
 {% endblock %}

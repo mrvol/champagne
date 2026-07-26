@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+{% include 'invite_steps.html' with current_step='products' %}
+<h2 class="font-serif italic text-3xl text-green-900 text-center mb-8">
+    {% if good.pk %}{% trans "Edit Wine" %}{% else %}{% trans "Add a Wine" %}{% endif %}
+</h2>
+
+<form method="post" enctype="multipart/form-data" class="bg-white rounded-xl border border-stone-200 p-6 space-y-4">
+    {% csrf_token %}
+    {% for field in form %}
+    <div>
+        <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}<p class="text-xs text-stone-400 mt-1">{{ field.help_text }}</p>{% endif %}
+        {% for err in field.errors %}<p class="text-xs text-red-600 mt-1">{{ err }}</p>{% endfor %}
+    </div>
+    {% endfor %}
+    <div>
+        <label class="block text-sm text-stone-500 mb-1">{% trans "Photo" %}</label>
+        <input type="file" name="photo" accept="image/*" class="w-full text-sm">
+    </div>
+    <button type="submit" class="w-full bg-green-900 text-white rounded-md py-2.5 text-sm transition hover:bg-green-800">{% trans "Save wine" %}</button>
+</form>
+<a href="{% url 'invite_products' invitation.token %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back to wines" %}</a>
+{% endblock %}

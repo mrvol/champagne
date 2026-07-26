@@ -7,6 +7,7 @@ import address.views
 import cart.views
 import company.views
 import goods.views
+import invite.views
 import mp.views
 import order.views
 import payment.views
@@ -18,12 +19,16 @@ import warehouse.views
 urlpatterns = [
     path('i18n/setlang/', person.views.set_language, name='set_language'),
 
-    # path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', mp.views.home, name='home'),
+    path('staff/stats/', mp.views.staff_dashboard, name='staff_dashboard'),
 
     # person
     path('user/list/', person.views.user_list, name='user_list'),
     path('user/<int:pk>/', person.views.user_detail, name='user_detail'),
+    path('api/user/list/', person.views.user_detail_api, name='user_list_api'),
+    path('api/user/<int:pk>/', person.views.user_detail_api, name='user_detail_api'),
+    path('staff/users/', person.views.staff_user_list, name='staff_user_list'),
     path('login/', person.views.login_view, name='login'),
     path('register/', person.views.register, name='register'),
     path('logout/', person.views.logout_view, name='logout'),
@@ -40,14 +45,23 @@ urlpatterns = [
     path('company/list/', company.views.company_list, name='company_list'),
     path('company/<int:pk>/', company.views.company_detail, name='company_detail'),
     path('company/<int:pk>/goods/', company.views.company_goods, name='company_goods'),
+    path('api/company/list/', company.views.company_list_api, name='company_list_api'),
+    path('staff/companies/', company.views.staff_company_list, name='staff_company_list'),
 
     # goods
     path('good/list/', goods.views.good_list, name='good_list'),
     path('good/<int:pk>/', goods.views.good_detail, name='good_detail'),
+    path('api/good/<int:pk>/', goods.views.good_detail_api, name='good_detail_api'),
+    path('api/good/list/', goods.views.good_detail_api, name='good_list_api'),
+    path('api/good/stats/', goods.views.good_stats_api, name='good_stats_api'),
+    path('api/good/<int:pk>/photos/', goods.views.good_photos_api, name='good_photos_api'),
+    path('staff/goods/', goods.views.staff_good_list, name='staff_good_list'),
 
     # order
     path('order/list/', order.views.order_list, name='order_list'),
     path('order/<int:pk>/', order.views.order_detail, name='order_detail'),
+    path('api/order/list/', order.views.order_list_api, name='order_list_api'),
+    path('staff/orders/', order.views.staff_order_list, name='staff_order_list'),
 
     # payment
     path('payment/list/', payment.views.payment_list, name='payment_list'),
@@ -72,4 +86,15 @@ urlpatterns = [
     path('cart/remove/<int:item_id>/', cart.views.remove_from_cart, name='remove_from_cart'),
     path('good/<int:pk>/add-to-cart/', cart.views.add_to_cart, name='add_to_cart'),
     path('api/goods/search/', cart.views.api_search, name='api_search'),
+
+    # invite / onboarding
+    path('invite/<str:token>/', invite.views.invitation_landing, name='invite_landing'),
+    path('invite/<str:token>/company/', invite.views.invitation_company, name='invite_company'),
+    path('invite/<str:token>/products/', invite.views.invitation_products, name='invite_products'),
+    path('invite/<str:token>/products/add/', invite.views.invitation_product_edit, name='invite_product_add'),
+    path('invite/<str:token>/products/<int:pk>/', invite.views.invitation_product_edit, name='invite_product_edit'),
+    path('invite/<str:token>/products/<int:pk>/delete/', invite.views.invitation_product_delete, name='invite_product_delete'),
+    path('invite/<str:token>/review/', invite.views.invitation_review, name='invite_review'),
+    path('invite/<str:token>/completed/', invite.views.invitation_completed, name='invite_completed'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+ 
