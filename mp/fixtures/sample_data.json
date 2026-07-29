@@ -1,854 +1,1486 @@
 [
-{
-  "model": "person.user",
-  "pk": 1,
-  "fields": {
-    "password": "",
-    "last_login": null,
-    "is_superuser": false,
-    "username": "amelie.dubois",
-    "first_name": "Amelie",
-    "last_name": "Dubois",
-    "email": "amelie.dubois@example.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-07-24T23:18:39.985Z",
-    "title": null,
-    "uid": "f576b1b7-e57f-4d18-8a06-51f72c3c30fd",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "address": null,
-    "phone": "+33612345678",
-    "country": "FR",
-    "birthday": null,
-    "email_verified": false,
-    "avatar": "",
-    "bio": "Champagne producer based in Reims.",
-    "gender": null,
-    "language": [],
-    "timezone": null,
-    "primary_address": null,
-    "roles": [
-      "seller"
-    ],
-    "failed_login_attempts": 0,
-    "account_locked": false,
-    "login_history": [],
-    "devices": [],
-    "kyc_status": "verified",
-    "identity_documents": [],
-    "terms_accepted_at": null,
-    "gdpr_consent": false,
-    "groups": [],
-    "user_permissions": []
+  {
+    "model": "person.user",
+    "pk": 1,
+    "fields": {
+      "password": "",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "amelie.dubois",
+      "first_name": "Amelie",
+      "last_name": "Dubois",
+      "email": "amelie.dubois@example.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-07-24T23:18:39.985Z",
+      "title": null,
+      "uid": "f576b1b7-e57f-4d18-8a06-51f72c3c30fd",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "address": null,
+      "phone": "+33612345678",
+      "country": "FR",
+      "birthday": null,
+      "email_verified": false,
+      "avatar": "",
+      "bio": "Champagne producer based in Reims.",
+      "gender": null,
+      "language": [],
+      "timezone": null,
+      "primary_address": null,
+      "roles": [
+        "seller"
+      ],
+      "failed_login_attempts": 0,
+      "account_locked": false,
+      "login_history": [],
+      "devices": [],
+      "kyc_status": "verified",
+      "identity_documents": [],
+      "terms_accepted_at": null,
+      "gdpr_consent": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "person.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$1200000$OoHU0M6UjEsQidyjaAdRpa$js7w2n2O25H4DerkfjrbLAzAmrO5t0MOH0rfKI5gLv8=",
+      "last_login": "2026-07-24T23:25:30.763Z",
+      "is_superuser": false,
+      "username": "mrvol777@gmail.com",
+      "first_name": "bob",
+      "last_name": "",
+      "email": "mrvol777@gmail.com",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2026-07-24T23:25:30.580Z",
+      "title": null,
+      "uid": "c63d7d65-157d-4067-95cb-0a64526cebbf",
+      "company_ids": [],
+      "created": "2026-07-24T23:25:30.759Z",
+      "changed": "2026-07-24T23:25:30.759Z",
+      "deleted": null,
+      "address": null,
+      "phone": null,
+      "country": null,
+      "birthday": "1994-07-25",
+      "email_verified": false,
+      "avatar": "",
+      "bio": null,
+      "gender": null,
+      "language": [],
+      "timezone": null,
+      "primary_address": null,
+      "roles": [],
+      "failed_login_attempts": 0,
+      "account_locked": false,
+      "login_history": [],
+      "devices": [],
+      "kyc_status": null,
+      "identity_documents": [],
+      "terms_accepted_at": null,
+      "gdpr_consent": false,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "person.webauthncredential",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "9f835082-0467-4b37-af51-9d0e5c4bcc5a",
+      "company_ids": [],
+      "created": "2026-07-24T23:25:44.610Z",
+      "changed": "2026-07-24T23:25:44.610Z",
+      "deleted": null,
+      "user": [
+        "mrvol777@gmail.com"
+      ],
+      "credential_id": "LWbDW9lxK4j+g2sJWRx5E2nkRuc=",
+      "public_key_x": "jrrt66gbTnYtpidUCjCtshmtdrYLq4duGAa657va0sI=",
+      "public_key_y": "vT1/M07nZU5DdKmviLrIP035Oz7LKS6M/2ObOCWhwhc=",
+      "sign_count": 0
+    }
+  },
+  {
+    "model": "company.company",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "ef5b764c-00f2-4606-890d-4f04b58b73a6",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "legal_name": "Maison Lumière",
+      "registration_number": "RCS-REIMS-482910",
+      "country": "FR",
+      "tax_id": "FR12482910337",
+      "vat_number": "FR12482910337",
+      "industry": "Wine & Spirits",
+      "website": "https://maisonlumiere.example",
+      "logo_url": null,
+      "founded_date": "1904-05-12",
+      "employee_count": 38,
+      "rating": "4.60",
+      "review_count": 1,
+      "trust_score": "91.50",
+      "verified_seller": true,
+      "dispute_count": 0
+    }
+  },
+  {
+    "model": "address.address",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "08c440d2-4a1d-4a00-8891-ad1dcc0cd635",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "type": [
+        "p"
+      ],
+      "user": [
+        "amelie.dubois"
+      ],
+      "line1": "12 Rue des Vignes",
+      "line2": null,
+      "city": "Reims",
+      "region": "Grand Est",
+      "postal_code": "51100",
+      "country": "FR"
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "17e7f0a3-d324-4d67-9fae-849d045669e0",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "photo": null,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Brut Reserve",
+      "sku": "ML-BRUT-750",
+      "vintage_year": 2016,
+      "region": "Champagne AOC",
+      "grape_variety": "Pinot Noir, Chardonnay",
+      "volume_ml": 750,
+      "abv": "12.50",
+      "price": "45.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 2,
+    "fields": {
+      "title": null,
+      "uid": "a66d4432-59b8-4445-a0eb-2c48f6dfb94f",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.434Z",
+      "changed": "2026-07-25T12:28:19.446Z",
+      "deleted": null,
+      "photo": 1,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Blanc de Blancs",
+      "sku": "ML-BDB-750",
+      "vintage_year": 2018,
+      "region": "Côte des Blancs, Champagne AOC",
+      "grape_variety": "Chardonnay",
+      "volume_ml": 750,
+      "abv": "12.50",
+      "price": "65.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 3,
+    "fields": {
+      "title": null,
+      "uid": "1e574027-eed5-433d-a711-f17fbb8a747d",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.460Z",
+      "changed": "2026-07-25T12:28:19.469Z",
+      "deleted": null,
+      "photo": 2,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Rosé",
+      "sku": "ML-ROSE-750",
+      "vintage_year": 2019,
+      "region": "Champagne AOC",
+      "grape_variety": "Pinot Noir, Pinot Meunier",
+      "volume_ml": 750,
+      "abv": "12.00",
+      "price": "58.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 4,
+    "fields": {
+      "title": null,
+      "uid": "917bdae2-6828-4365-8726-7d278f133269",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.479Z",
+      "changed": "2026-07-25T12:28:19.492Z",
+      "deleted": null,
+      "photo": 4,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Prestige Cuvée",
+      "sku": "ML-PREST-750",
+      "vintage_year": 2015,
+      "region": "Champagne AOC",
+      "grape_variety": "Pinot Noir, Chardonnay",
+      "volume_ml": 750,
+      "abv": "12.50",
+      "price": "120.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 5,
+    "fields": {
+      "title": null,
+      "uid": "d7a03fe0-f0f3-40e9-8d79-f1dbed132019",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.504Z",
+      "changed": "2026-07-25T12:28:19.514Z",
+      "deleted": null,
+      "photo": 6,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Extra Brut",
+      "sku": "ML-XBRUT-750",
+      "vintage_year": 2020,
+      "region": "Champagne AOC",
+      "grape_variety": "Pinot Meunier",
+      "volume_ml": 750,
+      "abv": "12.00",
+      "price": "42.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 6,
+    "fields": {
+      "title": null,
+      "uid": "ef59ca9f-f87f-4622-b0e9-4ba090265441",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.527Z",
+      "changed": "2026-07-25T12:28:19.538Z",
+      "deleted": null,
+      "photo": 8,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Demi-Sec",
+      "sku": "ML-DEMISEC-750",
+      "vintage_year": 2020,
+      "region": "Champagne AOC",
+      "grape_variety": "Chardonnay",
+      "volume_ml": 750,
+      "abv": "11.50",
+      "price": "39.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 7,
+    "fields": {
+      "title": null,
+      "uid": "50271f20-ad8d-4495-bb42-4024daee9645",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.548Z",
+      "changed": "2026-07-25T12:28:19.557Z",
+      "deleted": null,
+      "photo": 10,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Magnum Brut Reserve",
+      "sku": "ML-MAGBRUT-1500",
+      "vintage_year": 2017,
+      "region": "Champagne AOC",
+      "grape_variety": "Pinot Noir, Chardonnay, Pinot Meunier",
+      "volume_ml": 1500,
+      "abv": "12.50",
+      "price": "195.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.good",
+    "pk": 8,
+    "fields": {
+      "title": null,
+      "uid": "09e91fa2-19a4-4151-8d43-5409ea94b88e",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.566Z",
+      "changed": "2026-07-25T12:28:19.577Z",
+      "deleted": null,
+      "photo": 12,
+      "description": null,
+      "bullets": [],
+      "company": 1,
+      "name": "Maison Lumière Grand Cru Ambonnay",
+      "sku": "ML-GCAMB-750",
+      "vintage_year": 2014,
+      "region": "Ambonnay Grand Cru, Champagne AOC",
+      "grape_variety": "Pinot Noir",
+      "volume_ml": 750,
+      "abv": "12.50",
+      "price": "150.00",
+      "currency": 1,
+      "barcode": null,
+      "planted": null,
+      "soil_type": null,
+      "elevation": null,
+      "slope": null,
+      "harvested": null,
+      "organic_certified": false,
+      "groups": []
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "43bee29e-cecf-4cef-ac5b-ec753a8fdf1c",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.442Z",
+      "changed": "2026-07-25T12:28:19.445Z",
+      "deleted": null,
+      "md5": "e10bd26e107fe4817dc2ef57ad4847fe",
+      "good": 2,
+      "image": "int_storage/cv/e1/0b/d2/e10bd26e107fe4817dc2ef57ad4847fe/e10bd26e107fe4817dc2ef57ad4847fe.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 2,
+    "fields": {
+      "title": null,
+      "uid": "4841e416-4a50-4573-9648-bd2e61bc2f05",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.465Z",
+      "changed": "2026-07-25T12:28:19.469Z",
+      "deleted": null,
+      "md5": "26b8e3775793e569764f218e978b79c2",
+      "good": 3,
+      "image": "int_storage/cv/26/b8/e3/26b8e3775793e569764f218e978b79c2/26b8e3775793e569764f218e978b79c2.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 3,
+    "fields": {
+      "title": null,
+      "uid": "64055f49-b375-4e7c-9a84-090157b00fa9",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.474Z",
+      "changed": "2026-07-25T12:28:19.477Z",
+      "deleted": null,
+      "md5": "01b97f0045fd6d2049697daebbe8e78e",
+      "good": 3,
+      "image": "int_storage/cv/01/b9/7f/01b97f0045fd6d2049697daebbe8e78e/01b97f0045fd6d2049697daebbe8e78e.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 4,
+    "fields": {
+      "title": null,
+      "uid": "9c6bf51d-26f1-4f07-9ce5-4afd5d9c5d18",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.486Z",
+      "changed": "2026-07-25T12:28:19.491Z",
+      "deleted": null,
+      "md5": "716cd0e0dcfb9e1b4b4b190823ff86e4",
+      "good": 4,
+      "image": "int_storage/cv/71/6c/d0/716cd0e0dcfb9e1b4b4b190823ff86e4/716cd0e0dcfb9e1b4b4b190823ff86e4.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 5,
+    "fields": {
+      "title": null,
+      "uid": "af40256c-c27a-4860-8d71-6fbacb32d688",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.500Z",
+      "changed": "2026-07-25T12:28:19.502Z",
+      "deleted": null,
+      "md5": "957a5c556ddd04fa2caa3b4d73f5ef3d",
+      "good": 4,
+      "image": "int_storage/cv/95/7a/5c/957a5c556ddd04fa2caa3b4d73f5ef3d/957a5c556ddd04fa2caa3b4d73f5ef3d.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 6,
+    "fields": {
+      "title": null,
+      "uid": "297a760d-119f-468e-92ed-736c48f4c206",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.510Z",
+      "changed": "2026-07-25T12:28:19.513Z",
+      "deleted": null,
+      "md5": "97bc4f683772419d2ea662f858fe2e16",
+      "good": 5,
+      "image": "int_storage/cv/97/bc/4f/97bc4f683772419d2ea662f858fe2e16/97bc4f683772419d2ea662f858fe2e16.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 7,
+    "fields": {
+      "title": null,
+      "uid": "f28720a2-1f64-4c8a-9416-3223b02a142c",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.520Z",
+      "changed": "2026-07-25T12:28:19.525Z",
+      "deleted": null,
+      "md5": "80c5d4bbe5b431b12f8459ad3cd914c3",
+      "good": 5,
+      "image": "int_storage/cv/80/c5/d4/80c5d4bbe5b431b12f8459ad3cd914c3/80c5d4bbe5b431b12f8459ad3cd914c3.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 8,
+    "fields": {
+      "title": null,
+      "uid": "1a3d7e59-f606-4a71-8e9c-0ebdd1fb46ea",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.535Z",
+      "changed": "2026-07-25T12:28:19.537Z",
+      "deleted": null,
+      "md5": "d5f425ba690ae535e6d55b6ebdd90a3b",
+      "good": 6,
+      "image": "int_storage/cv/d5/f4/25/d5f425ba690ae535e6d55b6ebdd90a3b/d5f425ba690ae535e6d55b6ebdd90a3b.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 9,
+    "fields": {
+      "title": null,
+      "uid": "e71c995b-4f45-4d10-b07d-ecc275667d72",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.544Z",
+      "changed": "2026-07-25T12:28:19.546Z",
+      "deleted": null,
+      "md5": "12f87e4570e48faee299061dfbe802ad",
+      "good": 6,
+      "image": "int_storage/cv/12/f8/7e/12f87e4570e48faee299061dfbe802ad/12f87e4570e48faee299061dfbe802ad.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 10,
+    "fields": {
+      "title": null,
+      "uid": "95e795e7-ba17-4cd0-898c-6678236d4d54",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.554Z",
+      "changed": "2026-07-25T12:28:19.556Z",
+      "deleted": null,
+      "md5": "695d222c9f59423545f6c2db9d7834d9",
+      "good": 7,
+      "image": "int_storage/cv/69/5d/22/695d222c9f59423545f6c2db9d7834d9/695d222c9f59423545f6c2db9d7834d9.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 11,
+    "fields": {
+      "title": null,
+      "uid": "8f93ebff-d7f7-47a9-9981-a8360c5e627e",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.563Z",
+      "changed": "2026-07-25T12:28:19.564Z",
+      "deleted": null,
+      "md5": "3236f1d49db50f7fb11c233c1bfc90e1",
+      "good": 7,
+      "image": "int_storage/cv/32/36/f1/3236f1d49db50f7fb11c233c1bfc90e1/3236f1d49db50f7fb11c233c1bfc90e1.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 12,
+    "fields": {
+      "title": null,
+      "uid": "de819231-20f0-406f-b89d-142526dea01e",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.573Z",
+      "changed": "2026-07-25T12:28:19.575Z",
+      "deleted": null,
+      "md5": "df5ce98cda67c71f4252c0cbb01b41b8",
+      "good": 8,
+      "image": "int_storage/cv/df/5c/e9/df5ce98cda67c71f4252c0cbb01b41b8/df5ce98cda67c71f4252c0cbb01b41b8.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "goods.goodphoto",
+    "pk": 13,
+    "fields": {
+      "title": null,
+      "uid": "adba374b-8f0a-4b72-aeca-c43e756c9710",
+      "company_ids": [],
+      "created": "2026-07-25T12:28:19.583Z",
+      "changed": "2026-07-25T12:28:19.586Z",
+      "deleted": null,
+      "md5": "45678584a8e241388a05bac0ab0cb99a",
+      "good": 8,
+      "image": "int_storage/cv/45/67/85/45678584a8e241388a05bac0ab0cb99a/45678584a8e241388a05bac0ab0cb99a.jpg",
+      "description": null
+    }
+  },
+  {
+    "model": "warehouse.warehouse",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "60c40836-3560-4bb8-ad56-1793536fb37c",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "name": "Reims Central Cellar",
+      "country": "FR",
+      "city": "Reims",
+      "address": "3 Avenue de Champagne, 51100 Reims"
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "31042ce6-ede5-47a0-9d9a-2db81c47a2d3",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 1,
+      "quantity": 240
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 2,
+    "fields": {
+      "title": null,
+      "uid": "1974425f-049e-4494-b84a-6bde8b89db22",
+      "company_ids": [],
+      "created": "2026-07-26T08:33:51.366Z",
+      "changed": "2026-07-26T08:33:51.366Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 2,
+      "quantity": 120
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 3,
+    "fields": {
+      "title": null,
+      "uid": "f69dc4e6-50f4-47c4-893f-9220a3dff579",
+      "company_ids": [],
+      "created": "2026-07-26T08:33:51.367Z",
+      "changed": "2026-07-26T08:33:51.367Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 3,
+      "quantity": 90
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 4,
+    "fields": {
+      "title": null,
+      "uid": "7999665d-0f83-4755-a7d3-46759b4de783",
+      "company_ids": [],
+      "created": "2026-07-26T08:33:51.368Z",
+      "changed": "2026-07-26T08:33:51.368Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 4,
+      "quantity": 60
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 5,
+    "fields": {
+      "title": null,
+      "uid": "a8e24a9b-73e9-432d-a8e3-f20b40ec10fb",
+      "company_ids": [],
+      "created": "2026-07-26T08:33:51.369Z",
+      "changed": "2026-07-26T08:33:51.369Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 5,
+      "quantity": 150
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 6,
+    "fields": {
+      "title": null,
+      "uid": "0e0d21d0-bcea-44a4-98a2-ab78b941eaf0",
+      "company_ids": [],
+      "created": "2026-07-26T08:33:51.369Z",
+      "changed": "2026-07-26T08:33:51.369Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 6,
+      "quantity": 100
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 7,
+    "fields": {
+      "title": null,
+      "uid": "0f435cb2-bfc0-409f-ba17-ef55d5e4cb96",
+      "company_ids": [],
+      "created": "2026-07-26T08:33:51.370Z",
+      "changed": "2026-07-26T08:33:51.370Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 7,
+      "quantity": 40
+    }
+  },
+  {
+    "model": "warehouse.stock",
+    "pk": 8,
+    "fields": {
+      "title": null,
+      "uid": "08888c71-2916-4713-a5aa-aec28082e5c6",
+      "company_ids": [],
+      "created": "2026-07-26T08:33:51.370Z",
+      "changed": "2026-07-26T08:33:51.370Z",
+      "deleted": null,
+      "warehouse": 1,
+      "good": 8,
+      "quantity": 25
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "340d81fb-0c45-4bc0-ba30-767d0129e1ce",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "order": 1,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "270.00",
+      "currency": 1,
+      "status": "captured",
+      "provider": "stripe",
+      "transaction_id": "pi_3P0examplecharge"
+    }
+  },
+  {
+    "model": "transaction.transaction",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "5024e8d5-e48c-47ae-97df-52c5a138b189",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "payment": 1,
+      "type": "charge",
+      "method": "card",
+      "amount": "270.00",
+      "currency": 1,
+      "status": "succeeded",
+      "provider": "stripe",
+      "provider_reference": "ch_3P0examplecharge",
+      "raw_response": null
+    }
+  },
+  {
+    "model": "review.review",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "e708c1e7-df95-476c-aa18-d5ddb3dc1fee",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "author": [
+        "amelie.dubois"
+      ],
+      "rating": 5,
+      "comment": "Excellent vintage, fast shipping from the cellar.",
+      "content_type": [
+        "company",
+        "company"
+      ],
+      "object_id": 1
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "d946134f-52f6-4815-81c8-d750a8a66bac",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-04T15:20:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "delivered",
+      "total_amount": "270.00",
+      "currency": 1,
+      "estimated_delivery": "2026-07-06",
+      "carrier": "Chronopost",
+      "tracking_number": "CH1029384756FR",
+      "signature_required": true,
+      "delivery_instructions": "Leave with the concierge if no one answers.",
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 1,
+    "fields": {
+      "title": null,
+      "uid": "0617aef3-e9c4-4f4b-b352-f72d885e3cb2",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "order": 1,
+      "good": 4,
+      "quantity": 1,
+      "unit_price": "120.00"
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 2,
+    "fields": {
+      "title": null,
+      "uid": "e96e3b92-3658-4c75-91f7-0bbee048efa0",
+      "company_ids": [],
+      "created": "2026-07-01T09:00:00Z",
+      "changed": "2026-07-01T09:00:00Z",
+      "deleted": null,
+      "order": 1,
+      "good": 8,
+      "quantity": 1,
+      "unit_price": "150.00"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 2,
+    "fields": {
+      "title": null,
+      "uid": "b1c0b62d-adbb-4ace-9cc6-f56c16b8b031",
+      "company_ids": [],
+      "created": "2026-07-27T08:00:00Z",
+      "changed": "2026-07-27T08:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "placed",
+      "total_amount": "116.00",
+      "currency": 1,
+      "estimated_delivery": "2026-08-01",
+      "carrier": null,
+      "tracking_number": null,
+      "signature_required": false,
+      "delivery_instructions": null,
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 3,
+    "fields": {
+      "title": null,
+      "uid": "48c37d8a-1d30-4476-ba44-1d139421e974",
+      "company_ids": [],
+      "created": "2026-07-27T08:00:00Z",
+      "changed": "2026-07-27T08:00:00Z",
+      "deleted": null,
+      "order": 2,
+      "good": 3,
+      "quantity": 2,
+      "unit_price": "58.00"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 3,
+    "fields": {
+      "title": null,
+      "uid": "d85fc2aa-d627-4d00-a8cd-bdabd3f4ab29",
+      "company_ids": [],
+      "created": "2026-07-26T14:00:00Z",
+      "changed": "2026-07-26T14:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "payment_confirmed",
+      "total_amount": "143.00",
+      "currency": 1,
+      "estimated_delivery": "2026-07-31",
+      "carrier": null,
+      "tracking_number": null,
+      "signature_required": false,
+      "delivery_instructions": null,
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 4,
+    "fields": {
+      "title": null,
+      "uid": "dacae67b-8c96-4705-8887-f9d42a63ad40",
+      "company_ids": [],
+      "created": "2026-07-26T14:00:00Z",
+      "changed": "2026-07-26T14:00:00Z",
+      "deleted": null,
+      "order": 3,
+      "good": 2,
+      "quantity": 1,
+      "unit_price": "65.00"
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 5,
+    "fields": {
+      "title": null,
+      "uid": "8652781b-6a23-41c4-8105-ff3d09d67c45",
+      "company_ids": [],
+      "created": "2026-07-26T14:00:00Z",
+      "changed": "2026-07-26T14:00:00Z",
+      "deleted": null,
+      "order": 3,
+      "good": 6,
+      "quantity": 2,
+      "unit_price": "39.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 2,
+    "fields": {
+      "title": null,
+      "uid": "2fc66d84-98b2-42be-a2da-ae1ab692b6eb",
+      "company_ids": [],
+      "created": "2026-07-26T14:00:00Z",
+      "changed": "2026-07-26T14:00:00Z",
+      "deleted": null,
+      "order": 3,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "143.00",
+      "currency": 1,
+      "status": "captured",
+      "provider": "stripe",
+      "transaction_id": "pi_demo003"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 4,
+    "fields": {
+      "title": null,
+      "uid": "1c78675a-27e6-445f-98be-7c79a5e36671",
+      "company_ids": [],
+      "created": "2026-07-25T10:00:00Z",
+      "changed": "2026-07-25T10:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "preparing",
+      "total_amount": "126.00",
+      "currency": 1,
+      "estimated_delivery": "2026-07-30",
+      "carrier": null,
+      "tracking_number": null,
+      "signature_required": false,
+      "delivery_instructions": null,
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 6,
+    "fields": {
+      "title": null,
+      "uid": "e682a262-2a39-489c-bc02-5a9da124040d",
+      "company_ids": [],
+      "created": "2026-07-25T10:00:00Z",
+      "changed": "2026-07-25T10:00:00Z",
+      "deleted": null,
+      "order": 4,
+      "good": 5,
+      "quantity": 3,
+      "unit_price": "42.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 3,
+    "fields": {
+      "title": null,
+      "uid": "850ddf40-01b0-457e-8989-db34a9d507b5",
+      "company_ids": [],
+      "created": "2026-07-25T10:00:00Z",
+      "changed": "2026-07-25T10:00:00Z",
+      "deleted": null,
+      "order": 4,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "126.00",
+      "currency": 1,
+      "status": "captured",
+      "provider": "stripe",
+      "transaction_id": "pi_demo004"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 5,
+    "fields": {
+      "title": null,
+      "uid": "db2a4e2b-d55f-4823-92e5-7a53bf96227c",
+      "company_ids": [],
+      "created": "2026-07-24T09:30:00Z",
+      "changed": "2026-07-24T09:30:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "quality_inspection",
+      "total_amount": "195.00",
+      "currency": 1,
+      "estimated_delivery": "2026-07-29",
+      "carrier": null,
+      "tracking_number": null,
+      "signature_required": true,
+      "delivery_instructions": null,
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 7,
+    "fields": {
+      "title": null,
+      "uid": "6065ea59-912d-49c1-92c8-dc1182769905",
+      "company_ids": [],
+      "created": "2026-07-24T09:30:00Z",
+      "changed": "2026-07-24T09:30:00Z",
+      "deleted": null,
+      "order": 5,
+      "good": 7,
+      "quantity": 1,
+      "unit_price": "195.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 4,
+    "fields": {
+      "title": null,
+      "uid": "6cf38d14-57c3-48a8-9512-939d875f0e07",
+      "company_ids": [],
+      "created": "2026-07-24T09:30:00Z",
+      "changed": "2026-07-24T09:30:00Z",
+      "deleted": null,
+      "order": 5,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "195.00",
+      "currency": 1,
+      "status": "captured",
+      "provider": "stripe",
+      "transaction_id": "pi_demo005"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 6,
+    "fields": {
+      "title": null,
+      "uid": "e1ca7387-9c95-406c-945d-e9e4bdc2e1ab",
+      "company_ids": [],
+      "created": "2026-07-23T11:00:00Z",
+      "changed": "2026-07-23T11:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "packed",
+      "total_amount": "148.00",
+      "currency": 1,
+      "estimated_delivery": "2026-07-28",
+      "carrier": null,
+      "tracking_number": null,
+      "signature_required": false,
+      "delivery_instructions": null,
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 8,
+    "fields": {
+      "title": null,
+      "uid": "573bee58-c34c-4112-9616-5a64308a87b3",
+      "company_ids": [],
+      "created": "2026-07-23T11:00:00Z",
+      "changed": "2026-07-23T11:00:00Z",
+      "deleted": null,
+      "order": 6,
+      "good": 1,
+      "quantity": 2,
+      "unit_price": "45.00"
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 9,
+    "fields": {
+      "title": null,
+      "uid": "399114a4-281c-40f4-b987-9c2e2c044f33",
+      "company_ids": [],
+      "created": "2026-07-23T11:00:00Z",
+      "changed": "2026-07-23T11:00:00Z",
+      "deleted": null,
+      "order": 6,
+      "good": 3,
+      "quantity": 1,
+      "unit_price": "58.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 5,
+    "fields": {
+      "title": null,
+      "uid": "75e368f8-f4c7-4ba4-be7c-fcd8627087e3",
+      "company_ids": [],
+      "created": "2026-07-23T11:00:00Z",
+      "changed": "2026-07-23T11:00:00Z",
+      "deleted": null,
+      "order": 6,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "148.00",
+      "currency": 1,
+      "status": "captured",
+      "provider": "stripe",
+      "transaction_id": "pi_demo006"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 7,
+    "fields": {
+      "title": null,
+      "uid": "80010a8d-35c3-4722-bf4e-08904daea738",
+      "company_ids": [],
+      "created": "2026-07-22T09:00:00Z",
+      "changed": "2026-07-22T09:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "shipped",
+      "total_amount": "150.00",
+      "currency": 1,
+      "estimated_delivery": "2026-07-27",
+      "carrier": "DHL Express",
+      "tracking_number": "DHL4471029384",
+      "signature_required": false,
+      "delivery_instructions": null,
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 10,
+    "fields": {
+      "title": null,
+      "uid": "6f2c86a1-8481-4f1f-a7d4-65030baad035",
+      "company_ids": [],
+      "created": "2026-07-22T09:00:00Z",
+      "changed": "2026-07-22T09:00:00Z",
+      "deleted": null,
+      "order": 7,
+      "good": 8,
+      "quantity": 1,
+      "unit_price": "150.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 6,
+    "fields": {
+      "title": null,
+      "uid": "57bf3922-3872-4b5f-bcbc-9f0c5e91cf69",
+      "company_ids": [],
+      "created": "2026-07-22T09:00:00Z",
+      "changed": "2026-07-22T09:00:00Z",
+      "deleted": null,
+      "order": 7,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "150.00",
+      "currency": 1,
+      "status": "captured",
+      "provider": "stripe",
+      "transaction_id": "pi_demo007"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 8,
+    "fields": {
+      "title": null,
+      "uid": "3c93d8e6-2353-4ed3-b674-617ff7e91801",
+      "company_ids": [],
+      "created": "2026-07-21T09:00:00Z",
+      "changed": "2026-07-21T09:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "out_for_delivery",
+      "total_amount": "162.00",
+      "currency": 1,
+      "estimated_delivery": "2026-07-27",
+      "carrier": "UPS",
+      "tracking_number": "1Z999AA10123456784",
+      "signature_required": true,
+      "delivery_instructions": "Ring twice, apartment 4B.",
+      "notes": null
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 11,
+    "fields": {
+      "title": null,
+      "uid": "24ccd087-fc70-4c56-adfc-bf2e83133b71",
+      "company_ids": [],
+      "created": "2026-07-21T09:00:00Z",
+      "changed": "2026-07-21T09:00:00Z",
+      "deleted": null,
+      "order": 8,
+      "good": 4,
+      "quantity": 1,
+      "unit_price": "120.00"
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 12,
+    "fields": {
+      "title": null,
+      "uid": "9268af80-3840-4c26-89b2-eb20b23e68f0",
+      "company_ids": [],
+      "created": "2026-07-21T09:00:00Z",
+      "changed": "2026-07-21T09:00:00Z",
+      "deleted": null,
+      "order": 8,
+      "good": 5,
+      "quantity": 1,
+      "unit_price": "42.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 7,
+    "fields": {
+      "title": null,
+      "uid": "758dbd40-8168-470c-8c20-9873d7548e8b",
+      "company_ids": [],
+      "created": "2026-07-21T09:00:00Z",
+      "changed": "2026-07-21T09:00:00Z",
+      "deleted": null,
+      "order": 8,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "162.00",
+      "currency": 1,
+      "status": "captured",
+      "provider": "stripe",
+      "transaction_id": "pi_demo008"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 9,
+    "fields": {
+      "title": null,
+      "uid": "dbb56394-6b92-47ff-ba09-890ec4b16a81",
+      "company_ids": [],
+      "created": "2026-07-20T09:00:00Z",
+      "changed": "2026-07-20T09:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "cancelled",
+      "total_amount": "39.00",
+      "currency": 1,
+      "estimated_delivery": null,
+      "carrier": null,
+      "tracking_number": null,
+      "signature_required": false,
+      "delivery_instructions": null,
+      "notes": "Cancelled at the customer's request before dispatch."
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 13,
+    "fields": {
+      "title": null,
+      "uid": "7761589e-3180-43ca-8c39-433f9de30123",
+      "company_ids": [],
+      "created": "2026-07-20T09:00:00Z",
+      "changed": "2026-07-20T09:00:00Z",
+      "deleted": null,
+      "order": 9,
+      "good": 6,
+      "quantity": 1,
+      "unit_price": "39.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 8,
+    "fields": {
+      "title": null,
+      "uid": "000f686c-4690-4d35-afe4-57c44285a494",
+      "company_ids": [],
+      "created": "2026-07-20T09:00:00Z",
+      "changed": "2026-07-20T09:00:00Z",
+      "deleted": null,
+      "order": 9,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "39.00",
+      "currency": 1,
+      "status": "voided",
+      "provider": "stripe",
+      "transaction_id": "pi_demo009"
+    }
+  },
+  {
+    "model": "order.order",
+    "pk": 10,
+    "fields": {
+      "title": null,
+      "uid": "6755fa15-a4e7-4a1d-be5c-341532960ba0",
+      "company_ids": [],
+      "created": "2026-07-10T09:00:00Z",
+      "changed": "2026-07-10T09:00:00Z",
+      "deleted": null,
+      "buyer": [
+        "amelie.dubois"
+      ],
+      "seller": 1,
+      "delivery_address": 1,
+      "status": "refunded",
+      "total_amount": "130.00",
+      "currency": 1,
+      "estimated_delivery": null,
+      "carrier": null,
+      "tracking_number": null,
+      "signature_required": false,
+      "delivery_instructions": null,
+      "notes": "Refunded after a damaged bottle was reported on arrival."
+    }
+  },
+  {
+    "model": "order.orderitem",
+    "pk": 14,
+    "fields": {
+      "title": null,
+      "uid": "147115a7-8b35-4def-8213-df9c47914b78",
+      "company_ids": [],
+      "created": "2026-07-10T09:00:00Z",
+      "changed": "2026-07-10T09:00:00Z",
+      "deleted": null,
+      "order": 10,
+      "good": 2,
+      "quantity": 2,
+      "unit_price": "65.00"
+    }
+  },
+  {
+    "model": "payment.payment",
+    "pk": 9,
+    "fields": {
+      "title": null,
+      "uid": "d48bdd1e-38d0-454b-94b1-6470939f0b35",
+      "company_ids": [],
+      "created": "2026-07-10T09:00:00Z",
+      "changed": "2026-07-10T09:00:00Z",
+      "deleted": null,
+      "order": 10,
+      "payer": [
+        "amelie.dubois"
+      ],
+      "amount": "130.00",
+      "currency": 1,
+      "status": "refunded",
+      "provider": "stripe",
+      "transaction_id": "pi_demo010"
+    }
   }
-},
-{
-  "model": "person.user",
-  "pk": 2,
-  "fields": {
-    "password": "pbkdf2_sha256$1200000$OoHU0M6UjEsQidyjaAdRpa$js7w2n2O25H4DerkfjrbLAzAmrO5t0MOH0rfKI5gLv8=",
-    "last_login": "2026-07-24T23:25:30.763Z",
-    "is_superuser": false,
-    "username": "mrvol777@gmail.com",
-    "first_name": "bob",
-    "last_name": "",
-    "email": "mrvol777@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2026-07-24T23:25:30.580Z",
-    "title": null,
-    "uid": "c63d7d65-157d-4067-95cb-0a64526cebbf",
-    "company_ids": [],
-    "created": "2026-07-24T23:25:30.759Z",
-    "changed": "2026-07-24T23:25:30.759Z",
-    "deleted": null,
-    "address": null,
-    "phone": null,
-    "country": null,
-    "birthday": "1994-07-25",
-    "email_verified": false,
-    "avatar": "",
-    "bio": null,
-    "gender": null,
-    "language": [],
-    "timezone": null,
-    "primary_address": null,
-    "roles": [],
-    "failed_login_attempts": 0,
-    "account_locked": false,
-    "login_history": [],
-    "devices": [],
-    "kyc_status": null,
-    "identity_documents": [],
-    "terms_accepted_at": null,
-    "gdpr_consent": false,
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "person.webauthncredential",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "9f835082-0467-4b37-af51-9d0e5c4bcc5a",
-    "company_ids": [],
-    "created": "2026-07-24T23:25:44.610Z",
-    "changed": "2026-07-24T23:25:44.610Z",
-    "deleted": null,
-    "user": [
-      "mrvol777@gmail.com"
-    ],
-    "credential_id": "LWbDW9lxK4j+g2sJWRx5E2nkRuc=",
-    "public_key_x": "jrrt66gbTnYtpidUCjCtshmtdrYLq4duGAa657va0sI=",
-    "public_key_y": "vT1/M07nZU5DdKmviLrIP035Oz7LKS6M/2ObOCWhwhc=",
-    "sign_count": 0
-  }
-},
-{
-  "model": "company.company",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "ef5b764c-00f2-4606-890d-4f04b58b73a6",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "legal_name": "Maison Lumière",
-    "registration_number": "RCS-REIMS-482910",
-    "country": "FR",
-    "tax_id": "FR12482910337",
-    "vat_number": "FR12482910337",
-    "industry": "Wine & Spirits",
-    "website": "https://maisonlumiere.example",
-    "logo_url": null,
-    "founded_date": "1904-05-12",
-    "employee_count": 38,
-    "rating": "4.60",
-    "review_count": 1,
-    "trust_score": "91.50",
-    "verified_seller": true,
-    "dispute_count": 0
-  }
-},
-{
-  "model": "address.address",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "08c440d2-4a1d-4a00-8891-ad1dcc0cd635",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "type": [
-      "p"
-    ],
-    "user": [
-      "amelie.dubois"
-    ],
-    "line1": "12 Rue des Vignes",
-    "line2": null,
-    "city": "Reims",
-    "region": "Grand Est",
-    "postal_code": "51100",
-    "country": "FR"
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "17e7f0a3-d324-4d67-9fae-849d045669e0",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "photo": null,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Brut Reserve",
-    "sku": "ML-BRUT-750",
-    "vintage_year": 2016,
-    "region": "Champagne AOC",
-    "grape_variety": "Pinot Noir, Chardonnay",
-    "volume_ml": 750,
-    "abv": "12.50",
-    "price": "45.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 2,
-  "fields": {
-    "title": null,
-    "uid": "a66d4432-59b8-4445-a0eb-2c48f6dfb94f",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.434Z",
-    "changed": "2026-07-25T12:28:19.446Z",
-    "deleted": null,
-    "photo": 1,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Blanc de Blancs",
-    "sku": "ML-BDB-750",
-    "vintage_year": 2018,
-    "region": "Côte des Blancs, Champagne AOC",
-    "grape_variety": "Chardonnay",
-    "volume_ml": 750,
-    "abv": "12.50",
-    "price": "65.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 3,
-  "fields": {
-    "title": null,
-    "uid": "1e574027-eed5-433d-a711-f17fbb8a747d",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.460Z",
-    "changed": "2026-07-25T12:28:19.469Z",
-    "deleted": null,
-    "photo": 2,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Rosé",
-    "sku": "ML-ROSE-750",
-    "vintage_year": 2019,
-    "region": "Champagne AOC",
-    "grape_variety": "Pinot Noir, Pinot Meunier",
-    "volume_ml": 750,
-    "abv": "12.00",
-    "price": "58.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 4,
-  "fields": {
-    "title": null,
-    "uid": "917bdae2-6828-4365-8726-7d278f133269",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.479Z",
-    "changed": "2026-07-25T12:28:19.492Z",
-    "deleted": null,
-    "photo": 4,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Prestige Cuvée",
-    "sku": "ML-PREST-750",
-    "vintage_year": 2015,
-    "region": "Champagne AOC",
-    "grape_variety": "Pinot Noir, Chardonnay",
-    "volume_ml": 750,
-    "abv": "12.50",
-    "price": "120.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 5,
-  "fields": {
-    "title": null,
-    "uid": "d7a03fe0-f0f3-40e9-8d79-f1dbed132019",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.504Z",
-    "changed": "2026-07-25T12:28:19.514Z",
-    "deleted": null,
-    "photo": 6,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Extra Brut",
-    "sku": "ML-XBRUT-750",
-    "vintage_year": 2020,
-    "region": "Champagne AOC",
-    "grape_variety": "Pinot Meunier",
-    "volume_ml": 750,
-    "abv": "12.00",
-    "price": "42.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 6,
-  "fields": {
-    "title": null,
-    "uid": "ef59ca9f-f87f-4622-b0e9-4ba090265441",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.527Z",
-    "changed": "2026-07-25T12:28:19.538Z",
-    "deleted": null,
-    "photo": 8,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Demi-Sec",
-    "sku": "ML-DEMISEC-750",
-    "vintage_year": 2020,
-    "region": "Champagne AOC",
-    "grape_variety": "Chardonnay",
-    "volume_ml": 750,
-    "abv": "11.50",
-    "price": "39.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 7,
-  "fields": {
-    "title": null,
-    "uid": "50271f20-ad8d-4495-bb42-4024daee9645",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.548Z",
-    "changed": "2026-07-25T12:28:19.557Z",
-    "deleted": null,
-    "photo": 10,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Magnum Brut Reserve",
-    "sku": "ML-MAGBRUT-1500",
-    "vintage_year": 2017,
-    "region": "Champagne AOC",
-    "grape_variety": "Pinot Noir, Chardonnay, Pinot Meunier",
-    "volume_ml": 1500,
-    "abv": "12.50",
-    "price": "195.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.good",
-  "pk": 8,
-  "fields": {
-    "title": null,
-    "uid": "09e91fa2-19a4-4151-8d43-5409ea94b88e",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.566Z",
-    "changed": "2026-07-25T12:28:19.577Z",
-    "deleted": null,
-    "photo": 12,
-    "description": null,
-    "bullets": [],
-    "company": 1,
-    "name": "Maison Lumière Grand Cru Ambonnay",
-    "sku": "ML-GCAMB-750",
-    "vintage_year": 2014,
-    "region": "Ambonnay Grand Cru, Champagne AOC",
-    "grape_variety": "Pinot Noir",
-    "volume_ml": 750,
-    "abv": "12.50",
-    "price": "150.00",
-    "currency": 1,
-    "barcode": null,
-    "planted": null,
-    "soil_type": null,
-    "elevation": null,
-    "slope": null,
-    "harvested": null,
-    "organic_certified": false,
-    "groups": []
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "43bee29e-cecf-4cef-ac5b-ec753a8fdf1c",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.442Z",
-    "changed": "2026-07-25T12:28:19.445Z",
-    "deleted": null,
-    "md5": "e10bd26e107fe4817dc2ef57ad4847fe",
-    "good": 2,
-    "image": "int_storage/cv/e1/0b/d2/e10bd26e107fe4817dc2ef57ad4847fe/e10bd26e107fe4817dc2ef57ad4847fe.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 2,
-  "fields": {
-    "title": null,
-    "uid": "4841e416-4a50-4573-9648-bd2e61bc2f05",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.465Z",
-    "changed": "2026-07-25T12:28:19.469Z",
-    "deleted": null,
-    "md5": "26b8e3775793e569764f218e978b79c2",
-    "good": 3,
-    "image": "int_storage/cv/26/b8/e3/26b8e3775793e569764f218e978b79c2/26b8e3775793e569764f218e978b79c2.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 3,
-  "fields": {
-    "title": null,
-    "uid": "64055f49-b375-4e7c-9a84-090157b00fa9",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.474Z",
-    "changed": "2026-07-25T12:28:19.477Z",
-    "deleted": null,
-    "md5": "01b97f0045fd6d2049697daebbe8e78e",
-    "good": 3,
-    "image": "int_storage/cv/01/b9/7f/01b97f0045fd6d2049697daebbe8e78e/01b97f0045fd6d2049697daebbe8e78e.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 4,
-  "fields": {
-    "title": null,
-    "uid": "9c6bf51d-26f1-4f07-9ce5-4afd5d9c5d18",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.486Z",
-    "changed": "2026-07-25T12:28:19.491Z",
-    "deleted": null,
-    "md5": "716cd0e0dcfb9e1b4b4b190823ff86e4",
-    "good": 4,
-    "image": "int_storage/cv/71/6c/d0/716cd0e0dcfb9e1b4b4b190823ff86e4/716cd0e0dcfb9e1b4b4b190823ff86e4.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 5,
-  "fields": {
-    "title": null,
-    "uid": "af40256c-c27a-4860-8d71-6fbacb32d688",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.500Z",
-    "changed": "2026-07-25T12:28:19.502Z",
-    "deleted": null,
-    "md5": "957a5c556ddd04fa2caa3b4d73f5ef3d",
-    "good": 4,
-    "image": "int_storage/cv/95/7a/5c/957a5c556ddd04fa2caa3b4d73f5ef3d/957a5c556ddd04fa2caa3b4d73f5ef3d.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 6,
-  "fields": {
-    "title": null,
-    "uid": "297a760d-119f-468e-92ed-736c48f4c206",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.510Z",
-    "changed": "2026-07-25T12:28:19.513Z",
-    "deleted": null,
-    "md5": "97bc4f683772419d2ea662f858fe2e16",
-    "good": 5,
-    "image": "int_storage/cv/97/bc/4f/97bc4f683772419d2ea662f858fe2e16/97bc4f683772419d2ea662f858fe2e16.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 7,
-  "fields": {
-    "title": null,
-    "uid": "f28720a2-1f64-4c8a-9416-3223b02a142c",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.520Z",
-    "changed": "2026-07-25T12:28:19.525Z",
-    "deleted": null,
-    "md5": "80c5d4bbe5b431b12f8459ad3cd914c3",
-    "good": 5,
-    "image": "int_storage/cv/80/c5/d4/80c5d4bbe5b431b12f8459ad3cd914c3/80c5d4bbe5b431b12f8459ad3cd914c3.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 8,
-  "fields": {
-    "title": null,
-    "uid": "1a3d7e59-f606-4a71-8e9c-0ebdd1fb46ea",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.535Z",
-    "changed": "2026-07-25T12:28:19.537Z",
-    "deleted": null,
-    "md5": "d5f425ba690ae535e6d55b6ebdd90a3b",
-    "good": 6,
-    "image": "int_storage/cv/d5/f4/25/d5f425ba690ae535e6d55b6ebdd90a3b/d5f425ba690ae535e6d55b6ebdd90a3b.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 9,
-  "fields": {
-    "title": null,
-    "uid": "e71c995b-4f45-4d10-b07d-ecc275667d72",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.544Z",
-    "changed": "2026-07-25T12:28:19.546Z",
-    "deleted": null,
-    "md5": "12f87e4570e48faee299061dfbe802ad",
-    "good": 6,
-    "image": "int_storage/cv/12/f8/7e/12f87e4570e48faee299061dfbe802ad/12f87e4570e48faee299061dfbe802ad.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 10,
-  "fields": {
-    "title": null,
-    "uid": "95e795e7-ba17-4cd0-898c-6678236d4d54",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.554Z",
-    "changed": "2026-07-25T12:28:19.556Z",
-    "deleted": null,
-    "md5": "695d222c9f59423545f6c2db9d7834d9",
-    "good": 7,
-    "image": "int_storage/cv/69/5d/22/695d222c9f59423545f6c2db9d7834d9/695d222c9f59423545f6c2db9d7834d9.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 11,
-  "fields": {
-    "title": null,
-    "uid": "8f93ebff-d7f7-47a9-9981-a8360c5e627e",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.563Z",
-    "changed": "2026-07-25T12:28:19.564Z",
-    "deleted": null,
-    "md5": "3236f1d49db50f7fb11c233c1bfc90e1",
-    "good": 7,
-    "image": "int_storage/cv/32/36/f1/3236f1d49db50f7fb11c233c1bfc90e1/3236f1d49db50f7fb11c233c1bfc90e1.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 12,
-  "fields": {
-    "title": null,
-    "uid": "de819231-20f0-406f-b89d-142526dea01e",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.573Z",
-    "changed": "2026-07-25T12:28:19.575Z",
-    "deleted": null,
-    "md5": "df5ce98cda67c71f4252c0cbb01b41b8",
-    "good": 8,
-    "image": "int_storage/cv/df/5c/e9/df5ce98cda67c71f4252c0cbb01b41b8/df5ce98cda67c71f4252c0cbb01b41b8.jpg",
-    "description": null
-  }
-},
-{
-  "model": "goods.goodphoto",
-  "pk": 13,
-  "fields": {
-    "title": null,
-    "uid": "adba374b-8f0a-4b72-aeca-c43e756c9710",
-    "company_ids": [],
-    "created": "2026-07-25T12:28:19.583Z",
-    "changed": "2026-07-25T12:28:19.586Z",
-    "deleted": null,
-    "md5": "45678584a8e241388a05bac0ab0cb99a",
-    "good": 8,
-    "image": "int_storage/cv/45/67/85/45678584a8e241388a05bac0ab0cb99a/45678584a8e241388a05bac0ab0cb99a.jpg",
-    "description": null
-  }
-},
-{
-  "model": "warehouse.warehouse",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "60c40836-3560-4bb8-ad56-1793536fb37c",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "name": "Reims Central Cellar",
-    "country": "FR",
-    "city": "Reims",
-    "address": "3 Avenue de Champagne, 51100 Reims"
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "31042ce6-ede5-47a0-9d9a-2db81c47a2d3",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 1,
-    "quantity": 240
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 2,
-  "fields": {
-    "title": null,
-    "uid": "1974425f-049e-4494-b84a-6bde8b89db22",
-    "company_ids": [],
-    "created": "2026-07-26T08:33:51.366Z",
-    "changed": "2026-07-26T08:33:51.366Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 2,
-    "quantity": 120
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 3,
-  "fields": {
-    "title": null,
-    "uid": "f69dc4e6-50f4-47c4-893f-9220a3dff579",
-    "company_ids": [],
-    "created": "2026-07-26T08:33:51.367Z",
-    "changed": "2026-07-26T08:33:51.367Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 3,
-    "quantity": 90
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 4,
-  "fields": {
-    "title": null,
-    "uid": "7999665d-0f83-4755-a7d3-46759b4de783",
-    "company_ids": [],
-    "created": "2026-07-26T08:33:51.368Z",
-    "changed": "2026-07-26T08:33:51.368Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 4,
-    "quantity": 60
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 5,
-  "fields": {
-    "title": null,
-    "uid": "a8e24a9b-73e9-432d-a8e3-f20b40ec10fb",
-    "company_ids": [],
-    "created": "2026-07-26T08:33:51.369Z",
-    "changed": "2026-07-26T08:33:51.369Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 5,
-    "quantity": 150
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 6,
-  "fields": {
-    "title": null,
-    "uid": "0e0d21d0-bcea-44a4-98a2-ab78b941eaf0",
-    "company_ids": [],
-    "created": "2026-07-26T08:33:51.369Z",
-    "changed": "2026-07-26T08:33:51.369Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 6,
-    "quantity": 100
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 7,
-  "fields": {
-    "title": null,
-    "uid": "0f435cb2-bfc0-409f-ba17-ef55d5e4cb96",
-    "company_ids": [],
-    "created": "2026-07-26T08:33:51.370Z",
-    "changed": "2026-07-26T08:33:51.370Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 7,
-    "quantity": 40
-  }
-},
-{
-  "model": "warehouse.stock",
-  "pk": 8,
-  "fields": {
-    "title": null,
-    "uid": "08888c71-2916-4713-a5aa-aec28082e5c6",
-    "company_ids": [],
-    "created": "2026-07-26T08:33:51.370Z",
-    "changed": "2026-07-26T08:33:51.370Z",
-    "deleted": null,
-    "warehouse": 1,
-    "good": 8,
-    "quantity": 25
-  }
-},
-{
-  "model": "order.order",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "99259247-1f91-4879-935c-45c75b2321a6",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "buyer": [
-      "amelie.dubois"
-    ],
-    "seller": 1,
-    "delivery_address": 1,
-    "status": "paid",
-    "total_amount": "270.00",
-    "currency": 1
-  }
-},
-{
-  "model": "payment.payment",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "340d81fb-0c45-4bc0-ba30-767d0129e1ce",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "order": 1,
-    "payer": [
-      "amelie.dubois"
-    ],
-    "amount": "270.00",
-    "currency": 1,
-    "status": "captured",
-    "provider": "stripe",
-    "transaction_id": "pi_3P0examplecharge"
-  }
-},
-{
-  "model": "transaction.transaction",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "5024e8d5-e48c-47ae-97df-52c5a138b189",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "payment": 1,
-    "type": "charge",
-    "method": "card",
-    "amount": "270.00",
-    "currency": 1,
-    "status": "succeeded",
-    "provider": "stripe",
-    "provider_reference": "ch_3P0examplecharge",
-    "raw_response": null
-  }
-},
-{
-  "model": "review.review",
-  "pk": 1,
-  "fields": {
-    "title": null,
-    "uid": "e708c1e7-df95-476c-aa18-d5ddb3dc1fee",
-    "company_ids": [],
-    "created": "2026-07-01T09:00:00Z",
-    "changed": "2026-07-01T09:00:00Z",
-    "deleted": null,
-    "author": [
-      "amelie.dubois"
-    ],
-    "rating": 5,
-    "comment": "Excellent vintage, fast shipping from the cellar.",
-    "content_type": [
-      "company",
-      "company"
-    ],
-    "object_id": 1
-  }
-}
 ]

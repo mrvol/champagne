@@ -10,10 +10,10 @@ def invitation_url(invitation):
 def send_invitation_email(invitation):
     url = invitation_url(invitation)
     send_mail(
-        subject='You’re invited to join Champagne as a Wine House',
+        subject='You’re invited to join Voilà Champagne as a Wine House',
         message=(
             f'Hello{" " + invitation.contact_name if invitation.contact_name else ""},\n\n'
-            f'You’ve been invited to list your wines on Champagne. Follow the link below to '
+            f'You’ve been invited to list your wines on Voilà Champagne. Follow the link below to '
             f'create your account and set up your Wine House profile:\n\n{url}\n\n'
             f'This link is unique to you — previously entered information will be saved as you go, '
             f'so you can pick up where you left off at any time.'

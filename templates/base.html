@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Champagne{% endblock %}</title>
+    <title>{% block title %}Voilà Champagne{% endblock %}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
@@ -130,7 +130,7 @@
         <nav aria-label="{% trans 'Staff tools' %}" class="fixed inset-y-0 left-0 z-sidebar w-64 bg-stone-900 border-r border-stone-800 shadow-lg p-4 flex flex-col gap-1 overflow-y-auto">
             <div class="flex items-center justify-between gap-2 mb-6 px-1">
                 <div class="flex items-center gap-2">
-                    <span class="font-serif italic text-lg text-green-400">Champagne</span>
+                    <span class="font-serif italic text-lg text-green-400">Voilà Champagne</span>
                     <span class="text-[10px] font-bold tracking-wide uppercase border border-stone-700 text-stone-400 rounded px-1.5 py-0.5">{% trans "Staff" %}</span>
                 </div>
                 <button
@@ -163,6 +163,8 @@
                     <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3.5h7l3 3v14H7z"/><path d="M9.5 11h5M9.5 14h5M9.5 17h3"/></svg>
                     {% elif item.icon == 'user' %}
                     <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.25"/><path d="M5 19.5c1-3.5 4-5 7-5s6 1.5 7 5"/></svg>
+                    {% elif item.icon == 'mail' %}
+                    <svg class="w-[18px] h-[18px] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="5.5" width="17" height="13" rx="1.4"/><path d="M4 6.5l8 6.5 8-6.5"/></svg>
                     {% endif %}
                     <span class="flex-1">{{ item.label }}</span>
                     {% if item.count is not None %}
@@ -176,9 +178,9 @@
     </details>
     {% endif %}
     {% with url_name=request.resolver_match.url_name %}
-    <header class="sticky top-0 z-chrome bg-white gold-foil-rule px-4 py-3 md:py-5 flex items-center justify-between gap-6">
-        <a href="/" class="font-serif italic text-2xl md:text-3xl font-semibold text-green-900 tracking-wide shrink-0">Champagne</a>
-        <nav class="hidden md:flex items-center gap-10 text-xs uppercase tracking-[0.18em] font-medium">
+    <header class="print:hidden sticky top-0 z-chrome bg-white gold-foil-rule px-3 md:px-4 py-3 md:py-5 flex items-center justify-between gap-3 md:gap-6">
+        <a href="/" class="font-serif italic text-xl md:text-3xl font-semibold text-green-900 tracking-wide shrink-0">Voilà Champagne</a>
+        <nav class="hidden xl:flex items-center gap-10 text-xs uppercase tracking-[0.18em] font-medium">
             <a href="{% url 'home' %}" class="nav-link {% if url_name == 'home' %}is-active{% endif %}">{% trans "Home" %}</a>
             <a href="{% url 'good_list' %}" class="nav-link {% if url_name == 'good_list' or url_name == 'good_detail' %}is-active{% endif %}">{% trans "Goods" %}</a>
             <a href="{% url 'company_list' %}" class="nav-link {% if url_name == 'company_list' or url_name == 'company_detail' or url_name == 'company_goods' %}is-active{% endif %}">{% trans "Producers" %}</a>
@@ -187,7 +189,7 @@
             <a href="{% url 'order_list' %}" class="nav-link {% if url_name == 'order_list' or url_name == 'order_detail' %}is-active{% endif %}">{% trans "Orders" %}</a>
             {% endif %}
         </nav>
-        <div class="hidden md:flex items-center gap-5 text-xs uppercase tracking-[0.15em] shrink-0">
+        <div class="hidden xl:flex items-center gap-5 text-xs uppercase tracking-[0.15em] shrink-0">
             {% if user.is_authenticated %}
             <a href="{% url 'logout' %}" class="nav-link">{% trans "Logout" %}</a>
             {% else %}
@@ -207,7 +209,7 @@
                 </select>
             </form>
         </div>
-        <div class="md:hidden flex items-center gap-3 shrink-0">
+        <div class="xl:hidden flex items-center gap-2 shrink-0">
             {% if user.is_authenticated %}
             <a href="{% url 'logout' %}" class="text-sm text-stone-600">{% trans "Logout" %}</a>
             {% else %}
@@ -217,7 +219,7 @@
             <form action="{% url 'set_language' %}" method="post" class="inline">
                 {% csrf_token %}
                 <input type="hidden" name="next" value="{{ request.path }}">
-                <select name="language" onchange="this.form.submit()" class="text-stone-600 bg-transparent border border-stone-300 rounded-md text-sm py-1">
+                <select name="language" onchange="this.form.submit()" class="max-w-[5.5rem] truncate text-stone-600 bg-transparent border border-stone-300 rounded-md text-sm py-1">
                     {% get_current_language as CURRENT_LANGUAGE %}
                     {% get_available_languages as AVAILABLE_LANGUAGES %}
                     {% for code, name in AVAILABLE_LANGUAGES %}
@@ -228,7 +230,7 @@
         </div>
     </header>
     {% endwith %}
-    <main class="p-4 pb-20 md:pb-10 mx-auto {% block page_width %}max-w-md{% endblock %}">
+    <main class="p-4 pb-20 xl:pb-10 mx-auto {% block page_width %}max-w-md{% endblock %}">
         {% if messages %}
         <div class="mb-4 space-y-2">
             {% for message in messages %}
@@ -239,7 +241,7 @@
         {% block content %}{% endblock %}
     </main>
     {% with url_name=request.resolver_match.url_name %}
-    <nav class="md:hidden fixed bottom-0 inset-x-0 z-chrome bg-white shadow-[0_-6px_20px_-8px_rgba(26,21,16,0.12)] flex justify-around mx-auto {% block nav_width %}max-w-md{% endblock %}">
+    <nav class="print:hidden xl:hidden fixed bottom-0 inset-x-0 z-chrome bg-white shadow-[0_-6px_20px_-8px_rgba(26,21,16,0.12)] flex justify-around mx-auto {% block nav_width %}max-w-md{% endblock %}">
         <a href="{% url 'home' %}" class="tab-link {% if url_name == 'home' %}is-active{% endif %}">
             <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5"/><path d="M5.5 9.5V19a1 1 0 0 0 1 1H9a1 1 0 0 0 1-1v-4h4v4a1 1 0 0 0 1 1h2.5a1 1 0 0 0 1-1V9.5"/></svg>
             <span>{% trans "Home" %}</span>

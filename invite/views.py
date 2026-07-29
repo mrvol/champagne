@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.dateparse import parse_date
 from django.utils.translation import gettext as _
@@ -7,8 +8,8 @@ from django.views.decorators.http import require_POST
 
 from company.models import Company, CompanyPhoto
 from goods.models import Good
-from invite.emails import send_completion_notification
-from invite.forms import CompanyOnboardingForm, GoodOnboardingForm
+from invite.emails import send_completion_notification, send_invitation_email
+from invite.forms import CompanyOnboardingForm, GoodOnboardingForm, InvitationCreateForm
 from invite.models import Invitation
 from person.models import MIN_AGE, User, age_from_birthday
 
@@ -85,7 +86,9 @@ def invitation_company(request, token):
     if response:
         return response
     if invitation.company_id is None:
-        invitation.company = Company.objects.create()
+        invitation.company = Company.objects.create(
+            contact_email=invitation.contact_email, contact_name=invitation.contact_name,
+        )
         invitation.save(update_fields=['company'])
 
     if request.method == 'POST':
@@ -167,3 +170,26 @@ def invitation_completed(request, token):
     if invitation.status != Invitation.STATUS_COMPLETED:
         return redirect('invite_landing', token=token)
     return render(request, 'invite_completed.html', {'invitation': invitation})
+
+
+def staff_invite_list(request):
+    return render(request, 'staff_invite_list.html')
+
+
+def invitation_list_api(request):
+    if not request.user.is_staff:
+        return JsonResponse({'error': 'forbidden'}, status=403)
+
+    if request.method == 'POST':
+        form = InvitationCreateForm(request.POST)
+        if not form.is_valid():
+            errors = {field: [e['message'] for e in errs] for field, errs in form.errors.get_json_data().items()}
+            return JsonResponse({'errors': errors}, status=400)
+        invitation = form.save(commit=False)
+        invitation.invited_by = request.user
+        invitation.save()
+        send_invitation_email(invitation)
+        return JsonResponse(Invitation.as_json([invitation])[0], status=201)
+
+    invitations = Invitation.objects.order_by('-created')
+    return JsonResponse(Invitation.as_json(invitations), safe=False)

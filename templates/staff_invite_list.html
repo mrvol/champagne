@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load i18n vite %}
+{% block page_width %}max-w-6xl{% endblock %}
+{% block nav_width %}max-w-6xl{% endblock %}
+{% block content %}
+<div class="mb-4">
+    <h1 class="font-serif italic text-2xl text-green-900">{% trans "Invitations" %}</h1>
+</div>
+<div id="staff-invites-table"></div>
+{% endblock %}
+{% block extra_js %}
+{% vite_css 'src/entries/staff_invites.js' as staff_invites_css %}
+{% for href in staff_invites_css %}
+<link rel="stylesheet" href="{{ href }}">
+{% endfor %}
+<script type="module" src="{% vite_asset 'src/entries/staff_invites.js' %}"></script>
+{% endblock %}

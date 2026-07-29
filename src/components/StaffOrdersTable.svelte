@@ -1,12 +1,27 @@
 <script>
   import { onMount } from 'svelte'
 
+  const STATUS_OPTIONS = [
+    ['placed', 'Order placed'],
+    ['payment_confirmed', 'Payment confirmed'],
+    ['preparing', 'Preparing order'],
+    ['quality_inspection', 'Quality inspection'],
+    ['packed', 'Packed'],
+    ['shipped', 'Shipped'],
+    ['out_for_delivery', 'Out for delivery'],
+    ['delivered', 'Delivered'],
+    ['cancelled', 'Cancelled'],
+    ['refunded', 'Refunded'],
+  ]
+
   let rows = $state([])
   let loading = $state(true)
   let sortKey = $state('pk')
   let sortDir = $state('desc')
   let q = $state('')
   let status = $state('')
+  let savingPk = $state(null)
+  let errorPk = $state(null)
 
   onMount(async () => {
     const res = await fetch('/api/order/list/')
@@ -14,9 +29,26 @@
     loading = false
   })
 
-  // statuses aren't a fixed model choice (Order.status is free text), so the filter
-  // options are derived from whatever values actually appear in the data, not guessed
-  let availableStatuses = $derived([...new Set(rows.map((r) => r.status).filter(Boolean))].sort())
+  function csrfToken() {
+    return document.cookie.match(/(?:^|;\s*)csrftoken=([^;]*)/)?.[1]
+  }
+
+  async function updateStatus(pk, newStatus) {
+    savingPk = pk
+    errorPk = null
+    const res = await fetch(`/api/order/${pk}/`, {
+      method: 'POST',
+      headers: { 'X-CSRFToken': csrfToken() },
+      body: new URLSearchParams({ status: newStatus }),
+    })
+    savingPk = null
+    if (!res.ok) {
+      errorPk = pk
+      return
+    }
+    const data = await res.json()
+    rows = rows.map((r) => (r.pk === pk ? { ...r, status: data.status, status_display: data.status_display, updated: data.updated } : r))
+  }
 
   let filteredRows = $derived(
     rows.filter((r) => {
@@ -58,8 +90,8 @@
   />
   <select bind:value={status} class="border border-stone-300 rounded-md h-8 px-2 text-sm text-stone-600">
     <option value="">All statuses</option>
-    {#each availableStatuses as s}
-    <option value={s}>{s}</option>
+    {#each STATUS_OPTIONS as [code, label]}
+    <option value={code}>{label}</option>
     {/each}
   </select>
 </div>
@@ -93,7 +125,23 @@
         <td class="px-3 py-2 text-right tabular-nums text-stone-500">#{row.pk}</td>
         <td class="px-3 py-2 font-medium text-stone-900">{row.buyer}</td>
         <td class="px-3 py-2 text-stone-600">{row.seller}</td>
-        <td class="px-3 py-2 text-stone-600">{row.status ?? '—'}</td>
+        <td class="px-3 py-2">
+          <select
+            value={row.status ?? ''}
+            disabled={savingPk === row.pk}
+            onchange={(e) => updateStatus(row.pk, e.target.value)}
+            class="border border-stone-300 rounded-md h-7 px-1.5 text-xs text-stone-700 disabled:opacity-50"
+          >
+            {#each STATUS_OPTIONS as [code, label]}
+            <option value={code}>{label}</option>
+            {/each}
+          </select>
+          {#if savingPk === row.pk}
+          <span class="text-xs text-stone-400 ml-1">Saving…</span>
+          {:else if errorPk === row.pk}
+          <span class="text-xs text-red-700 ml-1">Could not save</span>
+          {/if}
+        </td>
         <td class="px-3 py-2 text-right tabular-nums font-medium text-stone-900">
           {parseFloat(row.total_amount).toFixed(2)}<span class="text-stone-400 font-normal text-xs ml-1">{row.currency_display}</span>
         </td>

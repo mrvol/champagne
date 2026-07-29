@@ -141,7 +141,7 @@ def passkey_register_options(request):
     request.session['passkey_challenge'] = b64url_encode(challenge)
     rp_id = request.get_host().split(':')[0]
     return JsonResponse({
-        'rp': {'id': rp_id, 'name': 'Champagne'},
+        'rp': {'id': rp_id, 'name': 'Voilà Champagne'},
         'user': {
             'id': b64url_encode(str(request.user.pk).encode()),
             'name': request.user.email,

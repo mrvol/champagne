@@ -65,7 +65,7 @@ class Company(BaseModel):
     swift_bic = models.CharField(max_length=32, blank=True, null=True)
     bank_account_number = models.CharField(max_length=64, blank=True, null=True)
     payment_terms = models.CharField(max_length=64, blank=True, null=True)  # e.g. "Net 30"
-    currency = models.CharField(choices=CURRENCY, default=1)  # ISO 4217
+    currency = models.IntegerField(choices=CURRENCY, default=1)  # ISO 4217
 
     # --- Public profile (onboarding) ---
     social_links = models.JSONField(default=dict, blank=True)  # {"instagram": "https://...", ...}
@@ -83,9 +83,13 @@ class Company(BaseModel):
                 'pk': c.pk,
                 'name': c.name or c.legal_name,
                 'legal_name': c.legal_name,
+                'tagline': c.tagline,
+                'story': c.story,
                 'country': c.country,
                 'region': c.region,
                 'industry': c.industry,
+                'founded_date': c.founded_date,
+                'annual_production': c.annual_production,
                 'verified_seller': c.verified_seller,
                 'rating': c.rating,
                 'review_count': c.review_count,

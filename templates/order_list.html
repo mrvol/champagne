@@ -1,17 +1,44 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n vite %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-3xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-3xl{% endblock %}
 {% block content %}
-<h2 class="font-serif text-2xl font-semibold text-green-900 mb-5">{% trans "Orders" %}</h2>
-<ul class="space-y-3">
+<h1 class="font-serif text-2xl md:text-3xl font-semibold text-green-900 mb-6">{% trans "My Orders" %}</h1>
+
+{% if orders %}
+<ul class="space-y-4">
     {% for order in orders %}
-    <li>
-        <a href="{% url 'order_detail' order.pk %}" class="block bg-white rounded-xl border border-stone-200 px-4 py-3.5 transition duration-200 ease-out hover:border-stone-300 hover:shadow-md">
-            <p class="font-medium">{% blocktrans with pk=order.pk %}Order #{{ pk }}{% endblocktrans %}</p>
-            <p class="text-sm text-stone-500">{{ order.status|default:"—" }} · {{ order.total_amount }} {{ order.get_currency_display }}</p>
-        </a>
-    </li>
-    {% empty %}
-    <li class="text-center py-16 text-stone-500">{% trans "No orders yet." %}</li>
+    {% include 'order_card.html' %}
     {% endfor %}
 </ul>
+{% else %}
+<div class="text-center py-12 max-w-sm mx-auto">
+    <div class="w-16 h-16 rounded-full bg-stone-100 flex items-center justify-center mx-auto mb-5 text-stone-400">
+        <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9"/></svg>
+    </div>
+    <h2 class="font-serif italic text-2xl text-green-900 mb-2">{% trans "No orders yet" %}</h2>
+    <p class="text-stone-600 mb-6">{% trans "Once you place an order, you'll be able to follow it here from checkout to delivery." %}</p>
+    <a href="{% url 'good_list' %}" class="inline-block bg-green-900 text-white rounded-md px-6 py-2.5 text-sm font-medium transition hover:bg-green-800">{% trans "Start shopping" %}</a>
+</div>
+
+{% if suggested %}
+<div class="mt-12">
+    <h2 class="font-serif text-xl font-semibold text-green-900 mb-4 text-center">{% trans "You might like" %}</h2>
+    <ul class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+        {% for good in suggested %}
+        {% include 'good_md.html' %}
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}
+{% block extra_js %}
+{% if suggested %}
+{% vite_css 'src/entries/good_card.js' as good_card_css %}
+{% for href in good_card_css %}
+<link rel="stylesheet" href="{{ href }}">
+{% endfor %}
+<script type="module" src="{% vite_asset 'src/entries/good_card.js' %}"></script>
+{% endif %}
 {% endblock %}

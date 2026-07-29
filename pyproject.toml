@@ -16,3 +16,13 @@ dependencies = [
 dev = [
     "pytest>=9.1.1",
 ]
+
+[tool.pytest.ini_options]
+# Django's `startapp` names test files `tests.py`, which pytest's own default
+# (test_*.py / *_test.py) never matches — without this, every app's tests.py is
+# silently skipped by a plain `pytest` run.
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+# person/tests.py tests a `CV`/resume-parsing pipeline (Document AI, LLM stages) that
+# doesn't exist anywhere in this project's models — leftover from an unrelated codebase,
+# not something this app can run. Ignored here rather than deleted or silently "fixed".
+addopts = "--ignore=person/tests.py"

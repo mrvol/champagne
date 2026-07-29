@@ -1,8 +1,8 @@
-# Champagne — Brandbook
+# Voilà Champagne — Brandbook
 
 ## Project
 
-Champagne is a marketplace for champagne and wine: producers (companies) list
+Voilà Champagne (voilachampagne.com) is a marketplace for champagne and wine: producers (companies) list
 goods (bottles), buyers browse, add to cart, and check out into orders.
 Mobile-first, server-rendered Django app styled with Tailwind (CDN, no build
 step).
@@ -39,7 +39,7 @@ on the system sans stack (Tailwind's default): dense pages (stock tables,
 order lists) need plain legibility, not a serif fighting for attention.
 
 - **`font-serif`** — section headings, page titles, producer/wine names.
-- **`font-serif italic`** — the wordmark ("Champagne" in the header — as
+- **`font-serif italic`** — the wordmark ("Voilà Champagne" in the header — as
   plain text, never `{% trans %}`, it's a brand name not a phrase) and
   emotional/editorial moments: "Our Story", page titles on destination
   pages like Producers/Goods/Cart. Reserve italic for the one or two most
@@ -70,9 +70,12 @@ Real photography of vineyards, cellars, bottles, and the people behind them
 is the single highest-leverage way this platform reads as premium rather
 than templated — more than any color or font choice. Rules of thumb:
 
-- Every hero (home, producer) is a real photo with a dark gradient overlay
-  (`bg-gradient-to-t from-black/70…`) for text legibility — never a stock
-  gray placeholder box on a marketing page.
+- Every hero — the producer storytelling hero and the homepage's conversion
+  hero alike — is a real full-bleed photo with a dark gradient overlay
+  (`bg-gradient-to-t from-black/75…`) for text legibility, never a stock
+  gray placeholder box. See "Conversion hero" below for how the homepage
+  layers its shopping content (bottle shot, CTA, search) on top of that
+  same photo treatment.
 - No photo yet? Fall back to a `from-green-900 to-stone-900` gradient, not
   gray — it still reads as "this brand has a color," just not a photo yet.
 - Company/product galleries (`CompanyPhoto`, `GoodPhoto`) are real uploads
@@ -159,11 +162,74 @@ reinventing it:
   tracked micro-label, same active-state logic, in the fixed bottom bar.
   Don't reach for a hamburger/drawer pattern here — the bottom bar is a
   deliberate, thumb-reachable mobile-commerce pattern, not a placeholder for
-  something more "proper."
-- **Hero** (`home.html`, `company_detail.html`) — full-width photo (edge to
+  something more "proper." The header's nav/tab-bar crossover is `xl`
+  (1280px), not `md` — the full desktop nav (logo + links + sign in/up +
+  language select) needs that much room once an authenticated user's extra
+  Cart/Orders links and a longer language name (`Français`, `Русский`) are
+  both in play; anything narrower measurably overflows. Don't move this back
+  down to `md`/`lg` without re-checking all three locales at that width.
+- **Storytelling hero** (`company_detail.html`) — full-width photo (edge to
   edge of the content column via `-mx-4`, not the true viewport), a
   `bg-gradient-to-t from-black/70…` overlay, `.fade-up` content stacked at
-  the bottom-left or center. No hero without a real photo behind it.
+  the bottom-left or center. No hero without a real photo behind it. Use
+  this where the page's job is to make someone feel something before they
+  do anything (a producer's story).
+- **Conversion hero** (`home.html`) — uses the same full-bleed photo +
+  dark gradient overlay as the storytelling hero (this was deliberately
+  photo-*less* for a while — a pale panel with no background image — to
+  keep the shopping CTA from competing with a photo for attention; brought
+  back by request because the atmospheric photo treatment itself was worth
+  keeping). Content is centered and stacked, `.fade-up` staggered: the
+  bottle shot first (small, `object-contain`, capped `h-24`→`h-40` across
+  breakpoints, drop-shadowed so it floats above the photo — still sized as
+  a supporting accent, not full-bleed, so it doesn't out-compete the CTA),
+  then the eyebrow/headline/subhead in white, then the CTA + search.
+  The image and overlay are `absolute inset-0` on the *section*, while the
+  text/CTA content sits in normal flow with a `min-h-[420px] md:min-h-[480px]`
+  floor — not inside a fixed `aspect-[...]` box. This matters: an
+  aspect-ratio box clips anything taller than the ratio allows, and once
+  this hero grew to include a bottle image, headline, subhead, CTA *and*
+  search stacked vertically, a fixed-aspect box silently clipped the CTA
+  and search out of view entirely at the `sm`/`md` breakpoints — real bug,
+  not hypothetical. Keep the CTA + search column `flex-col` at every
+  breakpoint (no `sm:`/`md:`/`lg:flex-row`) for the same reason it was
+  fixed before: a button and search field side by side run out of room and
+  clip long labels (French/Russian) before any breakpoint's column is wide
+  enough to hold both; full-width stacked always fits.
+- **Product of the Day** (`home.html`, right after the conversion hero,
+  before the filter chips — `mp.views.home` picks it) — a single spotlighted
+  good in an oversized card (`rounded-2xl`, photo full-bleed on one side,
+  details on the other, same responsive split as the hero: stacked on
+  mobile, side-by-side from `md:`). It exists to sell one bottle hard
+  without ever reading as a banner ad, so every "urgency" cue on it has to
+  be true, not decorative:
+  - **The pick itself rotates for real.** `mp.views.home` selects it via
+    `date.today().toordinal() % len(eligible)` over in-stock, verified-seller
+    goods — a deterministic daily rotation, not a random reroll per
+    request. That's what makes the eyebrow copy ("Today's Selection" /
+    "Featured today only — a new selection rotates in tomorrow.") honest
+    instead of a fake-urgency trope: it really is a different bottle
+    tomorrow, on a schedule, with no JS countdown timer required or wanted.
+  - **Scarcity is only shown when it's real.** The "Only N bottles
+    remaining" line renders solely when `pick.available <= 20` — never
+    invented for a well-stocked bottle. Uses `amber-700` (semantic
+    warning, see "Usage rules"), not red, not gold: a quiet fact, not an
+    alarm.
+  - **Discounts are real `Discount` rows, not fabricated.** If the picked
+    good has a currently-active `Discount` (`starts_at`/`ends_at` window),
+    the view computes a real `pick_price` and the template shows a
+    strikethrough original beside the gold discounted price. No active
+    discount → just the plain gold price, same as everywhere else in the
+    app. Don't add a badge/banner implying a deal exists when
+    `pick_discount` is `None`.
+  - **Trust reuses existing proof, it doesn't invent new copy.** The
+    verified-producer checkmark and "Est. {year}" line are the exact
+    partial from `company_md.html`, not new marketing language — the
+    credibility signal is "we already vouch for this producer everywhere,"
+    not a one-off claim written just for this slot.
+  - If there are no in-stock verified goods at all, the section doesn't
+    render (`{% if pick %}`) — same "don't fabricate content" rule as the
+    rest of the homepage.
 - **Product/producer card** (`good_md.html`, `company_md.html`) — the one
   card shape used everywhere a wine or producer appears (home, lists,
   producer pages): `rounded-xl border border-stone-200`, photo on top,
@@ -173,6 +239,14 @@ reinventing it:
 - **Pill/tag** (`bg-stone-100 rounded-full px-3 py-1` for filled, `border
   border-stone-300` for outline) — grape varieties, certifications. Filled
   vs. outline is the only distinction; don't add more tag styles.
+- **Filter chip** (`home.html`'s category row) — a different job from
+  Pill/tag above: these are clickable navigation into `good_list`, not
+  descriptive metadata, so they get their own filled state:
+  `bg-green-900 text-white rounded-full px-4 py-1.5` for the active/"All"
+  entry, `border border-stone-300 text-stone-700 rounded-full px-4 py-1.5`
+  for the rest — green because it's a primary action (see "Green is the
+  workhorse accent" below), not because Pill/tag's filled style extends
+  here.
 - **Label/value grid** — the pattern for both storytelling stats
   (region/founded/production on `company_detail.html`) and plain record
   data (`order_detail.html`, `user_detail.html`, etc.): a

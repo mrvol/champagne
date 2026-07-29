@@ -1,0 +1,231 @@
+{% load i18n humanize %}
+{% blocktrans with pk=order.pk asvar order_subject %}Order #{{ pk }}{% endblocktrans %}
+{% blocktrans with pk=order.pk asvar order_issue_subject %}Order #{{ pk }} — issue{% endblocktrans %}
+<li id="order-{{ order.pk }}" class="bg-white rounded-2xl border border-stone-200 overflow-hidden transition duration-200 ease-out hover:border-stone-300 hover:shadow-md">
+    <div class="p-4 md:p-6">
+        <div class="flex items-start justify-between gap-3">
+            <div>
+                <p class="font-serif text-lg font-semibold text-green-900">{% blocktrans with pk=order.pk %}Order #{{ pk }}{% endblocktrans %}</p>
+                <p class="text-xs text-stone-500 mt-0.5">{% blocktrans with date=order.created|date:"DATE_FORMAT" %}Placed {{ date }}{% endblocktrans %}</p>
+            </div>
+            <span class="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide px-2.5 py-1 rounded-full
+                {% if order.status == 'delivered' %}bg-green-900/10 text-green-900
+                {% elif order.status == 'cancelled' %}bg-stone-200 text-stone-600
+                {% elif order.status == 'refunded' %}bg-amber-50 text-amber-700
+                {% else %}bg-stone-100 text-stone-700{% endif %}">
+                <span class="w-3.5 h-3.5 shrink-0">{% include 'order_icon.html' with icon=order.status_icon %}</span>
+                {{ order.get_status_display }}
+            </span>
+        </div>
+
+        <div class="flex items-center gap-3 mt-4">
+            <div class="flex -space-x-2.5 shrink-0">
+                {% for item in order.items.all|slice:":4" %}
+                <div class="w-10 h-10 rounded-full border-2 border-white bg-stone-100 overflow-hidden shrink-0">
+                    {% if item.good.photo %}
+                    <img src="{{ item.good.photo.image.url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="40" height="40">
+                    {% else %}
+                    <div class="w-full h-full bg-gradient-to-br from-green-900 to-stone-900"></div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                {% if order.items.count > 4 %}
+                <div class="w-10 h-10 rounded-full border-2 border-white bg-stone-100 flex items-center justify-center text-xs font-medium text-stone-600 shrink-0">+{{ order.items.count|add:"-4" }}</div>
+                {% endif %}
+            </div>
+            <p class="text-sm text-stone-600">{% blocktrans count counter=order.item_count %}{{ counter }} bottle{% plural %}{{ counter }} bottles{% endblocktrans %}</p>
+            <div class="ml-auto text-right">
+                <p class="text-xs text-stone-500">{% trans "Total" %}</p>
+                <p class="text-gold font-medium">{{ order.total_amount }} {{ order.get_currency_display }}</p>
+            </div>
+        </div>
+
+        {% if order.estimated_delivery and order.status != 'delivered' and order.status != 'cancelled' and order.status != 'refunded' %}
+        <p class="text-xs text-stone-500 mt-3">{% blocktrans with date=order.estimated_delivery|date:"DATE_FORMAT" %}Estimated delivery {{ date }}{% endblocktrans %}</p>
+        {% endif %}
+
+        {% if order.pipeline_step != None %}
+        <ol aria-label="{% trans 'Order progress' %}" class="flex overflow-x-auto mt-5 -mx-1 px-1 pb-1">
+            {% for code, label, icon in pipeline %}
+            <li class="flex items-center {% if not forloop.last %}flex-1 min-w-[64px]{% endif %}">
+                <div class="flex flex-col items-center gap-1.5 w-16 shrink-0">
+                    <div
+                        class="w-8 h-8 rounded-full flex items-center justify-center shrink-0
+                            {% if forloop.counter0 < order.pipeline_step %}bg-green-900 text-white
+                            {% elif forloop.counter0 == order.pipeline_step %}bg-green-900 text-white ring-4 ring-green-900/15
+                            {% else %}bg-stone-100 text-stone-400{% endif %}"
+                        {% if forloop.counter0 == order.pipeline_step %}aria-current="step"{% endif %}
+                    >
+                        <span class="w-4 h-4">{% include 'order_icon.html' with icon=icon %}</span>
+                    </div>
+                    <span class="text-[10px] leading-tight text-center {% if forloop.counter0 == order.pipeline_step %}text-green-900 font-semibold{% else %}text-stone-400{% endif %}">{{ label }}</span>
+                </div>
+                {% if not forloop.last %}
+                <div class="flex-1 h-px {% if forloop.counter0 < order.pipeline_step %}bg-green-900{% else %}bg-stone-200{% endif %} -mt-4"></div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ol>
+        {% elif order.notes %}
+        <p class="text-sm text-stone-500 mt-4 border-t border-stone-200 pt-4">{{ order.notes }}</p>
+        {% endif %}
+    </div>
+
+    <div class="flex flex-wrap items-center gap-x-5 gap-y-2 px-4 md:px-6 pb-4 text-sm">
+        {% if order.status != 'placed' and order.status != 'cancelled' %}
+        <a href="{% url 'order_invoice' order.pk %}" class="text-green-800 hover:text-green-900">{% trans "Download invoice" %}</a>
+        {% endif %}
+        <form method="post" action="{% url 'order_reorder' order.pk %}" class="inline">
+            {% csrf_token %}
+            <button type="submit" class="text-green-800 hover:text-green-900">{% trans "Reorder" %}</button>
+        </form>
+        <a href="mailto:support@champagne.example?subject={{ order_subject|urlencode }}" class="text-stone-500 hover:text-stone-700">{% trans "Contact support" %}</a>
+        {% if order.is_in_transit %}
+        <a href="mailto:support@champagne.example?subject={{ order_issue_subject|urlencode }}" class="text-stone-500 hover:text-stone-700">{% trans "Report an issue" %}</a>
+        {% endif %}
+    </div>
+
+    <details class="group border-t border-stone-200" {% if expanded %}open{% endif %}>
+        <summary class="list-none cursor-pointer flex items-center justify-center gap-1.5 px-4 md:px-6 py-3 text-sm font-medium text-green-900 bg-stone-50 hover:bg-stone-100 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-green-400 focus-visible:ring-inset">
+            <span>{% if order.tracking %}{% trans "Track shipment" %}{% else %}{% trans "View order details" %}{% endif %}</span>
+            <svg class="w-4 h-4 transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 7.5 10 12.5 15 7.5"/></svg>
+        </summary>
+
+        <div class="p-4 md:p-6 bg-stone-50 space-y-6">
+            {% if order.tracking %}
+            <section aria-labelledby="tracking-heading-{{ order.pk }}">
+                <h3 id="tracking-heading-{{ order.pk }}" class="text-xs uppercase tracking-wide text-stone-500 mb-3">{% trans "Shipment tracking" %}</h3>
+                <div class="bg-white rounded-xl border border-stone-200 p-4">
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4 pb-4 border-b border-stone-200">
+                        <div>
+                            <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Carrier" %}</p>
+                            <p class="font-medium">{{ order.carrier|default:"—" }}</p>
+                        </div>
+                        <div>
+                            <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Tracking number" %}</p>
+                            <p class="font-medium font-mono text-xs">{{ order.tracking_number|default:"—" }}</p>
+                        </div>
+                        <div class="col-span-2 md:col-span-2">
+                            <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">
+                                {% if order.status == 'delivered' %}{% trans "Delivered" %}{% else %}{% trans "Next milestone" %}{% endif %}
+                            </p>
+                            <p class="font-medium">
+                                {% if order.status == 'delivered' %}{{ order.changed|date:"DATE_FORMAT" }}, {{ order.changed|date:"H:i" }}
+                                {% elif order.status == 'out_for_delivery' %}{% blocktrans with date=order.estimated_delivery|date:"DATE_FORMAT" %}Delivery expected {{ date }}, 14:00–18:00{% endblocktrans %}
+                                {% else %}{% trans "Out for delivery, next update soon" %}{% endif %}
+                            </p>
+                        </div>
+                    </div>
+                    <ol class="space-y-4">
+                        {% for event in order.tracking %}
+                        <li class="flex gap-3">
+                            <div class="flex flex-col items-center">
+                                <span class="w-2.5 h-2.5 rounded-full {% if event.done %}bg-green-900{% else %}bg-stone-300{% endif %} mt-1"></span>
+                                {% if not forloop.last %}<span class="w-px flex-1 {% if event.done %}bg-green-900/40{% else %}bg-stone-200{% endif %} mt-1"></span>{% endif %}
+                            </div>
+                            <div class="pb-1">
+                                <p class="text-sm {% if event.done %}text-stone-900 font-medium{% else %}text-stone-400{% endif %}">{{ event.label }}</p>
+                                <p class="text-xs text-stone-400">{% if event.done %}{{ event.at|date:"H:i" }} · {{ event.at|date:"DATE_FORMAT" }}{% else %}{% trans "Pending" %}{% endif %}</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ol>
+                </div>
+            </section>
+            {% endif %}
+
+            <section aria-labelledby="products-heading-{{ order.pk }}">
+                <h3 id="products-heading-{{ order.pk }}" class="text-xs uppercase tracking-wide text-stone-500 mb-3">{% trans "Products" %}</h3>
+                <ul class="space-y-2">
+                    {% for item in order.items.all %}
+                    <li class="flex items-center gap-3 bg-white rounded-xl border border-stone-200 p-3">
+                        <div class="w-14 h-14 rounded-md bg-stone-100 overflow-hidden shrink-0">
+                            {% if item.good.photo %}
+                            <img src="{{ item.good.photo.image.url }}" alt="" class="w-full h-full object-cover" loading="lazy" width="56" height="56">
+                            {% else %}
+                            <div class="w-full h-full bg-gradient-to-br from-green-900 to-stone-900"></div>
+                            {% endif %}
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <a href="{% url 'good_detail' item.good.pk %}" class="font-medium text-stone-900 hover:text-green-800 block leading-snug">{{ item.good.name }}</a>
+                            <p class="text-xs text-stone-500 mt-0.5">
+                                {% if item.good.vintage_year %}{{ item.good.vintage_year }} · {% endif %}
+                                {% if item.good.volume_ml %}{{ item.good.volume_ml }} ml · {% endif %}
+                                {% blocktrans with qty=item.quantity %}Qty {{ qty }}{% endblocktrans %}
+                            </p>
+                        </div>
+                        <p class="text-sm font-medium text-stone-700 shrink-0">{{ item.line_total }} {{ order.get_currency_display }}</p>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <div class="flex justify-between items-center mt-3 px-1">
+                    <span class="text-sm text-stone-500">{% trans "Total" %}</span>
+                    <span class="text-base font-medium text-gold">{{ order.total_amount }} {{ order.get_currency_display }}</span>
+                </div>
+            </section>
+
+            <section aria-labelledby="delivery-heading-{{ order.pk }}">
+                <h3 id="delivery-heading-{{ order.pk }}" class="text-xs uppercase tracking-wide text-stone-500 mb-3">{% trans "Delivery" %}</h3>
+                <div class="bg-white rounded-xl border border-stone-200 p-4 grid grid-cols-2 gap-4 text-sm">
+                    <div class="col-span-2">
+                        <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Delivery address" %}</p>
+                        <p class="font-medium">{{ order.delivery_address }}</p>
+                    </div>
+                    {% if order.estimated_delivery %}
+                    <div>
+                        <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Estimated delivery" %}</p>
+                        <p class="font-medium">{{ order.estimated_delivery|date:"DATE_FORMAT" }}</p>
+                    </div>
+                    {% endif %}
+                    <div>
+                        <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Signature required" %}</p>
+                        <p class="font-medium">{% if order.signature_required %}{% trans "Yes" %}{% else %}{% trans "No" %}{% endif %}</p>
+                    </div>
+                    {% if order.delivery_instructions %}
+                    <div class="col-span-2">
+                        <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Delivery instructions" %}</p>
+                        <p class="font-medium">{{ order.delivery_instructions }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+            </section>
+
+            {% with payment=order.payments.last %}
+            {% if payment %}
+            <section aria-labelledby="payment-heading-{{ order.pk }}">
+                <h3 id="payment-heading-{{ order.pk }}" class="text-xs uppercase tracking-wide text-stone-500 mb-3">{% trans "Payment" %}</h3>
+                <div class="bg-white rounded-xl border border-stone-200 p-4 grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Method" %}</p>
+                        <p class="font-medium capitalize">{{ payment.provider|default:"—" }}</p>
+                    </div>
+                    <div>
+                        <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Status" %}</p>
+                        <p class="font-medium capitalize">{{ payment.status|default:"—" }}</p>
+                    </div>
+                    <div class="col-span-2">
+                        <p class="text-[11px] uppercase tracking-wide text-stone-500 mb-1">{% trans "Amount charged" %}</p>
+                        <p class="font-medium">{{ payment.amount }} {{ order.get_currency_display }}</p>
+                    </div>
+                </div>
+            </section>
+            {% endif %}
+            {% endwith %}
+
+            {% if order.notes %}
+            <section aria-labelledby="notes-heading-{{ order.pk }}">
+                <h3 id="notes-heading-{{ order.pk }}" class="text-xs uppercase tracking-wide text-stone-500 mb-3">{% trans "Order notes" %}</h3>
+                <p class="text-sm text-stone-700 bg-white rounded-xl border border-stone-200 p-4">{{ order.notes }}</p>
+            </section>
+            {% endif %}
+
+            <section aria-labelledby="support-heading-{{ order.pk }}">
+                <h3 id="support-heading-{{ order.pk }}" class="text-xs uppercase tracking-wide text-stone-500 mb-3">{% trans "Need help?" %}</h3>
+                <div class="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                    <a href="mailto:support@champagne.example?subject={{ order_subject|urlencode }}" class="text-green-800 hover:text-green-900">{% trans "Contact support" %}</a>
+                    <a href="mailto:support@champagne.example?subject={{ order_issue_subject|urlencode }}" class="text-green-800 hover:text-green-900">{% trans "Report an issue" %}</a>
+                </div>
+            </section>
+        </div>
+    </details>
+</li>

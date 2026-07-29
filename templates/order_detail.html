@@ -1,28 +1,12 @@
 {% extends "base.html" %}
 {% load i18n %}
+{% block page_width %}max-w-md md:max-w-2xl lg:max-w-3xl{% endblock %}
+{% block nav_width %}max-w-md md:max-w-2xl lg:max-w-3xl{% endblock %}
 {% block content %}
-<h2 class="font-serif text-2xl font-semibold text-green-900 mb-6">{% blocktrans with pk=order.pk %}Order #{{ pk }}{% endblocktrans %}</h2>
-<div class="grid grid-cols-2 gap-x-6 gap-y-5 bg-white rounded-xl border border-stone-200 p-6 text-sm">
-    <div>
-        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Buyer" %}</p>
-        <p class="font-medium">{{ order.buyer }}</p>
-    </div>
-    <div>
-        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Seller" %}</p>
-        <p class="font-medium">{{ order.seller }}</p>
-    </div>
-    <div class="col-span-2">
-        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Delivery address" %}</p>
-        <p class="font-medium">{{ order.delivery_address }}</p>
-    </div>
-    <div>
-        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Status" %}</p>
-        <p class="font-medium">{{ order.status|default:"—" }}</p>
-    </div>
-    <div>
-        <p class="text-xs uppercase tracking-wide text-stone-500 mb-1">{% trans "Total" %}</p>
-        <p class="font-medium text-gold">{{ order.total_amount }} {{ order.get_currency_display }}</p>
-    </div>
-</div>
-<a href="{% url 'order_list' %}" class="inline-block mt-6 text-sm text-stone-500">&larr; {% trans "Back" %}</a>
+<a href="{% url 'order_list' %}" class="inline-block mb-4 text-sm text-stone-500 hover:text-stone-700">&larr; {% trans "My Orders" %}</a>
+<ul class="space-y-4">
+    {% with expanded=True %}
+    {% include 'order_card.html' %}
+    {% endwith %}
+</ul>
 {% endblock %}

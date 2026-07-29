@@ -74,3 +74,20 @@ class Invitation(BaseModel):
         self.step = self.STEP_DONE
         self.completed_at = timezone.now()
         self.save()
+
+    @classmethod
+    def as_json(cls, qs):
+        return [
+            {
+                'pk': i.pk,
+                'contact_email': i.contact_email,
+                'contact_name': i.contact_name,
+                'status': i.status,
+                'status_display': i.get_status_display(),
+                'step_display': i.get_step_display(),
+                'company': i.company.name if i.company_id else None,
+                'expires_at': i.expires_at.date().isoformat() if i.expires_at else None,
+                'created': i.created.date().isoformat(),
+            }
+            for i in qs
+        ]

@@ -1,9 +1,15 @@
+from datetime import timedelta
+
 from django import forms
+from django.utils import timezone
 
 from company.models import Company
 from goods.models import Good
+from invite.models import Invitation
+from person.models import User
 
 FIELD_CSS = 'w-full border border-stone-300 rounded-md p-2 text-sm'
+DEFAULT_INVITE_TTL_DAYS = 14
 
 
 class CommaSeparatedListField(forms.CharField):
@@ -35,13 +41,14 @@ class CompanyOnboardingForm(forms.ModelForm):
     facebook_url = forms.URLField(required=False, label='Facebook')
     x_url = forms.URLField(required=False, label='X / Twitter')
 
+    ESSENTIAL_FIELDS = ['name', 'country', 'region']
     COMPANY_INFO_FIELDS = [
-        'name', 'legal_name', 'vat_number', 'registration_number', 'tax_id',
+        'legal_name', 'vat_number', 'registration_number', 'tax_id',
         'founded_date', 'founders', 'ownership_info', 'description', 'story',
         'history', 'annual_production', 'certifications', 'awards', 'languages_spoken',
     ]
     CONTACT_FIELDS = ['contact_name', 'contact_position', 'contact_email', 'contact_phone', 'website', 'support_contact']
-    ADDRESS_FIELDS = ['registered_address', 'operational_address', 'country', 'region', 'city', 'postal_code', 'latitude', 'longitude']
+    ADDRESS_FIELDS = ['registered_address', 'operational_address', 'city', 'postal_code', 'latitude', 'longitude']
     BANKING_FIELDS = ['bank_name', 'bank_account_holder', 'iban', 'swift_bic', 'bank_account_number', 'payment_terms', 'currency']
     PROFILE_FIELDS = ['logo_url', 'tagline', 'instagram_url', 'facebook_url', 'x_url', 'pr_website', 'press_kit_url', 'sustainability_info']
 
@@ -83,6 +90,9 @@ class CompanyOnboardingForm(forms.ModelForm):
             self.fields['x_url'].initial = social.get('x', '')
         style_widgets(self)
 
+    def essentials(self):
+        return [self[name] for name in self.ESSENTIAL_FIELDS]
+
     def company_info(self):
         return [self[name] for name in self.COMPANY_INFO_FIELDS]
 
@@ -108,6 +118,30 @@ class CompanyOnboardingForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+
+class InvitationCreateForm(forms.ModelForm):
+    class Meta:
+        model = Invitation
+        fields = ['contact_email', 'contact_name', 'expires_at']
+        widgets = {'expires_at': forms.DateInput(attrs={'type': 'date'})}
+
+    def clean_contact_email(self):
+        email = self.cleaned_data['contact_email'].strip().lower()
+        if User.objects.filter(username=email).exists():
+            raise forms.ValidationError('An account already exists for this email.')
+        if Invitation.objects.filter(contact_email__iexact=email,
+                                      status__in=[Invitation.STATUS_PENDING, Invitation.STATUS_IN_PROGRESS]).exists():
+            raise forms.ValidationError('There is already an active invitation for this email.')
+        return email
+
+    def save(self, commit=True):
+        invitation = super().save(commit=False)
+        if not invitation.expires_at:
+            invitation.expires_at = timezone.now() + timedelta(days=DEFAULT_INVITE_TTL_DAYS)
+        if commit:
+            invitation.save()
+        return invitation
 
 
 class GoodOnboardingForm(forms.ModelForm):

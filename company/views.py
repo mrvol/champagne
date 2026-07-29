@@ -1,6 +1,8 @@
+from django.forms import modelform_factory
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 
+from company.forms import COMPANY_FIELDS
 from company.models import Company
 
 
@@ -25,6 +27,20 @@ def company_goods(request, pk):
     company = get_object_or_404(Company, pk=pk, verified_seller=True)
     goods = company.goods.all()
     return render(request, 'company_goods.html', {'company': company, 'goods': goods})
+
+
+def company_detail_api(request, pk):
+    if request.method == 'POST' and len(request.POST):
+        instance = get_object_or_404(Company, pk=pk)
+        # only bind fields the caller actually sent, so the storefront's quick-edit
+        # widget can't be blocked by unrelated required fields it never touches
+        fields = [f for f in COMPANY_FIELDS if f in request.POST]
+        form = modelform_factory(Company, fields=fields)(data=request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+
+    company = get_object_or_404(Company, pk=pk)
+    return JsonResponse(Company.as_json([company])[0])
 
 
 def company_list_api(request):

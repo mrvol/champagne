@@ -34,6 +34,21 @@ class Good(BaseModel):
         (51, 'Doux'),
     )
 
+    TYPE_CHOICES = [
+        ('still', 'Still'),
+        ('sparkling', 'Sparkling'),
+        ('fortified', 'Fortified'),
+        ('dessert', 'Dessert'),
+        ('rose', 'Rosé'),
+    ]
+
+    STOCK_CHOICES = [
+        ('in_stock', 'In stock'),
+        ('low_stock', 'Low stock'),
+        ('out_of_stock', 'Out of stock'),
+        ('pre_order', 'Pre-order'),
+    ]
+
     photo = models.ForeignKey('GoodPhoto', on_delete=models.SET_NULL, null=True, blank=True, related_name='+')
     description = models.TextField(blank=True, null=True)
     bullets = models.JSONField(default=list, blank=True)  # short marketing bullet points
@@ -62,39 +77,25 @@ class Good(BaseModel):
     # row_vineyard
     # positionInRow
 
-    # --- Onboarding catalogue fields ---
-    TYPE_STILL = 'still'
-    TYPE_SPARKLING = 'sparkling'
-    TYPE_FORTIFIED = 'fortified'
-    TYPE_DESSERT = 'dessert'
-    TYPE_ROSE = 'rose'
-    TYPE_CHOICES = [
-        (TYPE_STILL, 'Still'),
-        (TYPE_SPARKLING, 'Sparkling'),
-        (TYPE_FORTIFIED, 'Fortified'),
-        (TYPE_DESSERT, 'Dessert'),
-        (TYPE_ROSE, 'Rosé'),
-    ]
-    STOCK_IN_STOCK = 'in_stock'
-    STOCK_LOW_STOCK = 'low_stock'
-    STOCK_OUT_OF_STOCK = 'out_of_stock'
-    STOCK_PRE_ORDER = 'pre_order'
-    STOCK_CHOICES = [
-        (STOCK_IN_STOCK, 'In stock'),
-        (STOCK_LOW_STOCK, 'Low stock'),
-        (STOCK_OUT_OF_STOCK, 'Out of stock'),
-        (STOCK_PRE_ORDER, 'Pre-order'),
-    ]
-
     wine_type = models.CharField(max_length=16, choices=TYPE_CHOICES, blank=True, null=True)
     food_pairing = models.TextField(blank=True, null=True)
     awards = models.JSONField(default=list, blank=True)  # e.g. ["Decanter Gold 2023"]
     available_quantity = models.PositiveIntegerField(blank=True, null=True)  # simple onboarding-level stock count
     min_order_quantity = models.PositiveIntegerField(blank=True, null=True)
-    stock_status = models.CharField(max_length=16, choices=STOCK_CHOICES, default=STOCK_IN_STOCK)
+    stock_status = models.CharField(max_length=16, choices=STOCK_CHOICES, default='in_stock')
 
-    def __str__(self):
-        return self.name or f'Good #{self.pk}'
+    def get_quantity(self):
+        return self.stock.aggregate(total=Sum('quantity'))['total'] or 0
+
+    def get_quantity_str(self):
+        if self.stock_status == 'pre_order':
+            return self.get_stock_status_display()
+        q = self.get_quantity()
+        if not q:
+            return 'Out of stock'
+        if q <= 10:
+            return 'Low stock'
+        return 'In stock'
 
     @classmethod
     def as_json(cls, qs):
@@ -168,6 +169,9 @@ class Good(BaseModel):
             self.photo_id = photo.pk
             self.save()
         return photo
+
+    def __str__(self):
+        return self.name or f'Good #{self.pk}'
 
 
 class GoodPhoto(BaseModel):

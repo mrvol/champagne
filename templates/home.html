@@ -3,19 +3,112 @@
 {% block page_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block nav_width %}max-w-md md:max-w-2xl lg:max-w-4xl xl:max-w-6xl{% endblock %}
 {% block content %}
-<section class="relative -mx-4 rounded-b-2xl md:rounded-2xl overflow-hidden mb-12 md:mb-20">
-    <div class="aspect-[4/5] sm:aspect-[16/9] md:aspect-[21/9]">
-        <img src="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=1800&h=1000&fit=crop&q=80" alt="" class="w-full h-full object-cover">
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/25 to-black/10"></div>
-    <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-        <h1 class="fade-up font-serif italic text-4xl md:text-6xl text-white">Champagne</h1>
-        <p class="fade-up text-white/90 mt-3 max-w-md md:text-lg" style="animation-delay:.15s">{% trans "Exceptional champagne, direct from the estates that craft it." %}</p>
-        <a href="{% url 'good_list' %}" class="fade-up inline-block mt-6 bg-white text-green-900 rounded-md px-7 py-2.5 text-sm font-medium transition hover:bg-white/90" style="animation-delay:.3s">{% trans "Shop all champagnes" %}</a>
+<section class="relative -mx-4 rounded-b-2xl md:rounded-2xl overflow-hidden mb-7 md:mb-12">
+    <img src="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?w=1800&h=1000&fit=crop&q=80" alt="" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/15"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6 py-12 md:py-16 min-h-[420px] md:min-h-[480px]">
+        <img
+            src="/media/ChatGPT_Image_Jul_25_2026_01_11_17_PM.png"
+            width="1024" height="1536"
+            alt="{% trans "Lumière Champagne Brut — the house's signature bottle" %}"
+            class="fade-up h-24 sm:h-32 md:h-40 w-auto object-contain drop-shadow-2xl mb-4"
+            fetchpriority="high"
+        >
+        <p class="fade-up text-[11px] md:text-xs tracking-[0.22em] uppercase text-white/80 font-semibold" style="animation-delay:.05s">{% trans "Verified estates · Direct from Champagne" %}</p>
+        <h1 class="fade-up font-serif italic text-3xl sm:text-4xl md:text-5xl leading-[1.15] text-white mt-2" style="animation-delay:.1s">{% trans "Exceptional champagne, expertly sourced." %}</h1>
+        <p class="fade-up text-white/90 mt-3 max-w-md md:text-lg" style="animation-delay:.15s">{% trans "Real vintages from the estates that craft them — no middlemen, no guesswork." %}</p>
+        <div class="fade-up mt-6 flex flex-col gap-2.5 w-full max-w-sm" style="animation-delay:.2s">
+            <a href="{% url 'good_list' %}" class="bg-white text-green-900 rounded-md px-6 py-2.5 text-sm font-medium text-center transition hover:bg-white/90">{% trans "Shop champagnes" %}</a>
+            <form action="{% url 'good_list' %}" method="get" class="flex">
+                <label for="hero-search" class="sr-only">{% trans "Search by name, region, grape…" %}</label>
+                <input id="hero-search" type="search" name="q" placeholder="{% trans 'Search wines…' %}" class="w-full border-0 rounded-l-md px-3.5 py-2.5 text-sm bg-white/95 focus:outline-none focus:bg-white">
+                <button type="submit" aria-label="{% trans 'Search' %}" class="rounded-r-md px-3 bg-white/95 text-stone-500 transition hover:text-green-900 hover:bg-white">
+                    <svg class="w-4 h-4" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="9" r="6.5"/><path d="M17 17l-3.5-3.5" stroke-linecap="round"/></svg>
+                </button>
+            </form>
+        </div>
     </div>
 </section>
 
-<section class="mb-12 md:mb-20">
+{% if pick %}
+<section class="mb-8 md:mb-12">
+    <p class="text-[11px] md:text-xs tracking-[0.22em] uppercase text-gold font-semibold mb-3">{% trans "Today's Selection" %}</p>
+    <div class="bg-white rounded-2xl border border-stone-200 overflow-hidden md:grid md:grid-cols-2">
+        <a href="{% url 'good_detail' pick.pk %}" class="group block aspect-square md:aspect-auto bg-stone-100 overflow-hidden">
+            {% if pick.photo %}
+            <img src="{{ pick.photo.image.url }}" alt="{{ pick.name }}" class="w-full h-full object-cover transition duration-700 ease-out group-hover:scale-105">
+            {% else %}
+            <div class="w-full h-full bg-gradient-to-br from-green-900 to-stone-900"></div>
+            {% endif %}
+        </a>
+        <div class="p-5 md:p-8 flex flex-col">
+            <div class="flex flex-wrap items-center gap-1.5 text-sm text-stone-500">
+                {% if pick.company %}
+                <a href="{% url 'company_detail' pick.company.pk %}" class="hover:text-green-800">{{ pick.company.legal_name }}</a>
+                {% endif %}
+                {% if pick.company.verified_seller %}
+                <svg class="w-3.5 h-3.5 text-green-900 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16Zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5Z" clip-rule="evenodd" />
+                </svg>
+                <span class="sr-only">{% trans "Verified producer" %}</span>
+                {% endif %}
+                {% if pick.company.founded_date %}
+                <span>· {% blocktrans with year=pick.company.founded_date.year %}Est. {{ year }}{% endblocktrans %}</span>
+                {% endif %}
+            </div>
+
+            <a href="{% url 'good_detail' pick.pk %}" class="mt-1">
+                <h2 class="font-serif text-2xl md:text-3xl font-semibold text-green-900">{{ pick.name }}</h2>
+            </a>
+            <p class="text-stone-500 mt-1">
+                {{ pick.vintage_year|default:"—" }}{% if pick.region %} · {{ pick.region }}{% endif %}{% if pick.grape_variety %} · {{ pick.grape_variety }}{% endif %}
+            </p>
+
+            {% if pick.description %}
+            <p class="text-stone-700 leading-relaxed mt-3">{{ pick.description|truncatewords:28 }}</p>
+            {% endif %}
+
+            <div class="mt-4 flex items-baseline gap-2 flex-wrap">
+                {% if pick_discount %}
+                <span class="text-stone-400 line-through text-sm">{{ pick.price }} {{ pick.get_currency_display }}</span>
+                <span class="text-2xl text-gold font-medium">{{ pick_price|floatformat:2 }} {{ pick.get_currency_display }}</span>
+                <span class="text-xs text-stone-500 uppercase tracking-wide">{% trans "today only" %}</span>
+                {% else %}
+                <span class="text-2xl text-gold font-medium">{{ pick.price|default:"—" }} {{ pick.get_currency_display }}</span>
+                {% endif %}
+            </div>
+
+            {% if pick.available <= 20 %}
+            <p class="text-sm text-amber-700 mt-2">
+                {% blocktrans count counter=pick.available %}Only {{ counter }} bottle remaining.{% plural %}Only {{ counter }} bottles remaining.{% endblocktrans %}
+            </p>
+            {% endif %}
+
+            <form method="post" action="{% url 'add_to_cart' pick.pk %}" class="mt-5 flex gap-2">
+                {% csrf_token %}
+                <input type="number" name="quantity" value="1" min="1" max="{{ pick.available }}" class="w-20 border border-stone-300 rounded-md p-2 text-sm">
+                <button type="submit" class="flex-1 bg-green-900 text-white rounded-md py-2.5 text-sm font-medium transition hover:bg-green-800">{% trans "Add to cart" %}</button>
+            </form>
+            <a href="{% url 'good_detail' pick.pk %}" class="text-sm text-green-800 mt-3">{% trans "View full details" %}</a>
+
+            <p class="text-xs text-stone-400 mt-auto pt-5">{% trans "Featured today only — a new selection rotates in tomorrow." %}</p>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<section class="mb-8 md:mb-12">
+    <div class="flex items-center gap-2 overflow-x-auto pb-1 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
+        <a href="{% url 'good_list' %}" class="shrink-0 text-sm font-medium bg-green-900 text-white rounded-full px-4 py-1.5 transition hover:bg-green-800">{% trans "All wines" %}</a>
+        <a href="{% url 'good_list' %}?q={{ "Rosé"|urlencode }}" class="shrink-0 text-sm text-stone-700 border border-stone-300 rounded-full px-4 py-1.5 transition hover:border-stone-400 hover:text-green-900">{% trans "Rosé" %}</a>
+        <a href="{% url 'good_list' %}?q={{ "Blanc de Blancs"|urlencode }}" class="shrink-0 text-sm text-stone-700 border border-stone-300 rounded-full px-4 py-1.5 transition hover:border-stone-400 hover:text-green-900">{% trans "Blanc de Blancs" %}</a>
+        <a href="{% url 'good_list' %}?q={{ "Prestige"|urlencode }}" class="shrink-0 text-sm text-stone-700 border border-stone-300 rounded-full px-4 py-1.5 transition hover:border-stone-400 hover:text-green-900">{% trans "Prestige Cuvée" %}</a>
+        <a href="{% url 'good_list' %}?q={{ "Grand Cru"|urlencode }}" class="shrink-0 text-sm text-stone-700 border border-stone-300 rounded-full px-4 py-1.5 transition hover:border-stone-400 hover:text-green-900">{% trans "Grand Cru" %}</a>
+        <a href="{% url 'good_list' %}?q={{ "Magnum"|urlencode }}" class="shrink-0 text-sm text-stone-700 border border-stone-300 rounded-full px-4 py-1.5 transition hover:border-stone-400 hover:text-green-900">{% trans "Magnum" %}</a>
+    </div>
+</section>
+
+<section class="mb-10 md:mb-14">
     <div class="flex items-baseline justify-between mb-5 gap-3">
         <h2 class="font-serif text-2xl md:text-3xl font-semibold text-green-900">{% trans "Featured Wines" %}</h2>
         <a href="{% url 'good_list' %}" class="text-sm text-green-800 shrink-0">{% trans "Shop all champagnes" %}</a>
@@ -30,10 +123,10 @@
 </section>
 
 {% if producers %}
-<section class="mb-12 md:mb-20">
-    <div class="max-w-xl mx-auto text-center mb-8">
+<section class="mb-8 md:mb-12">
+    <div class="max-w-xl mx-auto text-center mb-6">
         <h2 class="font-serif italic text-2xl md:text-3xl text-green-900">{% trans "A Collection of Prestigious Estates" %}</h2>
-        <p class="text-stone-600 mt-2">{% trans "Every wine on Champagne comes from a producer we've verified in person — their heritage, craft, and story are part of what you're buying." %}</p>
+        <p class="text-stone-600 mt-2">{% trans "Every wine here comes from a producer we've verified in person." %}</p>
     </div>
     <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
         {% for company in producers %}
@@ -44,39 +137,5 @@
         <a href="{% url 'company_list' %}" class="inline-block text-sm text-green-800 border border-stone-300 rounded-md px-5 py-2 transition hover:border-stone-400">{% trans "Meet all our producers" %}</a>
     </div>
 </section>
-{% endif %}
-
-{% if user.is_authenticated %}
-<div class="mt-6 bg-white rounded-lg border border-stone-200 p-4">
-    <p class="text-sm font-medium mb-2">{% trans "Passkey" %}</p>
-    <button id="add-passkey" class="w-full bg-green-900 text-white rounded-md py-2 text-sm">{% trans "Add a passkey for this device" %}</button>
-    <p id="passkey-status" class="text-sm text-stone-500 mt-2"></p>
-</div>
-<script>
-document.getElementById('add-passkey').addEventListener('click', async () => {
-    const status = document.getElementById('passkey-status');
-    try {
-        const options = await (await fetch('{% url "passkey_register_options" %}')).json();
-        options.challenge = b64urlToBuffer(options.challenge);
-        options.user.id = b64urlToBuffer(options.user.id);
-        const credential = await navigator.credentials.create({ publicKey: options });
-        const payload = {
-            id: credential.id,
-            response: {
-                clientDataJSON: bufferToB64url(credential.response.clientDataJSON),
-                attestationObject: bufferToB64url(credential.response.attestationObject),
-            },
-        };
-        const res = await fetch('{% url "passkey_register_verify" %}', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json', 'X-CSRFToken': '{{ csrf_token }}'},
-            body: JSON.stringify(payload),
-        });
-        status.textContent = res.ok ? '{% trans "Passkey added." %}' : '{% trans "Could not add passkey." %}';
-    } catch (err) {
-        status.textContent = '{% trans "Passkey setup was cancelled or failed." %}';
-    }
-});
-</script>
 {% endif %}
 {% endblock %}

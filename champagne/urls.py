@@ -46,6 +46,7 @@ urlpatterns = [
     path('company/<int:pk>/', company.views.company_detail, name='company_detail'),
     path('company/<int:pk>/goods/', company.views.company_goods, name='company_goods'),
     path('api/company/list/', company.views.company_list_api, name='company_list_api'),
+    path('api/company/<int:pk>/', company.views.company_detail_api, name='company_detail_api'),
     path('staff/companies/', company.views.staff_company_list, name='staff_company_list'),
 
     # goods
@@ -60,7 +61,10 @@ urlpatterns = [
     # order
     path('order/list/', order.views.order_list, name='order_list'),
     path('order/<int:pk>/', order.views.order_detail, name='order_detail'),
+    path('order/<int:pk>/invoice/', order.views.order_invoice, name='order_invoice'),
+    path('order/<int:pk>/reorder/', order.views.order_reorder, name='order_reorder'),
     path('api/order/list/', order.views.order_list_api, name='order_list_api'),
+    path('api/order/<int:pk>/', order.views.order_detail_api, name='order_detail_api'),
     path('staff/orders/', order.views.staff_order_list, name='staff_order_list'),
 
     # payment
@@ -88,6 +92,8 @@ urlpatterns = [
     path('api/goods/search/', cart.views.api_search, name='api_search'),
 
     # invite / onboarding
+    path('staff/invites/', invite.views.staff_invite_list, name='staff_invite_list'),
+    path('api/invite/list/', invite.views.invitation_list_api, name='invite_list_api'),
     path('invite/<str:token>/', invite.views.invitation_landing, name='invite_landing'),
     path('invite/<str:token>/company/', invite.views.invitation_company, name='invite_company'),
     path('invite/<str:token>/products/', invite.views.invitation_products, name='invite_products'),

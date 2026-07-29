@@ -6,15 +6,28 @@
 {% include 'invite_steps.html' with current_step='company' %}
 <div class="text-center mb-8">
     <h2 class="font-serif italic text-3xl text-green-900">{% trans "Your Wine House" %}</h2>
-    <p class="text-stone-600 mt-2">{% trans "Tell us about your estate. Progress saves as you go, so you can return at any time." %}</p>
+    <p class="text-stone-600 mt-2">{% trans "Just the essentials to get started. Everything else is optional — add it now or later from your dashboard, at your own pace." %}</p>
 </div>
 
-<form method="post" enctype="multipart/form-data" class="space-y-8">
+<form method="post" enctype="multipart/form-data" class="space-y-6">
     {% csrf_token %}
 
     <section class="bg-white rounded-xl border border-stone-200 p-6">
-        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Company Information" %}</h3>
+        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "The basics" %}</h3>
         <div class="space-y-4">
+            {% for field in form.essentials %}
+            <div>
+                <label class="block text-sm text-stone-500 mb-1">{{ field.label }} <span class="text-stone-400">{% trans "(optional)" %}</span></label>
+                {{ field }}
+                {% for err in field.errors %}<p class="text-xs text-red-600 mt-1">{{ err }}</p>{% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <details class="bg-white rounded-xl border border-stone-200 p-6">
+        <summary class="font-serif text-xl text-green-900 cursor-pointer select-none">{% trans "More about your estate" %} <span class="text-sm font-sans text-stone-400">({% trans "optional" %})</span></summary>
+        <div class="space-y-4 mt-5">
             {% for field in form.company_info %}
             <div>
                 <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
@@ -24,11 +37,11 @@
             </div>
             {% endfor %}
         </div>
-    </section>
+    </details>
 
-    <section class="bg-white rounded-xl border border-stone-200 p-6">
-        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Business Contact" %}</h3>
-        <div class="space-y-4">
+    <details class="bg-white rounded-xl border border-stone-200 p-6">
+        <summary class="font-serif text-xl text-green-900 cursor-pointer select-none">{% trans "Business contact" %} <span class="text-sm font-sans text-stone-400">({% trans "optional" %})</span></summary>
+        <div class="space-y-4 mt-5">
             {% for field in form.contact_info %}
             <div>
                 <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
@@ -37,11 +50,11 @@
             </div>
             {% endfor %}
         </div>
-    </section>
+    </details>
 
-    <section class="bg-white rounded-xl border border-stone-200 p-6">
-        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Address & Location" %}</h3>
-        <div class="space-y-4">
+    <details class="bg-white rounded-xl border border-stone-200 p-6">
+        <summary class="font-serif text-xl text-green-900 cursor-pointer select-none">{% trans "Address & location" %} <span class="text-sm font-sans text-stone-400">({% trans "optional" %})</span></summary>
+        <div class="space-y-4 mt-5">
             {% for field in form.address_info %}
             <div>
                 <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
@@ -50,11 +63,11 @@
             </div>
             {% endfor %}
         </div>
-    </section>
+    </details>
 
-    <section class="bg-white rounded-xl border border-stone-200 p-6">
-        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Banking & Financial" %}</h3>
-        <div class="space-y-4">
+    <details class="bg-white rounded-xl border border-stone-200 p-6">
+        <summary class="font-serif text-xl text-green-900 cursor-pointer select-none">{% trans "Banking & payouts" %} <span class="text-sm font-sans text-stone-400">({% trans "optional — needed before your first payout" %})</span></summary>
+        <div class="space-y-4 mt-5">
             {% for field in form.banking_info %}
             <div>
                 <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
@@ -63,11 +76,11 @@
             </div>
             {% endfor %}
         </div>
-    </section>
+    </details>
 
-    <section class="bg-white rounded-xl border border-stone-200 p-6">
-        <h3 class="font-serif text-xl text-green-900 mb-5">{% trans "Public Profile" %}</h3>
-        <div class="space-y-4">
+    <details class="bg-white rounded-xl border border-stone-200 p-6">
+        <summary class="font-serif text-xl text-green-900 cursor-pointer select-none">{% trans "Public profile & photos" %} <span class="text-sm font-sans text-stone-400">({% trans "optional" %})</span></summary>
+        <div class="space-y-4 mt-5">
             {% for field in form.profile_info %}
             <div>
                 <label class="block text-sm text-stone-500 mb-1">{{ field.label }}</label>
@@ -94,7 +107,7 @@
                 <input type="file" name="cellar_photos" accept="image/*" multiple class="w-full text-sm">
             </div>
         </div>
-    </section>
+    </details>
 
     <div class="flex items-center justify-between gap-4 pt-2 pb-4">
         <button type="submit" name="save" class="text-sm text-stone-600 border border-stone-300 rounded-md px-5 py-2.5 transition hover:border-stone-400">{% trans "Save progress" %}</button>

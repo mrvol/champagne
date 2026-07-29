@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-25 21:54+0000\n"
+"POT-Creation-Date: 2026-07-27 12:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -36,7 +36,7 @@ msgstr "Vous devez avoir au moins %(age)s ans pour passer une commande."
 msgid "That password doesn't match this invitation's account."
 msgstr "Ce mot de passe ne correspond pas au compte de cette invitation."
 
-#: invite/views.py:64 person/views.py:54
+#: invite/views.py:64 person/views.py:55
 msgid "The password needs at least 8 characters."
 msgstr "Le mot de passe doit contenir au moins 8 caractères."
 
@@ -44,13 +44,15 @@ msgstr "Le mot de passe doit contenir au moins 8 caractères."
 msgid ""
 "An account already exists for this email. Contact support to relink your "
 "invitation."
-msgstr "Un compte existe déjà pour cet e-mail. Contactez le support pour relier votre invitation."
+msgstr ""
+"Un compte existe déjà pour cet e-mail. Contactez le support pour relier "
+"votre invitation."
 
-#: invite/views.py:68 person/views.py:58
+#: invite/views.py:68 person/views.py:59
 msgid "Enter your date of birth."
 msgstr "Saisissez votre date de naissance."
 
-#: invite/views.py:70 person/views.py:60
+#: invite/views.py:70 person/views.py:61
 #, python-format
 msgid "You must be at least %(age)s to sign up."
 msgstr "Vous devez avoir au moins %(age)s ans pour vous inscrire."
@@ -63,15 +65,106 @@ msgstr "Progression enregistrée."
 msgid "Wine saved."
 msgstr "Vin enregistré."
 
-#: person/views.py:40
+#: mp/context_processors.py:15 templates/staff_dashboard.html:7
+msgid "Overview"
+msgstr "Aperçu"
+
+#: mp/context_processors.py:19
+msgid "Catalog"
+msgstr "Catalogue"
+
+#: mp/context_processors.py:21 templates/order_card.html:138
+#: templates/staff_good_list.html:7
+msgid "Products"
+msgstr "Produits"
+
+#: mp/context_processors.py:22 templates/staff_company_list.html:7
+msgid "Companies"
+msgstr "Maisons"
+
+#: mp/context_processors.py:26
+msgid "Sales"
+msgstr "Ventes"
+
+#: mp/context_processors.py:28 templates/base.html:187 templates/base.html:262
+#: templates/staff_order_list.html:7
+msgid "Orders"
+msgstr "Commandes"
+
+#: mp/context_processors.py:29
+msgid "Customers"
+msgstr "Clients"
+
+#: order/models.py:24
+msgid "Order placed"
+msgstr "Commande passée"
+
+#: order/models.py:25
+msgid "Payment confirmed"
+msgstr "Paiement confirmé"
+
+#: order/models.py:26
+msgid "Preparing order"
+msgstr "Préparation de la commande"
+
+#: order/models.py:27
+msgid "Quality inspection"
+msgstr "Contrôle qualité"
+
+#: order/models.py:28
+msgid "Packed"
+msgstr "Emballée"
+
+#: order/models.py:29
+msgid "Shipped"
+msgstr "Expédiée"
+
+#: order/models.py:30 order/views.py:19
+msgid "Out for delivery"
+msgstr "En cours de livraison"
+
+#: order/models.py:31 order/views.py:34 templates/order_card.html:110
+msgid "Delivered"
+msgstr "Livrée"
+
+#: order/models.py:34
+msgid "Cancelled"
+msgstr "Annulée"
+
+#: order/models.py:35
+msgid "Refunded"
+msgstr "Remboursée"
+
+#: order/views.py:15
+msgid "Order collected from warehouse"
+msgstr "Commande récupérée à l'entrepôt"
+
+#: order/views.py:16
+msgid "Arrived at regional sorting centre"
+msgstr "Arrivée au centre de tri régional"
+
+#: order/views.py:17
+msgid "Departed sorting facility"
+msgstr "Départ du centre de tri"
+
+#: order/views.py:18
+msgid "In transit to destination city"
+msgstr "En transit vers la ville de destination"
+
+#: order/views.py:78
+#, python-format
+msgid "Items from Order #%(pk)s added to your cart."
+msgstr "Les articles de la commande n° %(pk)s ont été ajoutés à votre panier."
+
+#: person/views.py:41
 msgid "That email and password don't match."
 msgstr "Cet e-mail et ce mot de passe ne correspondent pas."
 
-#: person/views.py:52
+#: person/views.py:53
 msgid "Enter a valid work email."
 msgstr "Saisissez une adresse e-mail professionnelle valide."
 
-#: person/views.py:56
+#: person/views.py:57
 msgid "This email already has an account. Sign in instead."
 msgstr "Cet e-mail possède déjà un compte. Connectez-vous à la place."
 
@@ -91,7 +184,7 @@ msgstr "Ligne 2"
 msgid "City"
 msgstr "Ville"
 
-#: templates/address_detail.html:20 templates/company_detail.html:60
+#: templates/address_detail.html:20 templates/company_detail.html:61
 msgid "Region"
 msgstr "Région"
 
@@ -109,10 +202,10 @@ msgid "User"
 msgstr "Utilisateur"
 
 #: templates/address_detail.html:36 templates/company_goods.html:17
-#: templates/good_detail.html:91 templates/order_detail.html:27
-#: templates/payment_detail.html:27 templates/review_detail.html:19
-#: templates/stock_detail.html:19 templates/transaction_detail.html:31
-#: templates/user_detail.html:27 templates/warehouse_detail.html:20
+#: templates/good_detail.html:92 templates/payment_detail.html:27
+#: templates/review_detail.html:19 templates/stock_detail.html:19
+#: templates/transaction_detail.html:31 templates/user_detail.html:27
+#: templates/warehouse_detail.html:20
 msgid "Back"
 msgstr "Retour"
 
@@ -124,37 +217,45 @@ msgstr "Adresses"
 msgid "No addresses yet."
 msgstr "Aucune adresse pour le moment."
 
-#: templates/base.html:111 templates/base.html:174
+#: templates/base.html:126 templates/base.html:130
+msgid "Staff tools"
+msgstr "Outils du personnel"
+
+#: templates/base.html:134
+msgid "Staff"
+msgstr "Personnel"
+
+#: templates/base.html:140
+msgid "Close staff tools"
+msgstr "Fermer les outils du personnel"
+
+#: templates/base.html:182 templates/base.html:245
 msgid "Home"
 msgstr "Accueil"
 
-#: templates/base.html:112 templates/base.html:178 templates/good_list.html:7
+#: templates/base.html:183 templates/base.html:249 templates/good_list.html:7
 msgid "Goods"
 msgstr "Produits"
 
-#: templates/base.html:113 templates/base.html:182
+#: templates/base.html:184 templates/base.html:253
 #: templates/company_list.html:7
 msgid "Producers"
 msgstr "Producteurs"
 
-#: templates/base.html:115 templates/base.html:187 templates/cart_detail.html:4
+#: templates/base.html:186 templates/base.html:258 templates/cart_detail.html:4
 msgid "Cart"
 msgstr "Panier"
 
-#: templates/base.html:116 templates/base.html:191 templates/order_list.html:4
-msgid "Orders"
-msgstr "Commandes"
-
-#: templates/base.html:121 templates/base.html:141
+#: templates/base.html:192 templates/base.html:212
 msgid "Logout"
 msgstr "Déconnexion"
 
-#: templates/base.html:123 templates/base.html:143 templates/base.html:196
+#: templates/base.html:194 templates/base.html:214 templates/base.html:267
 #: templates/login.html:4 templates/login.html:16 templates/register.html:26
 msgid "Sign in"
 msgstr "Se connecter"
 
-#: templates/base.html:124 templates/base.html:144 templates/login.html:62
+#: templates/base.html:195 templates/base.html:215 templates/login.html:62
 #: templates/register.html:4
 msgid "Sign up"
 msgstr "S'inscrire"
@@ -167,7 +268,7 @@ msgstr "Supprimer"
 msgid "Your cart is empty."
 msgstr "Votre panier est vide."
 
-#: templates/cart_detail.html:25 templates/order_detail.html:15
+#: templates/cart_detail.html:25 templates/order_card.html:171
 msgid "Delivery address"
 msgstr "Adresse de livraison"
 
@@ -180,67 +281,68 @@ msgstr "Passer la commande"
 msgid "Company"
 msgstr "Maison"
 
-#: templates/company_detail.html:28 templates/company_detail.html:33
-#: templates/company_md.html:28
+#: templates/company_detail.html:29 templates/company_detail.html:34
+#: templates/company_md.html:28 templates/home.html:55
 msgid "Verified producer"
 msgstr "Producteur vérifié"
 
-#: templates/company_detail.html:41 templates/company_md.html:33
+#: templates/company_detail.html:42 templates/company_md.html:33
+#: templates/home.html:58
 #, python-format
 msgid "Est. %(year)s"
 msgstr "Depuis %(year)s"
 
-#: templates/company_detail.html:50
+#: templates/company_detail.html:51
 msgid "Our Story"
 msgstr "Notre histoire"
 
-#: templates/company_detail.html:66
+#: templates/company_detail.html:67
 msgid "Founded"
 msgstr "Fondée en"
 
-#: templates/company_detail.html:72
+#: templates/company_detail.html:73
 msgid "Speciality"
 msgstr "Spécialité"
 
-#: templates/company_detail.html:78
+#: templates/company_detail.html:79
 msgid "Annual Production"
 msgstr "Production annuelle"
 
-#: templates/company_detail.html:79
+#: templates/company_detail.html:80
 #, python-format
 msgid "%(count)s bottles"
 msgstr "%(count)s bouteilles"
 
-#: templates/company_detail.html:86 templates/good_detail.html:62
+#: templates/company_detail.html:87 templates/good_detail.html:63
 msgid "Grape Varieties"
 msgstr "Cépages"
 
-#: templates/company_detail.html:97
+#: templates/company_detail.html:98
 msgid "Certifications"
 msgstr "Certifications"
 
-#: templates/company_detail.html:110
+#: templates/company_detail.html:111
 msgid "Gallery"
 msgstr "Galerie"
 
-#: templates/company_detail.html:124 templates/home.html:20
+#: templates/company_detail.html:125 templates/home.html:115
 msgid "Featured Wines"
 msgstr "Vins en vedette"
 
-#: templates/company_detail.html:125
+#: templates/company_detail.html:126
 #, python-format
 msgid "View all (%(count)s)"
 msgstr "Voir tout (%(count)s)"
 
-#: templates/company_detail.html:137
+#: templates/company_detail.html:138
 msgid "Contact"
 msgstr "Contact"
 
-#: templates/company_detail.html:141
+#: templates/company_detail.html:142
 msgid "Visit website"
 msgstr "Visiter le site"
 
-#: templates/company_detail.html:146
+#: templates/company_detail.html:147
 msgid "Back to producers"
 msgstr "Retour aux producteurs"
 
@@ -265,27 +367,28 @@ msgstr "Aucun producteur pour le moment."
 msgid "Good"
 msgstr "Produit"
 
-#: templates/good_detail.html:53 templates/good_md.html:21
+#: templates/good_detail.html:54 templates/good_md.html:25
+#: templates/home.html:92
 msgid "Add to cart"
 msgstr "Ajouter au panier"
 
-#: templates/good_detail.html:56 templates/good_md.html:24
+#: templates/good_detail.html:57 templates/good_md.html:28
 msgid "Out of stock"
 msgstr "Rupture de stock"
 
-#: templates/good_detail.html:72
+#: templates/good_detail.html:73
 msgid "Volume"
 msgstr "Volume"
 
-#: templates/good_detail.html:78
+#: templates/good_detail.html:79
 msgid "ABV"
 msgstr "Degré d'alcool"
 
-#: templates/good_detail.html:84
+#: templates/good_detail.html:85
 msgid "SKU"
 msgstr "Référence"
 
-#: templates/good_list.html:10
+#: templates/good_list.html:10 templates/home.html:15
 msgid "Search by name, region, grape…"
 msgstr "Rechercher par nom, région, cépage…"
 
@@ -294,59 +397,109 @@ msgstr "Rechercher par nom, région, cépage…"
 msgid "No goods match \"%(q)s\"."
 msgstr "Aucun produit ne correspond à « %(q)s »."
 
-#: templates/good_list.html:16 templates/home.html:27
+#: templates/good_list.html:16 templates/home.html:122
 msgid "No goods yet."
 msgstr "Aucun produit pour le moment."
 
-#: templates/good_md.html:14
+#: templates/good_md.html:18
 #, python-format
 msgid "%(count)s in stock"
 msgstr "%(count)s en stock"
 
-#: templates/home.html:13
-msgid "Exceptional champagne, direct from the estates that craft it."
-msgstr "Un champagne d'exception, directement des domaines qui le façonnent."
+#: templates/home.html:9
+msgid "Verified estates · Direct from Champagne"
+msgstr "Domaines vérifiés · Direct de Champagne"
 
-#: templates/home.html:14 templates/home.html:21
+#: templates/home.html:10
+msgid "Exceptional champagne, expertly sourced."
+msgstr "Un champagne d'exception, sourcé avec expertise."
+
+#: templates/home.html:11
+msgid ""
+"Real vintages from the estates that craft them — no middlemen, no guesswork."
+msgstr ""
+"De vrais millésimes, directement des domaines qui les élaborent — sans "
+"intermédiaire, sans mauvaise surprise."
+
+#: templates/home.html:13
+msgid "Shop champagnes"
+msgstr "Voir les champagnes"
+
+#: templates/home.html:16
+msgid "Search wines…"
+msgstr "Rechercher des vins…"
+
+#: templates/home.html:17
+msgid "Search"
+msgstr "Rechercher"
+
+#: templates/home.html:27
+msgid "Lumière Champagne Brut — the house's signature bottle"
+msgstr "Lumière Champagne Brut — la bouteille emblématique de la maison"
+
+#: templates/home.html:37
+msgid "Today's Selection"
+msgstr "Sélection du jour"
+
+#: templates/home.html:77
+msgid "today only"
+msgstr "aujourd'hui seulement"
+
+#: templates/home.html:85
+#, python-format
+msgid "Only %(counter)s bottle remaining."
+msgid_plural "Only %(counter)s bottles remaining."
+msgstr[0] "Il ne reste que %(counter)s bouteille."
+msgstr[1] "Il ne reste que %(counter)s bouteilles."
+
+#: templates/home.html:94
+msgid "View full details"
+msgstr "Voir tous les détails"
+
+#: templates/home.html:96
+msgid "Featured today only — a new selection rotates in tomorrow."
+msgstr "En vedette aujourd'hui seulement — une nouvelle sélection demain."
+
+#: templates/home.html:104
+msgid "All wines"
+msgstr "Tous les vins"
+
+#: templates/home.html:105
+msgid "Rosé"
+msgstr "Rosé"
+
+#: templates/home.html:106
+msgid "Blanc de Blancs"
+msgstr "Blanc de Blancs"
+
+#: templates/home.html:107
+msgid "Prestige Cuvée"
+msgstr "Cuvée Prestige"
+
+#: templates/home.html:108
+msgid "Grand Cru"
+msgstr "Grand Cru"
+
+#: templates/home.html:109
+msgid "Magnum"
+msgstr "Magnum"
+
+#: templates/home.html:116
 msgid "Shop all champagnes"
 msgstr "Voir tous les champagnes"
 
-#: templates/home.html:35
+#: templates/home.html:130
 msgid "A Collection of Prestigious Estates"
 msgstr "Une sélection de domaines prestigieux"
 
-#: templates/home.html:36
-msgid ""
-"Every wine on Champagne comes from a producer we've verified in person — "
-"their heritage, craft, and story are part of what you're buying."
+#: templates/home.html:131
+msgid "Every wine here comes from a producer we've verified in person."
 msgstr ""
-"Chaque vin de Champagne provient d'un producteur que nous avons vérifié en "
-"personne — son héritage, son savoir-faire et son histoire font partie de ce "
-"que vous achetez."
+"Chaque vin ici provient d'un producteur que nous avons vérifié en personne."
 
-#: templates/home.html:44
+#: templates/home.html:139
 msgid "Meet all our producers"
 msgstr "Découvrir tous nos producteurs"
-
-#: templates/home.html:51
-msgid "Passkey"
-msgstr "Clé d'accès"
-
-#: templates/home.html:52
-msgid "Add a passkey for this device"
-msgstr "Ajouter une clé d'accès pour cet appareil"
-
-#: templates/home.html:75
-msgid "Passkey added."
-msgstr "Clé d'accès ajoutée."
-
-#: templates/home.html:75
-msgid "Could not add passkey."
-msgstr "Impossible d'ajouter la clé d'accès."
-
-#: templates/home.html:77
-msgid "Passkey setup was cancelled or failed."
-msgstr "La configuration de la clé d'accès a été annulée ou a échoué."
 
 #: templates/invite_account.html:7
 msgid "Welcome to Champagne"
@@ -355,7 +508,9 @@ msgstr "Bienvenue sur Champagne"
 #: templates/invite_account.html:8
 msgid ""
 "You've been invited to join as a Wine House. Create your account to begin."
-msgstr "Vous avez été invité à rejoindre en tant que maison de champagne. Créez votre compte pour commencer."
+msgstr ""
+"Vous avez été invité à rejoindre en tant que maison de champagne. Créez "
+"votre compte pour commencer."
 
 #: templates/invite_account.html:14 templates/invite_login.html:14
 #: templates/login.html:9 templates/register.html:13
@@ -388,7 +543,9 @@ msgstr "Votre maison"
 msgid ""
 "Tell us about your estate. Progress saves as you go, so you can return at "
 "any time."
-msgstr "Parlez-nous de votre domaine. La progression est enregistrée au fur et à mesure, vous pouvez donc revenir à tout moment."
+msgstr ""
+"Parlez-nous de votre domaine. La progression est enregistrée au fur et à "
+"mesure, vous pouvez donc revenir à tout moment."
 
 #: templates/invite_company.html:16
 msgid "Company Information"
@@ -442,7 +599,10 @@ msgstr "Merci"
 msgid ""
 "Your Wine House profile has been submitted and our team will review it "
 "shortly. We'll be in touch once you're live on Champagne."
-msgstr "Le profil de votre maison a été soumis et notre équipe l'examinera prochainement. Nous vous recontacterons dès que vous serez en ligne sur Champagne."
+msgstr ""
+"Le profil de votre maison a été soumis et notre équipe l'examinera "
+"prochainement. Nous vous recontacterons dès que vous serez en ligne sur "
+"Champagne."
 
 #: templates/invite_completed.html:7 templates/invite_invalid.html:15
 msgid "Back to home"
@@ -464,15 +624,21 @@ msgstr "Invitation expirée"
 msgid ""
 "This invitation has already been completed. If you need to make changes, "
 "please contact us."
-msgstr "Cette invitation a déjà été complétée. Si vous devez apporter des modifications, veuillez nous contacter."
+msgstr ""
+"Cette invitation a déjà été complétée. Si vous devez apporter des "
+"modifications, veuillez nous contacter."
 
 #: templates/invite_invalid.html:12
 msgid "This invitation is no longer valid. Please contact us for a new one."
-msgstr "Cette invitation n'est plus valide. Veuillez nous contacter pour en obtenir une nouvelle."
+msgstr ""
+"Cette invitation n'est plus valide. Veuillez nous contacter pour en obtenir "
+"une nouvelle."
 
 #: templates/invite_invalid.html:13
 msgid "This invitation link has expired. Please contact us for a new one."
-msgstr "Ce lien d'invitation a expiré. Veuillez nous contacter pour en obtenir un nouveau."
+msgstr ""
+"Ce lien d'invitation a expiré. Veuillez nous contacter pour en obtenir un "
+"nouveau."
 
 #: templates/invite_login.html:7
 msgid "Welcome back"
@@ -514,7 +680,9 @@ msgstr "Vos vins"
 msgid ""
 "Add every wine you'd like to offer. You can keep editing until you submit "
 "for review."
-msgstr "Ajoutez tous les vins que vous souhaitez proposer. Vous pouvez continuer à les modifier jusqu'à la soumission pour vérification."
+msgstr ""
+"Ajoutez tous les vins que vous souhaitez proposer. Vous pouvez continuer à "
+"les modifier jusqu'à la soumission pour vérification."
 
 #: templates/invite_products.html:10
 msgid "Add a wine"
@@ -539,7 +707,9 @@ msgstr "Vérification et soumission"
 
 #: templates/invite_review.html:7
 msgid "Take one last look. You can still edit any section before submitting."
-msgstr "Jetez un dernier coup d'œil. Vous pouvez encore modifier chaque section avant de soumettre."
+msgstr ""
+"Jetez un dernier coup d'œil. Vous pouvez encore modifier chaque section "
+"avant de soumettre."
 
 #: templates/invite_review.html:21 templates/invite_steps.html:7
 msgid "Wines"
@@ -588,31 +758,206 @@ msgstr "La connexion par clé d'accès a été annulée ou a échoué."
 msgid "No account?"
 msgstr "Pas de compte ?"
 
-#: templates/order_detail.html:4 templates/order_list.html:9
+#: templates/order_card.html:2 templates/order_card.html:8
+#: templates/order_invoice.html:7 templates/order_invoice.html:18
 #, python-format
 msgid "Order #%(pk)s"
 msgstr "Commande n° %(pk)s"
 
-#: templates/order_detail.html:7
-msgid "Buyer"
-msgstr "Acheteur"
+#: templates/order_card.html:3
+#, python-format
+msgid "Order #%(pk)s — issue"
+msgstr "Commande n° %(pk)s — problème"
 
-#: templates/order_detail.html:11
-msgid "Seller"
-msgstr "Vendeur"
+#: templates/order_card.html:9
+#, python-format
+msgid "Placed %(date)s"
+msgstr "Passée le %(date)s"
 
-#: templates/order_detail.html:19 templates/payment_detail.html:19
+#: templates/order_card.html:36
+#, python-format
+msgid "%(counter)s bottle"
+msgid_plural "%(counter)s bottles"
+msgstr[0] "%(counter)s bouteille"
+msgstr[1] "%(counter)s bouteilles"
+
+#: templates/order_card.html:38 templates/order_card.html:162
+#: templates/order_invoice.html:41 templates/order_invoice.html:58
+msgid "Total"
+msgstr "Total"
+
+#: templates/order_card.html:44
+#, python-format
+msgid "Estimated delivery %(date)s"
+msgstr "Livraison estimée le %(date)s"
+
+#: templates/order_card.html:48
+msgid "Order progress"
+msgstr "Avancement de la commande"
+
+#: templates/order_card.html:76
+msgid "Download invoice"
+msgstr "Télécharger la facture"
+
+#: templates/order_card.html:80
+msgid "Reorder"
+msgstr "Commander à nouveau"
+
+#: templates/order_card.html:82 templates/order_card.html:225
+msgid "Contact support"
+msgstr "Contacter le support"
+
+#: templates/order_card.html:84 templates/order_card.html:226
+msgid "Report an issue"
+msgstr "Signaler un problème"
+
+#: templates/order_card.html:90
+msgid "Track shipment"
+msgstr "Suivre le colis"
+
+#: templates/order_card.html:90
+msgid "View order details"
+msgstr "Voir les détails de la commande"
+
+#: templates/order_card.html:97
+msgid "Shipment tracking"
+msgstr "Suivi du colis"
+
+#: templates/order_card.html:101
+msgid "Carrier"
+msgstr "Transporteur"
+
+#: templates/order_card.html:105
+msgid "Tracking number"
+msgstr "Numéro de suivi"
+
+#: templates/order_card.html:110
+msgid "Next milestone"
+msgstr "Prochaine étape"
+
+#: templates/order_card.html:114
+#, python-format
+msgid "Delivery expected %(date)s, 14:00–18:00"
+msgstr "Livraison prévue le %(date)s, entre 14h00 et 18h00"
+
+#: templates/order_card.html:115
+msgid "Out for delivery, next update soon"
+msgstr "En cours de livraison, prochaine mise à jour bientôt"
+
+#: templates/order_card.html:128
+msgid "Pending"
+msgstr "En attente"
+
+#: templates/order_card.html:154
+#, python-format
+msgid "Qty %(qty)s"
+msgstr "Qté %(qty)s"
+
+#: templates/order_card.html:168
+msgid "Delivery"
+msgstr "Livraison"
+
+#: templates/order_card.html:176
+msgid "Estimated delivery"
+msgstr "Livraison estimée"
+
+#: templates/order_card.html:181
+msgid "Signature required"
+msgstr "Signature requise"
+
+#: templates/order_card.html:182
+msgid "Yes"
+msgstr "Oui"
+
+#: templates/order_card.html:182
+msgid "No"
+msgstr "Non"
+
+#: templates/order_card.html:186
+msgid "Delivery instructions"
+msgstr "Instructions de livraison"
+
+#: templates/order_card.html:196 templates/transaction_detail.html:7
+msgid "Payment"
+msgstr "Paiement"
+
+#: templates/order_card.html:199 templates/transaction_detail.html:15
+msgid "Method"
+msgstr "Méthode"
+
+#: templates/order_card.html:203 templates/payment_detail.html:19
 #: templates/transaction_detail.html:23
 msgid "Status"
 msgstr "Statut"
 
-#: templates/order_detail.html:23
-msgid "Total"
-msgstr "Total"
+#: templates/order_card.html:207
+msgid "Amount charged"
+msgstr "Montant débité"
 
-#: templates/order_list.html:14
-msgid "No orders yet."
-msgstr "Aucune commande pour le moment."
+#: templates/order_card.html:217
+msgid "Order notes"
+msgstr "Notes de commande"
+
+#: templates/order_card.html:223
+msgid "Need help?"
+msgstr "Besoin d'aide ?"
+
+#: templates/order_detail.html:6 templates/order_list.html:6
+msgid "My Orders"
+msgstr "Mes commandes"
+
+#: templates/order_invoice.html:8
+msgid "Print / Save as PDF"
+msgstr "Imprimer / Enregistrer en PDF"
+
+#: templates/order_invoice.html:15
+msgid "Invoice"
+msgstr "Facture"
+
+#: templates/order_invoice.html:25
+msgid "Sold by"
+msgstr "Vendu par"
+
+#: templates/order_invoice.html:29
+msgid "Billed to"
+msgstr "Facturé à"
+
+#: templates/order_invoice.html:38
+msgid "Item"
+msgstr "Article"
+
+#: templates/order_invoice.html:39
+msgid "Qty"
+msgstr "Qté"
+
+#: templates/order_invoice.html:40
+msgid "Unit price"
+msgstr "Prix unitaire"
+
+#: templates/order_invoice.html:66
+#, python-format
+msgid "Paid via %(provider)s — %(status)s."
+msgstr "Payé via %(provider)s — %(status)s."
+
+#: templates/order_list.html:19
+msgid "No orders yet"
+msgstr "Aucune commande pour l'instant"
+
+#: templates/order_list.html:20
+msgid ""
+"Once you place an order, you'll be able to follow it here from checkout to "
+"delivery."
+msgstr ""
+"Une fois votre commande passée, vous pourrez la suivre ici, de la validation "
+"à la livraison."
+
+#: templates/order_list.html:21
+msgid "Start shopping"
+msgstr "Commencer mes achats"
+
+#: templates/order_list.html:26
+msgid "You might like"
+msgstr "Vous pourriez aimer"
 
 #: templates/payment_detail.html:4
 #, python-format
@@ -676,6 +1021,10 @@ msgstr "Avis"
 msgid "No reviews yet."
 msgstr "Aucun avis pour le moment."
 
+#: templates/staff_user_list.html:7 templates/user_list.html:4
+msgid "Users"
+msgstr "Utilisateurs"
+
 #: templates/stock_detail.html:4
 #, python-format
 msgid "Stock #%(pk)s"
@@ -707,14 +1056,6 @@ msgstr "Aucun stock pour le moment."
 msgid "Transaction #%(pk)s"
 msgstr "Transaction n° %(pk)s"
 
-#: templates/transaction_detail.html:7
-msgid "Payment"
-msgstr "Paiement"
-
-#: templates/transaction_detail.html:15
-msgid "Method"
-msgstr "Méthode"
-
 #: templates/transaction_detail.html:27
 msgid "Provider ref"
 msgstr "Réf. prestataire"
@@ -739,10 +1080,6 @@ msgstr "Rôles"
 msgid "KYC status"
 msgstr "Statut KYC"
 
-#: templates/user_list.html:4
-msgid "Users"
-msgstr "Utilisateurs"
-
 #: templates/user_list.html:14
 msgid "No users yet."
 msgstr "Aucun utilisateur pour le moment."
@@ -754,39 +1091,3 @@ msgstr "Entrepôts"
 #: templates/warehouse_list.html:14
 msgid "No warehouses yet."
 msgstr "Aucun entrepôt pour le moment."
-
-#~ msgid "Vintage"
-#~ msgstr "Millésime"
-
-#~ msgid "Grape variety"
-#~ msgstr "Cépage"
-
-#~ msgid "Price"
-#~ msgstr "Prix"
-
-#~ msgid "In stock"
-#~ msgstr "En stock"
-
-#~ msgid "Featured"
-#~ msgstr "Sélection"
-
-#~ msgid "Registration #"
-#~ msgstr "N° d'immatriculation"
-
-#~ msgid "Tax ID"
-#~ msgstr "Numéro fiscal"
-
-#~ msgid "VAT number"
-#~ msgstr "Numéro de TVA"
-
-#~ msgid "Industry"
-#~ msgstr "Secteur"
-
-#~ msgid "Verified seller"
-#~ msgstr "Vendeur vérifié"
-
-#~ msgid "Companies"
-#~ msgstr "Maisons"
-
-#~ msgid "No companies yet."
-#~ msgstr "Aucune maison pour le moment."

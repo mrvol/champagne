@@ -98,6 +98,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # No real SMTP configured for this project yet; emails print to the console/log.
 # Swap for 'django.core.mail.backends.smtp.EmailBackend' + EMAIL_HOST/PORT/etc. in production.
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'Champagne <no-reply@champagne.example>'
+DEFAULT_FROM_EMAIL = 'Voilà Champagne <no-reply@voilachampagne.com>'
 SITE_BASE_URL = 'http://localhost:8989'
 ADMIN_NOTIFICATION_EMAILS = ['admin@champagne.example']
