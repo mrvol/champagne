@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 
 from company.forms import COMPANY_FIELDS
 from company.models import Company
+from person.decorators import staff_api_required, staff_required
 
 
 def company_list(request):
@@ -29,6 +30,7 @@ def company_goods(request, pk):
     return render(request, 'company_goods.html', {'company': company, 'goods': goods})
 
 
+@staff_api_required
 def company_detail_api(request, pk):
     if request.method == 'POST' and len(request.POST):
         instance = get_object_or_404(Company, pk=pk)
@@ -43,11 +45,11 @@ def company_detail_api(request, pk):
     return JsonResponse(Company.as_json([company])[0])
 
 
+@staff_api_required
 def company_list_api(request):
-    if not request.user.is_staff:
-        return JsonResponse({'error': 'forbidden'}, status=403)
     return JsonResponse(Company.as_json(Company.objects.all()), safe=False)
 
 
+@staff_required
 def staff_company_list(request):
     return render(request, 'staff_company_list.html')

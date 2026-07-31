@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from company.models import Company
 from goods.models import Good
+from person.decorators import staff_required
 
 
 def home(request):
@@ -41,5 +42,6 @@ def home(request):
     })
 
 
+@staff_required
 def staff_dashboard(request):
     return render(request, 'staff_dashboard.html')

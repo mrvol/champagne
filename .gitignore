@@ -10,7 +10,7 @@ wheels/
 .venv
 
 # Django
-db.sqlite3
+DB/
 media/
 
 # Node

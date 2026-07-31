@@ -1,10 +1,17 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+DB_DIR = Path(os.environ.get('DB_DIR', BASE_DIR / 'DB'))
 
 SECRET_KEY = 'django-insecure-dev-key'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
+
+# Django admin isn't served at the guessable /admin/ path - override this per
+# deployment (e.g. via env var) rather than relying on this default once it's
+# public in version control.
+ADMIN_URL = os.environ.get('ADMIN_URL', 'mgmt-7f2a9c/')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -68,7 +75,7 @@ WSGI_APPLICATION = 'champagne.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': DB_DIR / 'db.sqlite3',
     }
 }
 

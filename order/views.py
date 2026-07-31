@@ -10,6 +10,7 @@ from django.utils.translation import gettext as _
 from cart.models import Cart, CartItem
 from goods.models import Good
 from order.models import Order
+from person.decorators import staff_api_required, staff_required
 
 TRACKING_STEPS = [
     (9.25, _('Order collected from warehouse')),
@@ -79,15 +80,13 @@ def order_reorder(request, pk):
     return redirect('cart_detail')
 
 
+@staff_api_required
 def order_list_api(request):
-    if not request.user.is_staff:
-        return JsonResponse({'error': 'forbidden'}, status=403)
     return JsonResponse(Order.as_json(Order.objects.all()), safe=False)
 
 
+@staff_api_required
 def order_detail_api(request, pk):
-    if not request.user.is_staff:
-        return JsonResponse({'error': 'forbidden'}, status=403)
     order = get_object_or_404(Order, pk=pk)
     if request.method == 'POST':
         status = request.POST.get('status', '')
@@ -98,5 +97,6 @@ def order_detail_api(request, pk):
     return JsonResponse(Order.as_json([order])[0])
 
 
+@staff_required
 def staff_order_list(request):
     return render(request, 'staff_order_list.html')

@@ -6,7 +6,7 @@
 {% trans "Company" as default_company_name %}
 
 <section class="relative -mx-4 rounded-b-2xl md:rounded-2xl overflow-hidden mb-10 md:mb-16">
-    <div data-company-edit-widget data-pk="{{ company.pk }}"></div>
+    {% if user.is_staff %}<div data-company-edit-widget data-pk="{{ company.pk }}"></div>{% endif %}
     <div class="aspect-[4/3] sm:aspect-[16/9] md:aspect-[21/9] w-full {% if not company.hero_photo %}bg-gradient-to-br from-green-900 to-stone-900{% endif %}">
         {% if company.hero_photo %}
         <img src="{{ company.hero_photo.image.url }}" alt="" class="w-full h-full object-cover">

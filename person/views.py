@@ -13,6 +13,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.http import require_POST
 from django.views.i18n import set_language as django_set_language
 
+from person.decorators import staff_api_required, staff_required
 from person.models import MIN_AGE, User, WebAuthnCredential, age_from_birthday
 from person.passkeys import (
     b64url_decode, b64url_encode, parse_attested_credential_data,
@@ -97,10 +98,8 @@ def user_detail(request, pk):
 USER_FIELDS = ['username', 'email', 'first_name', 'last_name', 'phone', 'country', 'is_staff', 'is_active']
 
 
+@staff_api_required
 def user_detail_api(request, pk=None):
-    if not request.user.is_staff:
-        return JsonResponse({'error': 'forbidden'}, status=403)
-
     if request.method == 'POST' and len(request.POST):
         instance = get_object_or_404(User, pk=pk) if pk else User()
         fields = [f for f in USER_FIELDS if f in request.POST]
@@ -130,6 +129,7 @@ def user_detail_api(request, pk=None):
     return JsonResponse(data, safe=False)
 
 
+@staff_required
 def staff_user_list(request):
     return render(request, 'staff_user_list.html')
 

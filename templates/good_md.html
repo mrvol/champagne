@@ -1,13 +1,13 @@
 {% load i18n %}
 <li class="relative isolate bg-white rounded-xl border border-stone-200 flex flex-col h-full transition duration-200 ease-out hover:border-stone-300 hover:shadow-lg hover:-translate-y-0.5">
-    <div data-good-edit-widget data-pk="{{ good.pk }}"></div>
+    {% if user.is_staff %}<div data-good-edit-widget data-pk="{{ good.pk }}"></div>{% endif %}
     <a href="{% url 'good_detail' good.pk %}" class="flex-1 flex items-center gap-3 p-3 active:bg-stone-100 md:flex-col md:items-stretch md:text-center md:p-4">
         {% if good.photo %}
-        <div class="w-12 h-12 md:w-full md:h-48 rounded-md border border-stone-200 overflow-hidden shrink-0">
+        <div class="w-12 aspect-[2/3] md:w-full rounded-md border border-stone-200 overflow-hidden shrink-0">
             <img src="{{ good.photo.image.url }}" alt="{{ good.name }}" class="w-full h-full object-cover transition duration-500 ease-out hover:scale-105">
         </div>
         {% else %}
-        <div class="w-12 h-12 md:w-full md:h-48 rounded-md bg-stone-100 shrink-0"></div>
+        <div class="w-12 aspect-[2/3] md:w-full rounded-md bg-stone-100 shrink-0"></div>
         {% endif %}
         <div class="md:mt-3">
             <p class="font-medium">{{ good.name|default:"—" }}</p>

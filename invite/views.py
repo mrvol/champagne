@@ -11,6 +11,7 @@ from goods.models import Good
 from invite.emails import send_completion_notification, send_invitation_email
 from invite.forms import CompanyOnboardingForm, GoodOnboardingForm, InvitationCreateForm
 from invite.models import Invitation
+from person.decorators import staff_api_required, staff_required
 from person.models import MIN_AGE, User, age_from_birthday
 
 STEP_URL_NAMES = {
@@ -172,14 +173,13 @@ def invitation_completed(request, token):
     return render(request, 'invite_completed.html', {'invitation': invitation})
 
 
+@staff_required
 def staff_invite_list(request):
     return render(request, 'staff_invite_list.html')
 
 
+@staff_api_required
 def invitation_list_api(request):
-    if not request.user.is_staff:
-        return JsonResponse({'error': 'forbidden'}, status=403)
-
     if request.method == 'POST':
         form = InvitationCreateForm(request.POST)
         if not form.is_valid():

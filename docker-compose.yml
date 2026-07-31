@@ -1,0 +1,15 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8989:8989"
+    volumes:
+      - ./static:/app/static
+      - ./media:/app/media
+      - ./DB:/app/DB
+    environment:
+      # Set to 1 on a fresh (empty) DB/ to seed it with sample_data.json.
+      - LOAD_SAMPLE_DATA=0
+      # Override the default admin path for any real deployment - don't ship
+      # with the repo's default once it's public.
+      - ADMIN_URL=mgmt-7f2a9c/

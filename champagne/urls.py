@@ -19,7 +19,7 @@ import warehouse.views
 urlpatterns = [
     path('i18n/setlang/', person.views.set_language, name='set_language'),
 
-    path('admin/', admin.site.urls),
+    path(settings.ADMIN_URL, admin.site.urls),
     path('', mp.views.home, name='home'),
     path('staff/stats/', mp.views.staff_dashboard, name='staff_dashboard'),
 

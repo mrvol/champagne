@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from company.models import Company
 from goods.forms import GOOD_FIELDS
 from goods.models import Good
+from person.decorators import staff_api_required, staff_required
 from warehouse.models import Stock
 
 
@@ -26,10 +27,12 @@ def good_detail(request, pk):
         'grape_varieties': good.grape_variety_list(),
     })
 
+@staff_required
 def staff_good_list(request):
     return render(request, 'staff_good_list.html')
 
 
+@staff_api_required
 def good_detail_api(request, pk=None):
     if request.method == 'POST' and len(request.POST):
         if pk:
@@ -67,6 +70,7 @@ def good_detail_api(request, pk=None):
     return JsonResponse(data, safe=False)
 
 
+@staff_api_required
 def good_photos_api(request, pk):
     good = get_object_or_404(Good, pk=pk, company__verified_seller=True)
     if request.method == 'POST':
@@ -88,6 +92,7 @@ def good_photos_api(request, pk):
     })
 
 
+@staff_api_required
 def good_stats_api(request):
     qs = Good.objects.filter(company__verified_seller=True)
     by_status = {row['stock_status']: row['n'] for row in qs.values('stock_status').annotate(n=Count('pk'))}
