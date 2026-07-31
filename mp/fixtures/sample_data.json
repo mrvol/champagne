@@ -1914,7 +1914,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 1,
-    "quantity": 240
+    "quantity": 0
   }
 },
 {
@@ -1929,7 +1929,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 2,
-    "quantity": 120
+    "quantity": 0
   }
 },
 {
@@ -1944,7 +1944,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 3,
-    "quantity": 90
+    "quantity": 0
   }
 },
 {
@@ -1959,7 +1959,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 4,
-    "quantity": 60
+    "quantity": 0
   }
 },
 {
@@ -1974,7 +1974,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 5,
-    "quantity": 150
+    "quantity": 0
   }
 },
 {
@@ -1989,7 +1989,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 6,
-    "quantity": 100
+    "quantity": 0
   }
 },
 {
@@ -2004,7 +2004,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 7,
-    "quantity": 40
+    "quantity": 0
   }
 },
 {
@@ -2019,7 +2019,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 8,
-    "quantity": 25
+    "quantity": 0
   }
 },
 {
@@ -2034,7 +2034,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 16,
-    "quantity": 180
+    "quantity": 0
   }
 },
 {
@@ -2049,7 +2049,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 17,
-    "quantity": 64
+    "quantity": 0
   }
 },
 {
@@ -2064,7 +2064,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 18,
-    "quantity": 90
+    "quantity": 0
   }
 },
 {
@@ -2079,7 +2079,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 19,
-    "quantity": 70
+    "quantity": 0
   }
 },
 {
@@ -2094,7 +2094,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 20,
-    "quantity": 54
+    "quantity": 0
   }
 },
 {
@@ -2109,7 +2109,7 @@
     "deleted": null,
     "warehouse": 1,
     "good": 21,
-    "quantity": 76
+    "quantity": 0
   }
 }
 ]
