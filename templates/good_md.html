@@ -11,11 +11,16 @@
         {% endif %}
         <div class="md:mt-3">
             <p class="font-medium">{{ good.name|default:"—" }}</p>
-            <p class="text-sm text-stone-500">{{ good.vintage_year|default:"—" }} · <span class="text-gold font-medium">{{ good.price|default:"—" }} {{ good.get_currency_display }}</span></p>
+            <p class="text-sm text-stone-500">
+                {{ good.vintage_year|default:"—" }}
+                {% if good.available|default:0 > 0 or user.is_staff %} · <span class="text-gold font-medium">{{ good.price|default:"—" }} {{ good.get_currency_display }}</span>{% endif %}
+            </p>
             {% if good.sugar_level %}
             <p class="text-xs text-stone-500 mt-0.5">{{ good.get_sugar_level_display }}</p>
             {% endif %}
-            <p class="text-xs text-stone-500 mt-1">{% blocktrans with count=good.available|default:0 %}{{ count }} in stock{% endblocktrans %}</p>
+            {% if good.available|default:0 > 0 %}
+            <p class="text-xs text-stone-500 mt-1">{% blocktrans with count=good.available %}{{ count }} in stock{% endblocktrans %}</p>
+            {% endif %}
         </div>
     </a>
     {% if good.available|default:0 > 0 %}

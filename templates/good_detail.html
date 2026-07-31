@@ -30,7 +30,9 @@
             {{ good.vintage_year|default:"—" }}
             {% if good.region %} · {{ good.region }}{% endif %}
         </p>
+        {% if available > 0 or user.is_staff %}
         <p class="text-2xl text-gold font-medium mt-4">{{ good.price|default:"—" }} {{ good.get_currency_display }}</p>
+        {% endif %}
 
         {% if good.description %}
         <p class="text-stone-700 leading-relaxed mt-4">{{ good.description }}</p>

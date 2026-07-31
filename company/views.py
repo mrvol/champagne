@@ -1,3 +1,4 @@
+from django.db.models import Sum
 from django.forms import modelform_factory
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
@@ -14,7 +15,7 @@ def company_list(request):
 
 def company_detail(request, pk):
     company = get_object_or_404(Company, pk=pk, verified_seller=True)
-    featured_goods = company.goods.all()[:4]
+    featured_goods = company.goods.annotate(available=Sum('stock__quantity'))[:4]
     gallery_photos = company.photos.exclude(pk=company.hero_photo_id)[:6]
     return render(request, 'company_detail.html', {
         'company': company,
@@ -26,7 +27,7 @@ def company_detail(request, pk):
 
 def company_goods(request, pk):
     company = get_object_or_404(Company, pk=pk, verified_seller=True)
-    goods = company.goods.all()
+    goods = company.goods.annotate(available=Sum('stock__quantity'))
     return render(request, 'company_goods.html', {'company': company, 'goods': goods})
 
 
