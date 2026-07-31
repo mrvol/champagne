@@ -5,8 +5,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 DB_DIR = Path(os.environ.get('DB_DIR', BASE_DIR / 'DB'))
 
 SECRET_KEY = 'django-insecure-dev-key'
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = ['*']
+
+# Trust the reverse proxy's X-Forwarded-Proto header (nginx/champagne.conf already
+# sends it) so request.is_secure() and the CSRF Origin check see the real scheme
+# instead of assuming plain HTTP - without this, every POST over HTTPS behind a
+# proxy fails CSRF ("Origin checking failed - ... does not match any trusted origins").
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Django admin isn't served at the guessable /admin/ path - override this per
 # deployment (e.g. via env var) rather than relying on this default once it's

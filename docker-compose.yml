@@ -1,6 +1,6 @@
 services:
   web:
-    build: .
+    image: ghcr.io/mrvol/champagne:latest
     ports:
       - "8989:8989"
     volumes:
@@ -13,3 +13,6 @@ services:
       # Override the default admin path for any real deployment - don't ship
       # with the repo's default once it's public.
       - ADMIN_URL=mgmt-7f2a9c/
+      # Off in production - nginx (nginx/champagne.conf) serves /static/ and
+      # /media/ directly, so Django doesn't need DEBUG on for that.
+      - DEBUG=False
